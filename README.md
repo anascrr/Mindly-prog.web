@@ -4,8 +4,8 @@
 
 ## Perfis
 - Cliente
-- Profissional
-- Dono da Clínica
+- Recepcionista
+- Médicos
 
 ## Funcionalidades
 - Gerenciamento de horários e serviços
