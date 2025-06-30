@@ -5,7 +5,7 @@
 ## Perfis
 - Cliente
 - Recepcionista
-- Médicos
+- Médicos (Psiquiatra e Psicólogo)
 
 ## Funcionalidades
 - Gerenciamento de horários e serviços
@@ -14,3 +14,4 @@
 
 ## Tecnologias Utilizadas
 - HTML, CSS, JavaScript
+- Google Stitch, uizard, Figma
