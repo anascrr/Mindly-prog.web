@@ -18,7 +18,7 @@
   Criar, editar e cancelar agendamentos com base na agenda dos profissionais.
 
 - 👤 **Cadastro de Pacientes**  
-  Inserção de dados como nome, CPF, telefone e e-mail.
+  Inserção de dados como nome, CPF, telefone, data de nascimento e e-mail.
 
 - 🗓️ **Agenda Dinâmica**  
   Visualização diária/semanal da agenda dos profissionais, com possibilidade de bloqueio de horários.
