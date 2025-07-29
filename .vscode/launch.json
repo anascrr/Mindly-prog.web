@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MindlyApplication<mindly>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.edu.iff.ccc.mindly.MindlyApplication",
+            "projectName": "mindly",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
