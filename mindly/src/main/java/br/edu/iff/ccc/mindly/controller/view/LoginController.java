@@ -8,11 +8,10 @@ import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping(path = "principal")
-public class MainViewController {
+public class  LoginController {
 
     @GetMapping("/{id}")
     public String getHomePage(@PathVariable("id") String id, Model model) {
-        model.addAttribute("id", id);
         model.addAttribute("username", "usuário");
         model.addAttribute("password", "senha");
         return "index.html";
