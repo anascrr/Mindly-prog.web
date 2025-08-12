@@ -1,4 +1,4 @@
-package br.edu.iff.ccc.mindly.controller.view.restapi;
+package br.edu.iff.ccc.mindly.controller.restapi;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
