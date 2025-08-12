@@ -32,7 +32,7 @@ public class PacienteViewController {
 
     @PostMapping("/pacientes")
     public String salvarPaciente(Paciente paciente) {   
-        PacienteService.salvarPaciente(paciente); // Salva o paciente     
+        PacienteService.adicionarPaciente(paciente); // Salva o paciente     
         return "redirect:/api/pacientes";
     }
     
