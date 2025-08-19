@@ -3,22 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="#{app.title}">App Title</title>
+    <title th:text="#{app.title}">Mindly</title>
 </head>
 
 <body>
-    <h1>Olá, funcinou! Em construção.</h1>
-    <p th:text="#{app.welcome(#{app.title})}">Welcome Message App Title</span></p>
-    <p>ID: <span th:text="${id}">ID Placeholder</span></p>
-    <form>
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" th:placeholder="#{app.user}" />
-        <br/>
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" th:placeholder="#{app.password}" />
-        <br/>
-        <button type="submit">Login</button>
-    </form>
+    <h1 th:text="#{app.welcome(${username})}">Bem-vindo, usuário!</h1>
+    <p th:text="#{app.logged(${username})}">Você está logado como usuário.</p>
+    <a th:href="@{/logout}" th:text="#{app.logout}">Sair</a>
 </body>
+
 </html>

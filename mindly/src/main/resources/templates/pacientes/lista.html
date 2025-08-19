@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>Página de listagem de Pacientes</h1>
-    <p>Formulário será implementado na próxima fase.</p>
+    <ul>
+        <li th:each="paciente : ${pacientes}">
+            <b th:text="${paciente.nome}">Nome</b> - 
+            <span th:text="${paciente.email}">Email</span>
+        </li>
+    </ul>
 </body>
 </html>
