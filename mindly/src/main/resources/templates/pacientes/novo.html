@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes - Mindly</title>
+</head>
+
+<body>
+    <h1>Cadastrar Novo Paciente</h1>
+    <form th:action="@{/api/pacientes}" method="post">
+        <label>Nome: <input type="text" name="nome" required /></label><br>
+        <label>Email: <input type="email" name="email" required /></label><br>
+        <label>Telefone: <input type="text" name="telefone" required /></label><br>
+        <label>Endereço: <input type="text" name="endereco" required /></label><br>
+        <label>Data de Nascimento: <input type="text" name="dataNascimento" required /></label><br>
+        <label>CPF: <input type="text" name="cpf" required /></label><br>
+        <label>Plano de Saúde: <input type="text" name="planoSaude" required /></label><br>
+        <button type="submit">Salvar</button>
+    </form>
+    <a th:href="@{/api/pacientes}">Voltar à lista</a>
+</body>
+
+</html>

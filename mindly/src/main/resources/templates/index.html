@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro App</title>
+    <title th:text="#{app.title}">Mindly</title>
 </head>
+
 <body>
-    <h1>Olá, funcinou!!!!!!!!! Em construção.</h1>
+    <h1 th:text="#{app.welcome(${username})}">Bem-vindo, usuário!</h1>
+    <p th:text="#{app.logged(${username})}">Você está logado como usuário.</p>
+    <a th:href="@{/logout}" th:text="#{app.logout}">Sair</a>
 </body>
+
 </html>
