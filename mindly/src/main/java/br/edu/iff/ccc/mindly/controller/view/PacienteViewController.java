@@ -20,7 +20,8 @@ public class PacienteViewController {
     }
 
     @GetMapping("/pacientes/adicionar")
-    public String novoPaciente() {
+    public String novoPaciente(Model model) {
+        model.addAttribute("paciente", new Paciente());
         return "pacientes/adicionar"; // templates/pacientes/novo.html
     }
 

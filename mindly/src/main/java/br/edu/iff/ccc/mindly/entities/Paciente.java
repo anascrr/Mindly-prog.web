@@ -1,12 +1,13 @@
 package br.edu.iff.ccc.mindly.entities;
 
-import jakarta.annotation.Generated;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -38,6 +39,8 @@ public class Paciente {
 
     @NotEmpty(message = "Plano de saúde não pode ser vazio")
     private String planoSaude;
+
+    private List<Consulta> consultas = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -101,6 +104,14 @@ public class Paciente {
 
     public void setPlanoSaude(String planoSaude) {
         this.planoSaude = planoSaude;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void adicionarConsulta(Consulta consulta) {
+        this.consultas.add(consulta);
     }
 
     public Paciente(Long id, String nome, String email, String telefone, String endereco, String dataNascimento,
