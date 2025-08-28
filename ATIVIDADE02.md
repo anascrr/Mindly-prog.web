@@ -7,7 +7,7 @@
 - README.md com: nome e objetivo do projeto, tecnologias utilizadas (Java 17, Spring Boot 3.x, Thymeleaf, etc.) e um guia de "Como Executar" de como clonar, configurar as dependências e rodar a aplicação. Incluir imagem do wireframe.
 
 3. Atendimento Estrutura padrão de pacotes e organização Projeto
-✔️ Adoção da arquitetura em camadas, de pacotes: com.empresa.projeto.controller, com.empresa.projeto.service, com.empresa.projeto.entity, com.empresa.projeto.dto, etc.
+- ✔️ Adoção da arquitetura em camadas, de pacotes: com.empresa.projeto.controller, com.empresa.projeto.service, com.empresa.projeto.entity, com.empresa.projeto.dto, etc.
 
 4. Implementação View Controller
 - Classes anotadas com @Controller. Métodos que usam @GetMapping para preparar e exibir as views e @PostMapping para processar a submissão de formulários. Uso correto do objeto Model para enviar dados para a view e do @ModelAttribute para receber os dados do formulário, vinculando-os a um DTO.
