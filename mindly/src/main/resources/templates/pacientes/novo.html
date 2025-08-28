@@ -1,24 +1,91 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Pacientes - Mindly</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+  <title>Adicionar Paciente - Mindly</title>
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="../css/styles.css" /> <!-- CSS externo -->
 </head>
 
 <body>
-    <h1>Cadastrar Novo Paciente</h1>
-    <form th:action="@{/api/pacientes}" method="post">
-        <label>Nome: <input type="text" name="nome" required /></label><br>
-        <label>Email: <input type="email" name="email" required /></label><br>
-        <label>Telefone: <input type="text" name="telefone" required /></label><br>
-        <label>Endereço: <input type="text" name="endereco" required /></label><br>
-        <label>Data de Nascimento: <input type="text" name="dataNascimento" required /></label><br>
-        <label>CPF: <input type="text" name="cpf" required /></label><br>
-        <label>Plano de Saúde: <input type="text" name="planoSaude" required /></label><br>
-        <button type="submit">Salvar</button>
-    </form>
-    <a th:href="@{/api/pacientes}">Voltar à lista</a>
-</body>
+  <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden fonte-padrao">
+    <div class="layout-container flex h-full grow flex-col">
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
+        <div class="flex items-center gap-4 text-[#0d141c]">
+          <div class="size-4">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+          <h2 class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Mindly</h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+          <div class="flex items-center gap-9">
+            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes}">Pacientes</a>
+            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes/Adicionar}">Novo Paciente</a>
+          </div>
+          <div class="foto-perfil"></div>
+        </div>
+      </header>
 
+      <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+          <div class="flex flex-wrap justify-between gap-3 p-4">
+            <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente</p>
+          </div>
+
+          <form th:action="@{/api/pacientes}" method="post" class="flex flex-col gap-4 px-4 py-3">
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Nome</span>
+              <input type="text" name="nome" placeholder="Nome completo" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Email</span>
+              <input type="email" name="email" placeholder="E-mail" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Telefone</span>
+              <input type="text" name="telefone" placeholder="Telefone" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Endereço</span>
+              <input type="text" name="endereco" placeholder="Endereço" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Data de Nascimento</span>
+              <input type="text" name="dataNascimento" placeholder="Data de nascimento" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">CPF</span>
+              <input type="text" name="cpf" placeholder="CPF" required class="input-form" />
+            </label>
+
+            <label class="flex flex-col min-w-40 flex-1">
+              <span class="label-form">Plano de Saúde</span>
+              <input type="text" name="planoSaude" placeholder="Plano de saúde" required class="input-form" />
+            </label>
+
+            <div class="flex px-4 py-3 justify-end">
+              <button type="submit" class="btn-primario">
+                <span class="truncate">Adicionar</span>
+              </button>
+            </div>
+          </form>
+
+          <a th:href="@{/api/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

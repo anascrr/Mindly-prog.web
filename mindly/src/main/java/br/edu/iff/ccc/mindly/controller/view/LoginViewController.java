@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(path = "/api")
 public class LoginViewController {
 
     @GetMapping("/login")
@@ -18,13 +17,13 @@ public class LoginViewController {
         return "login"; // templates/login.html
     }
 
-    @GetMapping("/index")
-    public String mostrarIndex() {
-        return "index";
+    @GetMapping("/home")
+    public String mostrarHome() {
+        return "home"; // templates/home.html
     }
 
     @PostMapping("/login")
     public String login(Login request) {
-        return "redirect:/api/index";
+        return "redirect:/api/home";
     }
 }

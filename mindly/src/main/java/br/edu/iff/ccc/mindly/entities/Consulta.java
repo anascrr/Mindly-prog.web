@@ -2,8 +2,15 @@ package br.edu.iff.ccc.mindly.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Consulta {
+    @Id
     private Long id;
+    @ManyToOne
     private Paciente paciente;
     private String medico;
     private LocalDateTime dataConsulta;

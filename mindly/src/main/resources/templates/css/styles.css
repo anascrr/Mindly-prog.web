@@ -1,0 +1,65 @@
+/* Fonte padrão para toda a aplicação */
+.fonte-padrao {
+  font-family: Inter, 'Noto Sans', sans-serif;
+}
+
+/* Foto de perfil no header */
+.foto-perfil {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbNEF7WuX_seFcF0JLROrTnF9HxGg2nWJX_BzZF0WjynHC1X_EcZ7FtmB4kV_7pIjVGiC-wruWAE7PrjTowM3WRJHIyA9Rr-2dvkLvDab58k0u42b4U43a4yJXf6RUohcXwjLmY2320XXP67mOvoUYxtFmg8NpVPi4p4ar5C-HJiAHDYOOOYWYieDFw6WpWtneA4Tj0ngz4Kjr40pC6EtJdXwFQeHihl6DmBfuyLnGQGzAJbvKXTNHAwsBDG5fSSULHVftHxzcwKbv");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Labels do formulário */
+.label-form {
+  color: #0d141c;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+}
+
+/* Inputs do formulário */
+.input-form {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  resize: none;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  color: #0d141c;
+  border: 1px solid #cedbe8;
+  background-color: #f8fafc;
+  height: 3.5rem;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.input-form:focus {
+  outline: none;
+  border-color: #cedbe8;
+  box-shadow: none;
+}
+
+/* Botão primário */
+.btn-primario {
+  display: flex;
+  min-width: 84px;
+  max-width: 480px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  background-color: #3d99f5;
+  color: #f8fafc;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+}
