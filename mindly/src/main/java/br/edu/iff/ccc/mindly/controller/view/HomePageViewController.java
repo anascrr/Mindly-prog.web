@@ -13,7 +13,7 @@ public class HomePageViewController {
 
     @GetMapping("/inicio")
     public String inicio(Model model) {
-        model.addAttribute("consultas", consultaService.listarTodas());
+        model.addAttribute("consultas", consultaService.listarConsultas());
         // Se quiser, converta para DTO antes de adicionar ao model
         return "inicio";
     }

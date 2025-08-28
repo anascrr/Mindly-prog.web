@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas - Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden"
+        style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#0d141c]">
+                    <div class="size-4">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Mindly</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <a class="text-[#0d141c] text-sm font-medium leading-normal"
+                        th:href="@{/api/pacientes}">Pacientes</a>
+                    <a class="text-[#0d141c] text-sm font-medium leading-normal"
+                        th:href="@{/api/consultas}">Consultas</a>
+                </div>
+            </header>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Lista de Consultas
+                        </p>
+                        <div class="flex gap-3">
+                            <input id="filtroDataConsulta" type="date"
+                                class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base"
+                                onchange="filtrarConsultas()" style="min-width: 200px;">
+                            <input id="filtroPacienteConsulta" type="text" placeholder="Buscar paciente..."
+                                class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base"
+                                onkeyup="filtrarConsultas()" style="min-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 @container">
+                        <div class="flex overflow-hidden rounded-lg border border-[#cedbe8] bg-slate-50">
+                            <table class="flex-1">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th
+                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
+                                            Data</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
+                                            Hora</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
+                                            Paciente</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
+                                            Médico</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
+                                            Observação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="consulta : ${consultas}"
+                                        class="border-t border-t-[#cedbe8] consulta-row" th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}
+                                        " th:data-paciente="${consulta.paciente.nome.toLowerCase()}">
+                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
+                                            th:text="${#temporals.format(consulta.dataConsulta, 'dd/MM/yyyy')}">Data
+                                        </td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
+                                            th:text="${#temporals.format(consulta.dataConsulta, 'HH:mm')}">Hora</td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
+                                            th:text="${consulta.paciente.nome}">Paciente</td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
+                                            th:text="${consulta.medico}">Médico</td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
+                                            th:text="${consulta.observacao}">Observação</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="flex justify-end overflow-hidden px-5 pb-5">
+                        <a th:href="@{/api/consultas/adicionar}"
+                            class="flex max-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#3d99f5] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3 gap-2">
+                            <div class="text-slate-50" data-icon="Plus" data-size="20px" data-weight="regular">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            Adicionar Consulta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filtrarConsultas() {
+            var inputData = document.getElementById("filtroDataConsulta").value;
+            var inputPaciente = document.getElementById("filtroPacienteConsulta").value.toLowerCase();
+            var linhas = document.getElementsByClassName("consulta-row");
+            for (var i = 0; i < linhas.length; i++) {
+                var data = linhas[i].getAttribute("data-data");
+                var paciente = linhas[i].getAttribute("data-paciente");
+                var mostra = true;
+                if (inputData && data !== inputData) {
+                    mostra = false;
+                }
+                if (inputPaciente && (!paciente || paciente.indexOf(inputPaciente) === -1)) {
+                    mostra = false;
+                }
+                linhas[i].style.display = mostra ? "" : "none";
+            }
+        }
+        // Seleciona a data de hoje automaticamente ao carregar
+        window.onload = function () {
+            var hoje = new Date();
+            var yyyy = hoje.getFullYear();
+            var mm = String(hoje.getMonth() + 1).padStart(2, '0');
+            var dd = String(hoje.getDate()).padStart(2, '0');
+            var dataHoje = yyyy + '-' + mm + '-' + dd;
+            document.getElementById("filtroDataConsulta").value = dataHoje;
+            filtrarConsultas();
+        }
+    </script> netstat -ano | findstr 60898
+</body>
+
+</html>

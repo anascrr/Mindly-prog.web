@@ -31,15 +31,18 @@
                     <a class="text-[#0d141c] text-sm font-medium leading-normal"
                         th:href="@{/api/pacientes}">Pacientes</a>
                     <a class="text-[#0d141c] text-sm font-medium leading-normal"
-                        th:href="@{/api/pacientes/adicionar}">Novo
-                        Paciente</a>
+                        th:href="@{/api/consultas}">Consultas</a>
                 </div>
             </header>
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                     <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Lista de
-                            Pacientes</p>
+                        <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Lista de Pacientes
+                        </p>
+                        <input id="filtroPaciente" type="text" placeholder="Buscar paciente..."
+                            class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base" onkeyup="filtrarPacientes()"
+                            style="min-width: 250px;">
                     </div>
                     <div class="px-4 py-3 @container">
                         <div class="flex overflow-hidden rounded-lg border border-[#cedbe8] bg-slate-50">
@@ -55,7 +58,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="paciente : ${pacientes}" class="border-t border-t-[#cedbe8]">
+                                    <tr th:each="paciente : ${pacientes}"
+                                        class="border-t border-t-[#cedbe8] paciente-row">
                                         <td class="h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
                                             th:text="${paciente.nome}">Nome</td>
                                         <td class="h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal bg-white"
@@ -83,6 +87,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function filtrarPacientes() {
+            var input = document.getElementById("filtroPaciente");
+            var filtro = input.value.toLowerCase();
+            var linhas = document.getElementsByClassName("paciente-row");
+            for (var i = 0; i < linhas.length; i++) {
+                var nome = linhas[i].getElementsByTagName("td")[0].textContent.toLowerCase();
+                if (nome.indexOf(filtro) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

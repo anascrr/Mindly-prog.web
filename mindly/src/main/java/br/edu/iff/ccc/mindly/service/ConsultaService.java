@@ -10,11 +10,11 @@ import java.util.Optional;
 @Service
 public class ConsultaService {
 
-    private final List<Consulta> consultas = new ArrayList<>();
-    private Long proximoId = 1L;
+    private static Long proximoId = 1L;
 
-    public List<Consulta> listarTodas() {
-        return new ArrayList<>(consultas);
+    private static List<Consulta> consultas = new ArrayList<>();
+    public static List<Consulta> listarConsultas() {
+        return consultas;
     }
 
     public Optional<Consulta> buscarPorId(Long id) {
@@ -54,7 +54,7 @@ public class ConsultaService {
                 .orElse(0L) + 1;
     }
 
-    public void adicionarConsulta(Consulta consulta) {
+    public static void adicionarConsulta(Consulta consulta) {
         consulta.setId(proximoId++);
         consultas.add(consulta);
     }
