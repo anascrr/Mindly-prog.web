@@ -1,7 +1,10 @@
 package br.edu.iff.ccc.mindly.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -22,7 +28,7 @@ public class Paciente {
     @NotEmpty(message = "Nome não pode ser vazio")
     private String nome;
 
-    @NotEmpty(message = "Email não pode ser vazio")
+    @Email(message = "Email inválido")
     private String email;
 
     @NotEmpty(message = "Telefone não pode ser vazio")
@@ -31,12 +37,12 @@ public class Paciente {
     @NotEmpty(message = "Endereço não pode ser vazio")
     private String endereco;
 
-    @Size(min = 10, max = 10, message = "Data de nascimento deve ter 10 caracteres")
-    @NotEmpty(message = "Data de nascimento não pode ser vazio")
-    private String dataNascimento;
+    @NotNull(message = "Data de nascimento não pode ser vazio")
+    @Past
+    private LocalDate dataNascimento;
 
     @NotEmpty(message = "CPF não pode ser vazio")
-    @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
+    @Size(min = 11, max = 11, message = "Adicione apenas os números do CPF")
     private String cpf;
 
     @NotEmpty(message = "Plano de saúde não pode ser vazio")

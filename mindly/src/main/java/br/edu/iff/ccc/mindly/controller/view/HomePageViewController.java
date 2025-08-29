@@ -11,10 +11,9 @@ public class HomePageViewController {
     @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping("/inicio")
+    @GetMapping("/home")
     public String inicio(Model model) {
         model.addAttribute("consultas", consultaService.listarConsultas());
-        // Se quiser, converta para DTO antes de adicionar ao model
-        return "inicio";
+        return "home";
     }
 }
