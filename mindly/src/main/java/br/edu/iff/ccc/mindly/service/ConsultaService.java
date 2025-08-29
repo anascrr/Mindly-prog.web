@@ -1,6 +1,9 @@
 package br.edu.iff.ccc.mindly.service;
 
+import br.edu.iff.ccc.mindly.dto.ConsultaDTO;
 import br.edu.iff.ccc.mindly.entities.Consulta;
+import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,12 +38,12 @@ public class ConsultaService {
         return consultas.removeIf(consulta -> consulta.getId().equals(id));
     }
 
-    public Consulta atualizar(Long id, Consulta novaConsulta) {
+    public Consulta atualizar(Long id, ConsultaDTO dto) {
         Optional<Consulta> existente = buscarPorId(id);
         if (existente.isPresent()) {
             Consulta consulta = existente.get();
-            consulta.setDataConsulta(novaConsulta.getDataConsulta());
-            consulta.setObservacao(novaConsulta.getObservacao());
+            consulta.setDataConsulta(dto.getDataConsulta());
+            consulta.setObservacao(dto.getObservacao());
             // Atualize outros campos conforme necessário
             return consulta;
         }
@@ -54,8 +57,14 @@ public class ConsultaService {
                 .orElse(0L) + 1;
     }
 
-    public static void adicionarConsulta(Consulta consulta) {
-        consulta.setId(proximoId++);
-        consultas.add(consulta);
+    public static void adicionarConsulta(ConsultaDTO dto) {
+        dto.setId(proximoId++);
+        consultas.add(dto);
     }
+
+    public void cancelar(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cancelar'");
+    }
+
 }

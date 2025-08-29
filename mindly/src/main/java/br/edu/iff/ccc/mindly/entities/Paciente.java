@@ -4,28 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.CascadeType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
+@Table(name = "pacientes")
 public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Nome não pode ser vazio")
+    @NotNull(message = "Nome não pode ser nulo")
     private String nome;
 
     @Email(message = "Email inválido")
@@ -90,11 +80,11 @@ public class Paciente {
         this.endereco = endereco;
     }
 
-    public String getDataNascimento() {
+    public @NotNull(message = "Data de nascimento não pode ser vazio") @Past LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(@NotNull(message = "Data de nascimento não pode ser vazio") @Past LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -122,7 +112,7 @@ public class Paciente {
         this.consultas.add(consulta);
     }
 
-    public Paciente(Long id, String nome, String email, String telefone, String endereco, String dataNascimento,
+    public Paciente(Long id, String nome, String email, String telefone, String endereco, @NotNull(message = "Data de nascimento não pode ser vazio") @Past LocalDate dataNascimento,
             String cpf, String planoSaude) {
         this.id = id;
         this.nome = nome;
@@ -132,13 +122,5 @@ public class Paciente {
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.planoSaude = planoSaude;
-    }
-
-    public Paciente() {
-    }
-
-    public void add(Paciente paciente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
 }

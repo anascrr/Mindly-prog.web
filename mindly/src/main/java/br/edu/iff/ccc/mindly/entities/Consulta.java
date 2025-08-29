@@ -1,14 +1,11 @@
 package br.edu.iff.ccc.mindly.entities;
 
 import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "consultas",
+       uniqueConstraints = {@UniqueConstraint(columnNames = {"profissional_id","data_hora","sala"})})
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +15,21 @@ public class Consulta {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    private String medico;
-    private LocalDateTime dataConsulta;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "medico_id", nullable = false)
+    private Usuario medico;
+
+    @Column(name = "data_hora", nullable = false)
+    private LocalDateTime dataHora;
+    
     private String observacao;
 
-    public Consulta() {
+    public Long getId() {
+        return id;
     }
 
-    public Consulta(Paciente paciente, String medico, LocalDateTime dataConsulta, String observacao) {
-        this.paciente = paciente;
-        this.medico = medico;
-        this.dataConsulta = dataConsulta;
-        this.observacao = observacao;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Paciente getPaciente() {
@@ -40,20 +40,20 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public String getMedico() {
+    public Usuario getMedico() {
         return medico;
     }
 
-    public void setMedico(String medico) {
+    public void setMedico(Usuario medico) {
         this.medico = medico;
     }
 
-    public LocalDateTime getDataConsulta() {
-        return dataConsulta;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setDataConsulta(LocalDateTime dataConsulta) {
-        this.dataConsulta = dataConsulta;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public String getObservacao() {
@@ -62,13 +62,5 @@ public class Consulta {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

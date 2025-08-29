@@ -8,12 +8,12 @@ import br.edu.iff.ccc.mindly.entities.Paciente;
 import jakarta.validation.Valid;
 
 public class PacienteService {
-    public static void salvarPaciente(PacienteDTO dto) {
+    public void salvarPaciente(PacienteDTO dto) {
     }
     
     public static List<Paciente> pacientes = new ArrayList<>(); {
     }
-    public static List<Paciente> listarPacientes() {
+    public List<Paciente> listarPacientes() {
         return pacientes;
     }
     public static void adicionarPaciente(Paciente paciente) {

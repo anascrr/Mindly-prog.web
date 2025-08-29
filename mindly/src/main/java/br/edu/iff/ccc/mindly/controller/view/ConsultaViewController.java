@@ -61,10 +61,30 @@ public class ConsultaViewController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarConsulta(@PathVariable Long id) {
-        return "consultas/editar"; // templates/consultas/editar.html
+    public String editarForm(@PathVariable Long id, Model model) {
+        model.addAttribute("consulta", new ConsultaDTO(id, null, null, null));
+        model.addAttribute("pacientes", PacienteService.listarPacientes());
+    //    model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
+        return "consultas/editar";
+    }
+    
+    @PostMapping("/editar/{id}")
+    public String atualizar(@PathVariable Long id,
+                            @Valid @ModelAttribute("consulta") ConsultaDTO dto,
+                            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("pacientes", PacienteService.listarPacientes());
+    //        model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
+            return "consultas/editar";
+        }
+        consultaService.atualizar(id, dto);
+        return "redirect:/consultas";
     }
 
-    
-    
+    @PostMapping("/cancelar/{id}")
+    public String cancelar(@PathVariable Long id) {
+        consultaService.cancelar(id);
+        return "redirect:/consultas";
+    }
+
 }
