@@ -34,8 +34,6 @@
 * **HTML/CSS** – estrutura e estilo de páginas
 * **Git** – versionamento
 
-> **Nota:** a execução abaixo **não depende de Maven instalado**. O foco está em rodar via IDE (VS Code) e configurar o ambiente Java/BD.
-
 ---
 
 ## 🚀 Como Executar (detalhado, sem Maven)
