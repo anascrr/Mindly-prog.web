@@ -1,90 +1,30 @@
 package br.edu.iff.ccc.mindly.controller.view;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.iff.ccc.mindly.dto.ConsultaDTO;
-import br.edu.iff.ccc.mindly.entities.Consulta;
-import br.edu.iff.ccc.mindly.service.ConsultaService;
-import br.edu.iff.ccc.mindly.entities.Paciente;
-import br.edu.iff.ccc.mindly.service.PacienteService;
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
-@RequestMapping("/Consultas")
+@RequestMapping("/agendamentos")
 public class ConsultaViewController {
 
-    private final ConsultaService consultaService;
-    private final PacienteService pacienteService;
-    //private final DisponibilidadeService disponibilidadeService;
-
-    public ConsultaViewController(ConsultaService consultaService,
-                                  PacienteService pacienteService){
-    //                              DisponibilidadeService disponibilidadeService) {
-        this.consultaService = consultaService;
-        this.pacienteService = pacienteService;
-    //    this.disponibilidadeService = disponibilidadeService;
-    }
-
-    @GetMapping
-    public String listarConsultas(Model model) {
-        model.addAttribute("consultas", ConsultaService.listarConsultas()); // Lista as consultas
-        return "consultas/lista"; // templates/consultas/lista.html
-    }
-    @GetMapping("/adicionar")
-    public String novoConsulta(Model model) {
+    @GetMapping("/novo")
+    public String novoAgendamento(Model model) {
         model.addAttribute("consulta", new ConsultaDTO());
-        model.addAttribute("pacientes", PacienteService.listarPacientes());
-    //    model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
-        return "consultas/adicionar"; // templates/consultas/adicionar.html
-    }
-
-    @PostMapping("/consultas")
-    public String salvarConsulta(@Valid @ModelAttribute("consulta") ConsultaDTO dto,
-                         BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("pacientes", PacienteService.listarPacientes());
-    //        model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
-            return "consultas/adicionar"; // Volta para a página de adicionar
-        }
-
-        ConsultaService.adicionarConsulta(dto);
-        return "redirect:/consultas";
+        return "novo-agendamento";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarForm(@PathVariable Long id, Model model) {
-        model.addAttribute("consulta", new ConsultaDTO(id, null, null, null));
-        model.addAttribute("pacientes", PacienteService.listarPacientes());
-    //    model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
-        return "consultas/editar";
-    }
-    
-    @PostMapping("/editar/{id}")
-    public String atualizar(@PathVariable Long id,
-                            @Valid @ModelAttribute("consulta") ConsultaDTO dto,
-                            BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("pacientes", PacienteService.listarPacientes());
-    //        model.addAttribute("disponibilidades", disponibilidadeService.listarDisponiveis());
-            return "consultas/editar";
-        }
-        consultaService.atualizar(id, dto);
-        return "redirect:/consultas";
+    public String editarAgendamento(@PathVariable Long id, Model model) {
+        model.addAttribute("consultaId", id);
+        return "editar-agendamento";
     }
 
-    @PostMapping("/cancelar/{id}")
-    public String cancelar(@PathVariable Long id) {
-        consultaService.cancelar(id);
-        return "redirect:/consultas";
+    @GetMapping("/cancelar/{id}")
+    public String cancelarAgendamento(@PathVariable Long id, Model model) {
+        model.addAttribute("consultaId", id);
+        return "cancelar-agendamento";
     }
-
 }
