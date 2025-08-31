@@ -1,41 +1,35 @@
-// DisponibilidadeService.java
 package br.edu.iff.ccc.mindly.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+
+import br.edu.iff.ccc.mindly.dto.DisponibilidadeDTO;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class DisponibilidadeService {
-    private final DisponibilidadeRepository repo;
 
-    public DisponibilidadeService(DisponibilidadeRepository repo) {
-        this.repo = repo;
+    private final Map<Long, DisponibilidadeDTO> disponibilidades = new HashMap<>();
+    private final AtomicLong idCounter = new AtomicLong(1);
+
+    public List<DisponibilidadeDTO> listarTodas() {
+        return new ArrayList<>(disponibilidades.values());
     }
 
-    public List<Disponibilidade> listarTodas() { return repo.findAll(); }
-
-    public List<Disponibilidade> listarDisponiveis() { return repo.findByReservadaFalse(); }
-
-    public DisponibilidadeDTO buscarDTO(Long id) {
-        return DisponibilidadeDTO.fromEntity(repo.findById(id).orElseThrow());
+    public DisponibilidadeDTO buscarPorId(Long id) {
+        return disponibilidades.get(id);
     }
 
-    @Transactional
-    public Disponibilidade salvar(DisponibilidadeDTO dto) {
-        return repo.save(dto.toEntity());
+    public DisponibilidadeDTO salvar(DisponibilidadeDTO dto) {
+        if (dto.getId() == null) {
+            dto.setId(idCounter.getAndIncrement());
+        }
+        disponibilidades.put(dto.getId(), dto);
+        return dto;
     }
 
-    @Transactional
-    public Disponibilidade atualizar(Long id, DisponibilidadeDTO dto) {
-        var d = repo.findById(id).orElseThrow();
-        d.setProfissional(dto.getProfissional());
-        d.setInicio(dto.getInicio());
-        d.setFim(dto.getFim());
-        d.setSala(dto.getSala());
-        return repo.save(d);
+    public void deletar(Long id) {
+        disponibilidades.remove(id);
     }
-
-    @Transactional
-    public void excluir(Long id) { repo.deleteById(id); }
 }

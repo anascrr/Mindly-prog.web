@@ -1,70 +1,35 @@
 package br.edu.iff.ccc.mindly.service;
 
-import br.edu.iff.ccc.mindly.dto.ConsultaDTO;
-import br.edu.iff.ccc.mindly.entities.Consulta;
-import jakarta.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import br.edu.iff.ccc.mindly.dto.ConsultaDTO;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class ConsultaService {
 
-    private static Long proximoId = 1L;
+    private final Map<Long, ConsultaDTO> consultas = new HashMap<>();
+    private final AtomicLong idCounter = new AtomicLong(1);
 
-    private static List<Consulta> consultas = new ArrayList<>();
-    public static List<Consulta> listarConsultas() {
-        return consultas;
+    public List<ConsultaDTO> listarTodas() {
+        return new ArrayList<>(consultas.values());
     }
 
-    public Optional<Consulta> buscarPorId(Long id) {
-        return consultas.stream()
-                .filter(consulta -> consulta.getId().equals(id))
-                .findFirst();
+    public ConsultaDTO buscarPorId(Long id) {
+        return consultas.get(id);
     }
 
-    public Consulta salvar(Consulta consulta) {
-        if (consulta.getId() == null) {
-            consulta.setId(gerarNovoId());
+    public ConsultaDTO salvar(ConsultaDTO dto) {
+        if (dto.getId() == null) {
+            dto.setId(idCounter.getAndIncrement());
         }
-        consultas.add(consulta);
-        return consulta;
+        consultas.put((Long) dto.getId(), dto);
+        return dto;
     }
 
-    public boolean remover(Long id) {
-        return consultas.removeIf(consulta -> consulta.getId().equals(id));
+    public void deletar(Long id) {
+        consultas.remove(id);
     }
-
-    public Consulta atualizar(Long id, ConsultaDTO dto) {
-        Optional<Consulta> existente = buscarPorId(id);
-        if (existente.isPresent()) {
-            Consulta consulta = existente.get();
-            consulta.setDataConsulta(dto.getDataConsulta());
-            consulta.setObservacao(dto.getObservacao());
-            // Atualize outros campos conforme necessário
-            return consulta;
-        }
-        return null;
-    }
-
-    private Long gerarNovoId() {
-        return consultas.stream()
-                .mapToLong(Consulta::getId)
-                .max()
-                .orElse(0L) + 1;
-    }
-
-    public static void adicionarConsulta(ConsultaDTO dto) {
-        dto.setId(proximoId++);
-        consultas.add(dto);
-    }
-
-    public void cancelar(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cancelar'");
-    }
-
 }

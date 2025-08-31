@@ -62,4 +62,12 @@ public class ConsultaDTO {
     public void setMedico(String medico) {
         this.medico = medico;
     }
+
+    public Object getId() {
+        throw new UnsupportedOperationException("Unimplemented method 'getId'");
+    }
+
+    public void setId(long andIncrement) {
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
 }
