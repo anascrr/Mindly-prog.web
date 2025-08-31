@@ -13,7 +13,7 @@ public class PacienteService {
     
     public static List<Paciente> pacientes = new ArrayList<>(); {
     }
-    public List<Paciente> listarPacientes() {
+    public static List<Paciente> listarPacientes() {
         return pacientes;
     }
     public static void adicionarPaciente(Paciente paciente) {
