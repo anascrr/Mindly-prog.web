@@ -19,9 +19,11 @@ public class Consulta {
     private Paciente paciente;
 
     private String medico;
+    
     private LocalDateTime dataConsulta;
-    private String observacao;
 
+    private String observacao;
+    
     public Consulta() {
     }
 

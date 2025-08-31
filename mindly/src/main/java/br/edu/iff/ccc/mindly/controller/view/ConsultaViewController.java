@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import br.edu.iff.ccc.mindly.entities.Consulta;
-import br.edu.iff.ccc.mindly.entities.Paciente;
 import br.edu.iff.ccc.mindly.service.ConsultaService;
-import br.edu.iff.ccc.mindly.service.PacienteService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
