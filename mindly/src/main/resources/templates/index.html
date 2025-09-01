@@ -29,7 +29,6 @@
         .fc-toolbar-title,
         .fc-col-header-cell-cushion,
         .fc-daygrid-day-number {
-            font-family: 'Rubik', sans-serif !important;
             color: #545454 !important;
         }
 
@@ -39,7 +38,6 @@
             background-color: #65a272 !important;
             border-color: #65a272 !important;
             color: #fff !important;
-            font-family: 'Rubik', sans-serif !important;
         }
 
         .fc-button-primary:focus,
@@ -57,25 +55,12 @@
         .fc-daygrid-day-frame {
             background: #f6f6f6 !important;
         }
-
-        .fc .fc-button .fc-icon {
-            font-family: "FC Icons", Arial, sans-serif !important;
-            font-style: normal !important;
-            font-weight: normal !important;
-            text-transform: none !important;
-            line-height: 1 !important;
-            letter-spacing: normal !important;
-            direction: ltr !important;
-            -webkit-font-smoothing: antialiased !important;
-            -moz-osx-font-smoothing: grayscale !important;
-        }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
     <div th:replace="~{fragmentos/navbar :: navbar}"></div>
     <div class="flex flex-row justify-center items-start min-h-[80vh] px-10 py-8 gap-10 flex-1">
-        <!-- Lista de consultas do dia -->
         <div class="bg-caixa rounded-lg shadow-md p-6 w-[380px] min-h-[600px]">
             <h2 class="text-xl font-bold text-concreto mb-4" id="titulo-consultas">
                 Consultas do dia

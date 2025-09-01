@@ -33,6 +33,7 @@
             color: #545454;
             font-weight: 900;
             letter-spacing: 1px;
+            font-size: 1.5rem;
             font-family: 'Rubik', sans-serif !important;
         }
 
@@ -102,19 +103,19 @@
 
         .brand {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.5rem;
         }
 
-        .brand-icon {
-            width: 36px;
-            height: 36px;
-            margin-right: 0.7rem;
+        .brand-img {
+            width: 250px;
+            height: auto;
+            display: block;
         }
 
         .brand-title {
-            font-size: 1.7rem;
+            font-size: 2rem;
             font-weight: 800;
             color: #545454;
             letter-spacing: 1px;
@@ -126,13 +127,8 @@
 <body>
     <div class="login-container">
         <div class="brand">
-            <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
-                <circle cx="24" cy="24" r="22" fill="#65a272" stroke="#65a272" stroke-width="2" />
-                <path d="M14 28c2 4 6 8 10 8s8-4 10-8" stroke="#fffcf5" stroke-width="2" stroke-linecap="round" />
-                <circle cx="18" cy="20" r="2" fill="#fffcf5" />
-                <circle cx="30" cy="20" r="2" fill="#fffcf5" />
-            </svg>
             <span class="brand-title">Mindly</span>
+            <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo" class="brand-img" />
         </div>
         <h1>Login</h1>
 
