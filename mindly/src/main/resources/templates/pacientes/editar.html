@@ -6,64 +6,97 @@
     <title>Editar Paciente - Mindly</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            background: #fffcf5 !important;
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .text-principal,
+        label,
+        input,
+        span,
+        p,
+        a,
+        button {
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .btn-salvar {
+            background: #65a272 !important;
+            color: #fff !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+
+        .btn-salvar:hover {
+            background: #4e7e59 !important;
+        }
+
+        .input-edit {
+            background: #fffcf5 !important;
+            color: #545454 !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden"
-        style="font-family: Inter, 'Noto Sans', sans-serif;">
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
             <div th:replace="~{fragmentos/navbar :: navbar}"></div>
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
                     <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Editar
+                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Editar
                             Paciente</p>
                     </div>
                     <form th:action="@{/pacientes/editar}" th:object="${pacienteDTO}" method="post"
                         class="flex flex-col gap-4 px-4 py-3">
                         <input type="hidden" th:field="*{id}" />
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Nome</span>
+                            <span class="text-base font-medium leading-normal pb-2">Nome</span>
                             <input type="text" th:field="*{nome}" placeholder="Nome completo" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Email</span>
+                            <span class="text-base font-medium leading-normal pb-2">Email</span>
                             <input type="email" th:field="*{email}" placeholder="E-mail" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Telefone</span>
+                            <span class="text-base font-medium leading-normal pb-2">Telefone</span>
                             <input type="text" th:field="*{telefone}" placeholder="Telefone" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Endereço</span>
+                            <span class="text-base font-medium leading-normal pb-2">Endereço</span>
                             <input type="text" th:field="*{endereco}" placeholder="Endereço" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Data de
+                            <span class="text-base font-medium leading-normal pb-2">Data de
                                 Nascimento</span>
                             <input type="text" th:field="*{dataNascimento}" placeholder="Data de nascimento" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">CPF</span>
+                            <span class="text-base font-medium leading-normal pb-2">CPF</span>
                             <input type="text" th:field="*{cpf}" placeholder="CPF" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Plano de Saúde</span>
+                            <span class="text-base font-medium leading-normal pb-2">Plano de Saúde</span>
                             <input type="text" th:field="*{planoSaude}" placeholder="Plano de saúde" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <div class="flex px-4 py-3 justify-end">
                             <button type="submit"
-                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#3d99f5] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]">
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-salvar text-sm font-bold leading-normal tracking-[0.015em]">
                                 <span class="truncate">Salvar</span>
                             </button>
                         </div>
