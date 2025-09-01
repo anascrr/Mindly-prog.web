@@ -22,7 +22,6 @@
         span,
         p,
         a,
-        button,
         select {
             font-family: 'Rubik', sans-serif !important;
             color: #545454 !important;
@@ -31,11 +30,29 @@
         .btn-adicionar {
             background: #65a272 !important;
             color: #fff !important;
-            font-family: 'Rubik', sans-serif !important;
         }
 
         .btn-adicionar:hover {
             background: #4e7e59 !important;
+        }
+
+        .btn-editar {
+            background: #65a272 !important;
+            /* ou cor que você quiser */
+            color: #fff !important;
+        }
+
+        .btn-editar:hover {
+            background: #4e7e59 !important;
+        }
+
+        .btn-excluir {
+            background: #ef4444 !important;
+            color: #fff !important;
+        }
+
+        .btn-excluir:hover {
+            background: #b91c1c !important;
         }
 
         .input-edit,
@@ -97,8 +114,7 @@
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <div class="flex px-4 py-3 justify-end">
-                            <button type="submit"
-                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-adicionar text-sm font-bold leading-normal tracking-[0.015em]">
+                            <button type="submit" class="btn-adicionar">
                                 <span class="truncate">Adicionar</span>
                             </button>
                         </div>
