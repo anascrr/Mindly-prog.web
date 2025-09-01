@@ -20,7 +20,7 @@ public class PacienteViewController {
     @GetMapping("/pacientes")
     public String listarPacientes(Model model) {
         model.addAttribute("pacientes", PacienteService.listarTodos());
-        return "pacientes/layout"; 
+        return "pacientes/lista"; 
     }
 
     @GetMapping("/pacientes/adicionar")
