@@ -14,7 +14,7 @@ public class PacienteDTO {
     private String nome;
 
     @NotEmpty(message = "E-mail não pode ser vazio")
-    @Pattern(regexp = "^[\\w\\.-]+@((gmail|hotmail)\\.com(\\.br)?)$", message = "E-mail deve ser do domínio gmail.com ou hotmail.com")
+    @Pattern(regexp = "^[\\w\\.-]+@(gmail\\.com(\\.br)?|hotmail\\.com(\\.br)?)$", message = "E-mail deve ser do domínio gmail.com, gmail.com.br, hotmail.com ou hotmail.com.br")
     private String email;
 
     @NotEmpty(message = "Telefone não pode ser vazio")
