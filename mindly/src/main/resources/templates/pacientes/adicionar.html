@@ -28,7 +28,7 @@
         <div class="flex flex-1 justify-end gap-8">
           <div class="flex items-center gap-9">
             <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes}">Pacientes</a>
-            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/api/pacientes/adicionar}">Novo
+            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes/adicionar}">Novo
               Paciente</a>
           </div>
           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
@@ -41,7 +41,7 @@
           <div class="flex flex-wrap justify-between gap-3 p-4">
             <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente</p>
           </div>
-          <form th:action="@{/api/pacientes}" th:object="${pacienteDTO}" method="post"
+          <form th:action="@{/pacientes}" th:object="${pacienteDTO}" method="post"
             class="flex flex-col gap-4 px-4 py-3">
             <label class="flex flex-col min-w-40 flex-1">
               <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Nome</span>
@@ -94,7 +94,7 @@
               </button>
             </div>
           </form>
-          <a th:href="@{/api/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+          <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
         </div>
       </div>
     </div>

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
-@RequestMapping("/api")
 public class ConsultaViewController {
 
     private final ConsultaService consultaService;
@@ -58,7 +57,7 @@ public class ConsultaViewController {
 
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
         if (paciente == null) {
-            return "redirect:/api/consultas/adicionar";
+            return "redirect:/consultas/adicionar";
         }
 
         // Aceita formato do input type="datetime-local" (yyyy-MM-ddTHH:mm)
@@ -72,7 +71,7 @@ public class ConsultaViewController {
         consulta.setObservacao(observacao);
 
         consultaService.salvar(consulta);
-        return "redirect:/api/consultas";
+        return "redirect:/consultas";
     }
 
     // POST para salvar as alterações
@@ -83,12 +82,12 @@ public class ConsultaViewController {
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
         consulta.setPaciente(paciente);
         consultaService.atualizar(consulta.getId(), consulta);
-        return "redirect:/api/consultas";
+        return "redirect:/consultas";
     }
 
     @GetMapping("/consultas/excluir/{id}")
     public String excluirConsulta(@PathVariable Long id) {
         consultaService.remover(id);
-        return "redirect:/api/consultas";
+        return "redirect:/consultas";
     }
 }
