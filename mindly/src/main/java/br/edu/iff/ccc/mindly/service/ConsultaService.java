@@ -10,10 +10,10 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class ConsultaService {
 
-    private final Map<Long, ConsultaDTO> consultas = new HashMap<>();
-    private final AtomicLong idCounter = new AtomicLong(1);
+    private final static Map<Long, ConsultaDTO> consultas = new HashMap<>();
+    private final static AtomicLong idCounter = new AtomicLong(1);
 
-    public List<ConsultaDTO> listarTodas() {
+    public static List<ConsultaDTO> listarTodas() {
         return new ArrayList<>(consultas.values());
     }
 
@@ -21,7 +21,7 @@ public class ConsultaService {
         return consultas.get(id);
     }
 
-    public ConsultaDTO salvar(ConsultaDTO dto) {
+    public static ConsultaDTO salvar(ConsultaDTO dto) {
         if (dto.getId() == null) {
             dto.setId(idCounter.getAndIncrement());
         }

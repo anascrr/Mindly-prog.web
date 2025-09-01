@@ -10,6 +10,6 @@ public class DisponibilidadeViewController {
 
     @GetMapping
     public String definirDisponibilidade() {
-        return "disponibilidade"; // arquivo disponibilidade.html
+        return "disponibilidades/lista"; // arquivo disponibilidade.html
     }
 }
