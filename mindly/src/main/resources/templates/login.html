@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -8,18 +8,19 @@
 
 <body>
     <h1>Mindly - Login</h1>
-    
+
+    <!-- Mensagem de erro -->
+    <div th:if="${erro}" th:text="${erro}" style="color: red;"></div>
+
     <form th:action="@{/home}" th:object="${loginDTO}" method="post">
         <label for="email">Email:</label>
-        <input type="text" id="email" th:field="*{email}" placeholder="Digite seu email" required>
+        <input type="text" id="email" th:field="*{email}" placeholder="Digite seu email" required />
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required>
+        <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required />
 
         <button type="submit">Entrar</button>
     </form>
-
-    <div th:if="${erro}" th:text="${erro}" style="color: red;"></div>
 </body>
 
 </html>
