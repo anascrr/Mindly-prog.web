@@ -36,7 +36,6 @@ public class ConsultaViewController {
         return "consultas/adicionar"; // templates/consultas/adicionar.html
     }
 
-    // GET para exibir o formulário preenchido
     @GetMapping("/consultas/editar/{id}")
     public String editarConsulta(@PathVariable Long id, Model model) {
         Consulta consulta = consultaService.buscarPorId(id).orElse(null);
@@ -60,7 +59,6 @@ public class ConsultaViewController {
             return "redirect:/consultas/adicionar";
         }
 
-        // Aceita formato do input type="datetime-local" (yyyy-MM-ddTHH:mm)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime dataHora = LocalDateTime.parse(dataConsulta, formatter);
 
@@ -74,7 +72,6 @@ public class ConsultaViewController {
         return "redirect:/consultas";
     }
 
-    // POST para salvar as alterações
     @PostMapping("/consultas/editar")
     public String atualizarConsulta(
             @ModelAttribute("consulta") Consulta consulta,

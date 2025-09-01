@@ -8,6 +8,6 @@ public class HomePageViewController {
 
     @GetMapping("/home")
     public String homePage() {
-        return "index"; // arquivo home.html
+        return "index"; 
     }
 }

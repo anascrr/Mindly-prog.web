@@ -38,7 +38,6 @@
             this.planoSaude = planoSaude;
         }
 
-        // Getters e setters...
         public Long getId() {
             return id;
         }

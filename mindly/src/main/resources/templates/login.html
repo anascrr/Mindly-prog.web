@@ -9,7 +9,6 @@
 <body>
     <h1>Mindly - Login</h1>
 
-    <!-- Mensagem de erro -->
     <div th:if="${erro}" th:text="${erro}" style="color: red;"></div>
 
     <form th:action="@{/home}" th:object="${loginDTO}" method="post">

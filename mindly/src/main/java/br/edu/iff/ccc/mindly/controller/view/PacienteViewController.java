@@ -20,13 +20,13 @@ public class PacienteViewController {
     @GetMapping("/pacientes")
     public String listarPacientes(Model model) {
         model.addAttribute("pacientes", PacienteService.listarTodos());
-        return "pacientes/layout"; // templates/pacientes/layout.html
+        return "pacientes/layout"; 
     }
 
     @GetMapping("/pacientes/adicionar")
     public String novoPaciente(Model model) {
         model.addAttribute("pacienteDTO", new PacienteDTO());
-        return "pacientes/adicionar"; // templates/pacientes/adicionar.html
+        return "pacientes/adicionar"; 
     }
 
     @GetMapping("/pacientes/editar/{id}")
@@ -34,7 +34,7 @@ public class PacienteViewController {
         Paciente paciente = PacienteService.buscarPorId(id);
         PacienteDTO pacienteDTO = new PacienteDTO(paciente);
         model.addAttribute("pacienteDTO", pacienteDTO);
-        return "pacientes/editar"; // templates/pacientes/editar.html
+        return "pacientes/editar"; 
     }
 
     @PostMapping("/pacientes")

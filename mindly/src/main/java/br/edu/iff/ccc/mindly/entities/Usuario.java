@@ -16,7 +16,7 @@ public class Usuario {
     private String passwordHash;
 
     @Column(nullable=false)
-    private String role; // "RECEPCIONISTA", "PSICOLOGO", "PSIQUIATRA"
+    private String role; 
     
     public Long getId() {
         return id;

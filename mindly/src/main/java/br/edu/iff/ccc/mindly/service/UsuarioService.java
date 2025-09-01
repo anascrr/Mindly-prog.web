@@ -13,7 +13,6 @@ public class UsuarioService {
     private final Map<Long, UsuarioDTO> usuarios = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong(1);
 
-    // login simples em memória
     public UsuarioDTO autenticar(String username, String senha) {
         return usuarios.values().stream()
                 .filter(u -> u.getUsername().equals(username) && u.getSenha().equals(senha))

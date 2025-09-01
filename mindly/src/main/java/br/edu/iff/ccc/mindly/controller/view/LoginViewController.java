@@ -26,7 +26,7 @@ public class LoginViewController {
 
         if (usuario != null) {
             model.addAttribute("username", usuario.getNome());
-            model.addAttribute("role", usuario.getPapel());
+            model.addAttribute("role", usuario.getCargo());
             return "index";
         } else {
             model.addAttribute("erro", "Usuário ou senha inválidos");

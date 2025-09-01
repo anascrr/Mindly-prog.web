@@ -64,8 +64,6 @@ public class PacienteDTO {
                 this.planoSaude);
     }
 
-    // Getters e setters
-
     public Long getId() {
         return id;
     }

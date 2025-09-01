@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class ConsultaDTO {
 
     @NotNull(message = "O paciente é obrigatório")
-    private Long pacienteId; // Apenas o ID do paciente
+    private Long pacienteId; 
 
     @NotNull(message = "A data da consulta é obrigatória")
     @FutureOrPresent(message = "A data da consulta deve ser no presente ou futuro")
@@ -19,7 +19,7 @@ public class ConsultaDTO {
     private String observacao;
 
     @NotBlank(message = "O médico é obrigatório")
-    private String medico; // Nome do médico
+    private String medico; 
 
     public ConsultaDTO() {
     }
