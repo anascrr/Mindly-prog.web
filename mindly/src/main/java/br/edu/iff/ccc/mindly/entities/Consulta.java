@@ -1,6 +1,7 @@
 package br.edu.iff.ccc.mindly.entities;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -19,11 +20,11 @@ public class Consulta {
     private Paciente paciente;
 
     private String medico;
-    
+
     private LocalDateTime dataConsulta;
 
     private String observacao;
-    
+
     public Consulta() {
     }
 

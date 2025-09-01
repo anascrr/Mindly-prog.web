@@ -10,10 +10,10 @@ import java.util.Optional;
 @Service
 public class ConsultaService {
 
-    private static Long proximoId = 1L;
+    private Long proximoId = 1L;
+    private List<Consulta> consultas = new ArrayList<>();
 
-    private static List<Consulta> consultas = new ArrayList<>();
-    public static List<Consulta> listarConsultas() {
+    public List<Consulta> listarConsultas() {
         return consultas;
     }
 
@@ -25,7 +25,7 @@ public class ConsultaService {
 
     public Consulta salvar(Consulta consulta) {
         if (consulta.getId() == null) {
-            consulta.setId(gerarNovoId());
+            consulta.setId(proximoId++);
         }
         consultas.add(consulta);
         return consulta;
@@ -41,21 +41,8 @@ public class ConsultaService {
             Consulta consulta = existente.get();
             consulta.setDataConsulta(novaConsulta.getDataConsulta());
             consulta.setObservacao(novaConsulta.getObservacao());
-            // Atualize outros campos conforme necessário
             return consulta;
         }
         return null;
-    }
-
-    private Long gerarNovoId() {
-        return consultas.stream()
-                .mapToLong(Consulta::getId)
-                .max()
-                .orElse(0L) + 1;
-    }
-
-    public static void adicionarConsulta(Consulta consulta) {
-        consulta.setId(proximoId++);
-        consultas.add(consulta);
     }
 }

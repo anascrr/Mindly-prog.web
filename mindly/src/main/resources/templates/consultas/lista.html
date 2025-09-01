@@ -73,15 +73,40 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="consulta : ${consultas}"
-                                        class="border-t border-t-[#cedbe8] consulta-row" th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}
-                                        " th:data-paciente="${consulta.paciente.nome.toLowerCase()}">
+                                        class="border-t border-t-[#cedbe8] consulta-row"
+                                        th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}"
+                                        th:data-paciente="${consulta.paciente != null ? consulta.paciente.nome.toLowerCase() : ''}">
                                         <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
                                             th:text="${#temporals.format(consulta.dataConsulta, 'dd/MM/yyyy')}">Data
                                         </td>
                                         <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
                                             th:text="${#temporals.format(consulta.dataConsulta, 'HH:mm')}">Hora</td>
-                                        <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
-                                            th:text="${consulta.paciente.nome}">Paciente</td>
+                                        <td
+                                            class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white relative group-hover:bg-gray-100">
+                                            <span
+                                                th:text="${consulta.paciente != null ? consulta.paciente.nome : 'Paciente não informado'}">Paciente</span>
+                                            <span
+                                                class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                                                <a th:href="@{'/api/pacientes/editar/' + ${consulta.paciente.id}}"
+                                                    class="text-blue-500 hover:text-blue-700" title="Editar Paciente">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M4 21h4.586a1 1 0 0 0 .707-.293l10.5-10.5a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0l-10.5 10.5A1 1 0 0 0 4 21zm14.707-13.293a1 1 0 0 1 0 1.414l-1.414 1.414-2.828-2.828 1.414-1.414a1 1 0 0 1 1.414 0l1.414 1.414z"
+                                                            fill="currentColor" />
+                                                    </svg>
+                                                </a>
+                                                <a th:href="@{'/api/pacientes/excluir/' + ${consulta.paciente.id}}"
+                                                    class="text-red-500 hover:text-red-700" title="Excluir Paciente"
+                                                    onclick="return confirm('Tem certeza que deseja excluir este paciente?');">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" />
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                        </td>
                                         <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
                                             th:text="${consulta.medico}">Médico</td>
                                         <td class="h-[72px] px-4 py-2 w-[200px] text-[#0d141c] text-sm font-normal leading-normal bg-white"
@@ -127,7 +152,6 @@
                 linhas[i].style.display = mostra ? "" : "none";
             }
         }
-        // Seleciona a data de hoje automaticamente ao carregar
         window.onload = function () {
             var hoje = new Date();
             var yyyy = hoje.getFullYear();
