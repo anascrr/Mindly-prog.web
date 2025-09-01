@@ -26,6 +26,9 @@ public class ConsultaService {
     public Consulta salvar(Consulta consulta) {
         if (consulta.getId() == null) {
             consulta.setId(proximoId++);
+        } else {
+            // Remove a consulta antiga com o mesmo ID, se existir
+            consultas.removeIf(c -> c.getId().equals(consulta.getId()));
         }
         consultas.add(consulta);
         return consulta;

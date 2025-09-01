@@ -59,8 +59,14 @@
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Médico</span>
-                            <input type="text" name="medico" placeholder="Nome do médico" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                            <select name="medico" required
+                                class="form-select flex-1 rounded-lg border border-[#cedbe8] bg-slate-50 h-14 p-[15px] text-base font-normal leading-normal">
+                                <option value="" disabled selected>Selecione o médico</option>
+                                <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo
+                                </option>
+                                <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos -
+                                    Psiquiatra</option>
+                            </select>
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Data e Hora da
@@ -80,7 +86,7 @@
                             </button>
                         </div>
                     </form>
-                    <a th:href="@{/api/consultas/lista}" class="mt-4 text-blue-600">Voltar à lista</a>
+                    <a th:href="@{/api/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
                 </div>
             </div>
         </div>

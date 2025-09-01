@@ -1,45 +1,51 @@
 package br.edu.iff.ccc.mindly.controller.view;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 import br.edu.iff.ccc.mindly.entities.Consulta;
 import br.edu.iff.ccc.mindly.entities.Paciente;
 import br.edu.iff.ccc.mindly.service.ConsultaService;
 import br.edu.iff.ccc.mindly.service.PacienteService;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/api")
 public class ConsultaViewController {
 
     private final ConsultaService consultaService;
+    private final PacienteService pacienteService;
 
-    public ConsultaViewController(ConsultaService consultaService) {
+    public ConsultaViewController(ConsultaService consultaService, PacienteService pacienteService) {
         this.consultaService = consultaService;
+        this.pacienteService = pacienteService;
     }
 
     @GetMapping("/consultas")
     public String listarConsultas(Model model) {
-        model.addAttribute("consultas", consultaService.listarConsultas()); // Lista as consultas
+        model.addAttribute("consultas", consultaService.listarConsultas());
         return "consultas/lista"; // templates/consultas/lista.html
     }
 
     @GetMapping("/consultas/adicionar")
     public String novoConsulta(Model model) {
         model.addAttribute("consulta", new Consulta());
-        model.addAttribute("pacientes", PacienteService.listarTodos()); // Adicione esta linha
+        model.addAttribute("pacientes", pacienteService.listarTodos());
         return "consultas/adicionar"; // templates/consultas/adicionar.html
     }
 
+    // GET para exibir o formulário preenchido
     @GetMapping("/consultas/editar/{id}")
-    public String editarConsulta(@PathVariable Long id) {
+    public String editarConsulta(@PathVariable Long id, Model model) {
+        Consulta consulta = consultaService.buscarPorId(id).orElse(null);
+        if (consulta == null) {
+            return "redirect:/api/consultas";
+        }
+        model.addAttribute("consulta", consulta);
+        model.addAttribute("pacientes", pacienteService.listarTodos());
         return "consultas/editar"; // templates/consultas/editar.html
     }
 
@@ -50,14 +56,13 @@ public class ConsultaViewController {
             @RequestParam String dataConsulta,
             @RequestParam(required = false) String observacao) {
 
-        Paciente paciente = PacienteService.buscarPorId(pacienteId);
+        Paciente paciente = pacienteService.buscarPorId(pacienteId);
         if (paciente == null) {
             return "redirect:/api/consultas/adicionar";
         }
 
         // Aceita formato do input type="datetime-local" (yyyy-MM-ddTHH:mm)
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter
-                .ofPattern("yyyy-MM-dd'T'HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime dataHora = LocalDateTime.parse(dataConsulta, formatter);
 
         Consulta consulta = new Consulta();
@@ -70,4 +75,20 @@ public class ConsultaViewController {
         return "redirect:/api/consultas";
     }
 
+    // POST para salvar as alterações
+    @PostMapping("/consultas/editar")
+    public String atualizarConsulta(
+            @ModelAttribute("consulta") Consulta consulta,
+            @RequestParam Long pacienteId) {
+        Paciente paciente = pacienteService.buscarPorId(pacienteId);
+        consulta.setPaciente(paciente);
+        consultaService.atualizar(consulta.getId(), consulta);
+        return "redirect:/api/consultas";
+    }
+
+    @GetMapping("/consultas/excluir/{id}")
+    public String excluirConsulta(@PathVariable Long id) {
+        consultaService.remover(id);
+        return "redirect:/api/consultas";
+    }
 }
