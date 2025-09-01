@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -24,11 +25,17 @@ public class HomePageViewController {
         LocalDate dataSelecionada = (data != null) ? LocalDate.parse(data) : hoje;
 
         List<Consulta> consultasHoje = consultaService.obterConsultasPorData(hoje);
-        List<Consulta> consultasData = consultaService.obterConsultasPorData(dataSelecionada);
+        if (consultasHoje == null)
+            consultasHoje = new ArrayList<>();
+        consultasHoje.sort(Comparator.comparing(Consulta::getDataConsulta));
 
-        // Garante que nunca será null
-        model.addAttribute("consultasHoje", consultasHoje != null ? consultasHoje : new ArrayList<>());
-        model.addAttribute("consultasData", consultasData != null ? consultasData : new ArrayList<>());
+        List<Consulta> consultasData = consultaService.obterConsultasPorData(dataSelecionada);
+        if (consultasData == null)
+            consultasData = new ArrayList<>();
+        consultasData.sort(Comparator.comparing(Consulta::getDataConsulta));
+
+        model.addAttribute("consultasHoje", consultasHoje);
+        model.addAttribute("consultasData", consultasData);
         model.addAttribute("dataSelecionada", dataSelecionada);
         model.addAttribute("hoje", hoje);
 

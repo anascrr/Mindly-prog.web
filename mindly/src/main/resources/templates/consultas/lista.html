@@ -25,7 +25,8 @@
                         <div class="flex gap-3">
                             <input id="filtroDataConsulta" type="date"
                                 class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base"
-                                onchange="filtrarConsultas()" style="min-width: 200px;">
+                                onchange="filtrarConsultas()" style="min-width: 200px;"
+                                placeholder="Selecione uma data...">
                             <input id="filtroPacienteConsulta" type="text" placeholder="Buscar paciente..."
                                 class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base"
                                 onkeyup="filtrarConsultas()" style="min-width: 200px;">
@@ -36,18 +37,26 @@
                             <table class="flex-1">
                                 <thead>
                                     <tr class="bg-gray-100">
-                                        <th
-                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
-                                            Data</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
-                                            Hora</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
-                                            Paciente</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal">
-                                            Médico</th>
+                                        <th class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(0)">
+                                            Data
+                                            <span id="seta-data">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(1)">
+                                            Hora
+                                            <span id="seta-hora">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(2)">
+                                            Paciente
+                                            <span id="seta-paciente">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left text-[#0d141c] w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(3)">
+                                            Médico
+                                            <span id="seta-medico">▲</span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -130,14 +139,46 @@
                 linhas[i].style.display = mostra ? "" : "none";
             }
         }
-        window.onload = function () {
-            var hoje = new Date();
-            var yyyy = hoje.getFullYear();
-            var mm = String(hoje.getMonth() + 1).padStart(2, '0');
-            var dd = String(hoje.getDate()).padStart(2, '0');
-            var dataHoje = yyyy + '-' + mm + '-' + dd;
-            document.getElementById("filtroDataConsulta").value = dataHoje;
-            filtrarConsultas();
+
+        let ordem = [true, true, true, true]; // true = crescente, false = decrescente
+
+        function ordenarTabela(col) {
+            let tabela = document.querySelector("table tbody");
+            let linhas = Array.from(tabela.querySelectorAll("tr"));
+            let getValue = (td) => td.textContent.trim();
+
+            linhas.sort((a, b) => {
+                let valA = getValue(a.children[col]);
+                let valB = getValue(b.children[col]);
+                // Para data e hora, converte para formato comparável
+                if (col === 0) { // Data
+                    let [diaA, mesA, anoA] = valA.split("/");
+                    let [diaB, mesB, anoB] = valB.split("/");
+                    valA = new Date(`${anoA}-${mesA}-${diaA}`);
+                    valB = new Date(`${anoB}-${mesB}-${diaB}`);
+                }
+                if (col === 1) { // Hora
+                    valA = valA.replace(":", "");
+                    valB = valB.replace(":", "");
+                }
+                if (ordem[col]) {
+                    return valA > valB ? 1 : valA < valB ? -1 : 0;
+                } else {
+                    return valA < valB ? 1 : valA > valB ? -1 : 0;
+                }
+            });
+
+            // Atualiza a tabela
+            linhas.forEach(linha => tabela.appendChild(linha));
+
+            // Alterna a ordem para próxima vez
+            ordem[col] = !ordem[col];
+
+            // Atualiza as setas
+            document.getElementById("seta-data").textContent = col === 0 ? (ordem[0] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-hora").textContent = col === 1 ? (ordem[1] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-paciente").textContent = col === 2 ? (ordem[2] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-medico").textContent = col === 3 ? (ordem[3] ? "▲" : "▼") : "▲";
         }
     </script>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
