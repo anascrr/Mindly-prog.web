@@ -80,7 +80,6 @@
                 </li>
             </ul>
         </div>
-        <!-- Calendário grande -->
         <div class="bg-caixa rounded-lg shadow-md p-6 w-[600px] min-h-[600px] flex flex-col items-center">
             <h2 class="text-xl font-bold text-concreto mb-4">Calendário</h2>
             <div id="calendario" style="width:100%;"></div>
@@ -88,9 +87,7 @@
     </div>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
     <script th:inline="javascript">
-        // Eventos do calendário (consultas) vindos do backend
         const eventos = [
-            /*[# th:each="consulta : ${consultasTodas}" ]*/
             {
                 title: /*[[${consulta.paciente.nome}]]*/'Paciente',
                 start: /*[[${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd\'T\'HH:mm')}]]*/'2025-09-01T14:00',
@@ -99,7 +96,6 @@
                     hora: /*[[${#temporals.format(consulta.dataConsulta, 'HH:mm')}]]*/'14:00'
                 }
             }
-            /*[/]*/
         ];
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -122,7 +118,6 @@
                     window.location.href = '/?data=' + info.dateStr;
                 },
                 eventClick: function (info) {
-                    // Opcional: mostrar detalhes do evento
                 },
                 validRange: {
                     start: null,
@@ -130,9 +125,7 @@
                 }
             });
 
-            /*[# th:if="${dataSelecionada != null}" ]*/
             calendar.gotoDate(/*[[${#temporals.format(dataSelecionada, 'yyyy-MM-dd')}]]*/'2025-09-01');
-            /*[/]*/
 
             calendar.render();
         });
