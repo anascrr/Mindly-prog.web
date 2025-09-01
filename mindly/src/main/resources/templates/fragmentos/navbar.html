@@ -1,6 +1,7 @@
 <header th:fragment="navbar"
-    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
-    <div class="flex items-center gap-4 text-[#0d141c]">
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3"
+    style="background: #d8d5ca; font-family: 'Rubik', sans-serif;">
+    <div class="flex items-center gap-4" style="color: #545454;">
         <div class="size-4">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -8,11 +9,15 @@
                     fill="currentColor"></path>
             </svg>
         </div>
-        <h2 class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Mindly</h2>
+        <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]"
+            style="color: #545454; font-family: 'Rubik', sans-serif;">Mindly</h2>
     </div>
     <div class="flex flex-1 justify-end gap-8">
-        <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/home}">Home</a>
-        <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes}">Pacientes</a>
-        <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/consultas}">Consultas</a>
+        <a class="text-sm font-medium leading-normal" th:href="@{/home}"
+            style="color: #545454; font-family: 'Rubik', sans-serif;">Home</a>
+        <a class="text-sm font-medium leading-normal" th:href="@{/pacientes}"
+            style="color: #545454; font-family: 'Rubik', sans-serif;">Pacientes</a>
+        <a class="text-sm font-medium leading-normal" th:href="@{/consultas}"
+            style="color: #545454; font-family: 'Rubik', sans-serif;">Consultas</a>
     </div>
 </header>

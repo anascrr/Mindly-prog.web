@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f5dc 0%, #e6f4ea 100%);
+            font-family: 'Rubik', sans-serif !important;
+            background: linear-gradient(180deg, #fffcf5 0%, #d8d5ca 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -15,56 +18,60 @@
         }
 
         .login-container {
-            background: #fffbe6;
+            background: #fffcf5;
             padding: 2.5rem 2.5rem 2rem 2.5rem;
             border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(34, 70, 34, 0.08);
+            box-shadow: 0 4px 24px rgba(101, 162, 114, 0.08);
             min-width: 340px;
-            border: 1.5px solid #cbe7c3;
+            border: 1.5px solid #65a272;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 2rem;
-            color: #2e7d32;
+            color: #545454;
             font-weight: 900;
             letter-spacing: 1px;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         label {
             display: block;
             margin-top: 1.2rem;
             margin-bottom: 0.3rem;
-            color: #3e4d3a;
+            color: #545454;
             font-weight: 600;
             letter-spacing: 0.5px;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 0.8rem;
-            border: 1.5px solid #b2cbb6;
+            border: 1.5px solid #65a272;
             border-radius: 8px;
             font-size: 1rem;
-            background: #f5f5dc;
-            color: #2e7d32;
+            background: #fffcf5;
+            color: #545454;
             transition: border-color 0.2s;
             margin-bottom: 0.5rem;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         input[type="text"]:focus,
         input[type="password"]:focus {
-            border-color: #81c784;
+            border-color: #65a272;
             outline: none;
-            background: #f0f8f4;
+            background: #fff;
         }
 
         button {
             width: 100%;
             padding: 0.85rem;
-            background: linear-gradient(90deg, #81c784 0%, #388e3c 100%);
-            color: #fffbe6;
+            background: #65a272;
+            color: #fffcf5;
             border: none;
             border-radius: 8px;
             font-size: 1.1rem;
@@ -72,12 +79,13 @@
             cursor: pointer;
             margin-top: 1.5rem;
             letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(34, 70, 34, 0.07);
+            box-shadow: 0 2px 8px rgba(101, 162, 114, 0.07);
             transition: background 0.2s;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         button:hover {
-            background: linear-gradient(90deg, #388e3c 0%, #81c784 100%);
+            background: #4e7e59;
         }
 
         .error-message {
@@ -89,6 +97,7 @@
             margin-bottom: 1.2rem;
             text-align: center;
             font-weight: 500;
+            font-family: 'Rubik', sans-serif !important;
         }
 
         .brand {
@@ -107,8 +116,9 @@
         .brand-title {
             font-size: 1.7rem;
             font-weight: 800;
-            color: #388e3c;
+            color: #545454;
             letter-spacing: 1px;
+            font-family: 'Rubik', sans-serif !important;
         }
     </style>
 </head>
@@ -117,10 +127,10 @@
     <div class="login-container">
         <div class="brand">
             <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
-                <circle cx="24" cy="24" r="22" fill="#81c784" stroke="#388e3c" stroke-width="2" />
-                <path d="M14 28c2 4 6 8 10 8s8-4 10-8" stroke="#fffbe6" stroke-width="2" stroke-linecap="round" />
-                <circle cx="18" cy="20" r="2" fill="#fffbe6" />
-                <circle cx="30" cy="20" r="2" fill="#fffbe6" />
+                <circle cx="24" cy="24" r="22" fill="#65a272" stroke="#65a272" stroke-width="2" />
+                <path d="M14 28c2 4 6 8 10 8s8-4 10-8" stroke="#fffcf5" stroke-width="2" stroke-linecap="round" />
+                <circle cx="18" cy="20" r="2" fill="#fffcf5" />
+                <circle cx="30" cy="20" r="2" fill="#fffcf5" />
             </svg>
             <span class="brand-title">Mindly</span>
         </div>
