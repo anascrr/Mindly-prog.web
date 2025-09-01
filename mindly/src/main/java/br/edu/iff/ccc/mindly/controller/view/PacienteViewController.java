@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.iff.ccc.mindly.dto.PacienteDTO;
 import br.edu.iff.ccc.mindly.entities.Paciente;
@@ -16,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@RequestMapping("/api")
 public class PacienteViewController {
 
     @GetMapping("/pacientes")
@@ -49,18 +47,18 @@ public class PacienteViewController {
         }
         Paciente paciente = pacienteDTO.toEntity();
         PacienteService.adicionarPaciente(paciente);
-        return "redirect:/api/pacientes";
+        return "redirect:/pacientes";
     }
 
     @PostMapping("/pacientes/editar")
     public String atualizarPaciente(@ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO) {
         PacienteService.atualizarPaciente(pacienteDTO);
-        return "redirect:/api/pacientes";
+        return "redirect:/pacientes";
     }
 
     @GetMapping("/pacientes/{id}")
     public String excluirPaciente(@PathVariable Long id) {
         PacienteService.excluirPaciente(id);
-        return "redirect:/api/pacientes";
+        return "redirect:/pacientes";
     }
 }

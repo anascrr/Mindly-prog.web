@@ -23,7 +23,7 @@
                             Editar Consulta
                         </p>
                     </div>
-                    <form th:action="@{/api/consultas/editar}" th:object="${consulta}" method="post"
+                    <form th:action="@{/consultas/editar}" th:object="${consulta}" method="post"
                         class="flex flex-col gap-4 px-4 py-3">
                         <input type="hidden" th:field="*{id}" />
                         <label class="flex flex-col min-w-40 flex-1">
@@ -62,7 +62,7 @@
                             </button>
                         </div>
                     </form>
-                    <a th:href="@{/api/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
+                    <a th:href="@{/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
                 </div>
             </div>
         </div>

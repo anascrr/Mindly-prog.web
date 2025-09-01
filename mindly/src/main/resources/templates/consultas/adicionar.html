@@ -23,7 +23,7 @@
                             Adicionar Consulta
                         </p>
                     </div>
-                    <form th:action="@{/api/consultas}" method="post" class="flex flex-col gap-4 px-4 py-3">
+                    <form th:action="@{/consultas}" method="post" class="flex flex-col gap-4 px-4 py-3">
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Paciente</span>
                             <div class="flex gap-2 items-center">
@@ -33,7 +33,7 @@
                                     <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
                                         th:text="${paciente.nome}"></option>
                                 </select>
-                                <a th:href="@{/api/pacientes/adicionar}" class="text-blue-600 underline text-sm"
+                                <a th:href="@{/pacientes/adicionar}" class="text-blue-600 underline text-sm"
                                     title="Adicionar novo paciente">
                                     + Adicionar paciente
                                 </a>
@@ -68,7 +68,8 @@
                             </button>
                         </div>
                     </form>
-                    <a th:href="@{/api/consultas}" class="mt-4 text-blue-600 inline">Voltar à lista</a>
+                    <a th:href="@{/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
+                    <a th:href="@{/consultas}" class="mt-4 text-blue-600 inline">Voltar à lista</a>
                 </div>
             </div>
         </div>
