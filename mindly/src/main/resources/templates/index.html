@@ -18,12 +18,15 @@
     <div class="flex flex-row justify-center items-start min-h-[80vh] px-10 py-8 gap-10 flex-1">
         <!-- Lista de consultas do dia -->
         <div class="bg-white rounded-lg shadow-md p-6 w-[380px] min-h-[600px]">
-            <h2 class="text-xl font-bold text-[#0d141c] mb-4" id="titulo-consultas">Consultas do dia</h2>
+            <h2 class="text-xl font-bold text-[#0d141c] mb-4" id="titulo-consultas">
+                Consultas do dia
+                <span th:text="${#temporals.format(dataSelecionada, 'dd/MM/yyyy')}"></span>
+            </h2>
             <ul id="listaConsultasHoje">
-                <li th:if="${consultasHoje == null or consultasHoje.empty}" class="text-gray-500">
-                    Nenhuma consulta marcada para hoje.
+                <li th:if="${consultasData == null or consultasData.empty}" class="text-gray-500">
+                    Nenhuma consulta marcada para esta data.
                 </li>
-                <li th:each="consulta : ${consultasHoje}" class="mb-3 border-b pb-2 last:border-b-0 last:pb-0">
+                <li th:each="consulta : ${consultasData}" class="mb-3 border-b pb-2 last:border-b-0 last:pb-0">
                     <div class="flex flex-col">
                         <span class="font-semibold text-[#3d99f5]" th:text="${consulta.paciente.nome}">Paciente</span>
                         <span class="text-sm text-[#49739c]"
@@ -67,22 +70,22 @@
                     center: 'title',
                     right: ''
                 },
+                buttonText: {
+                    today: 'Hoje'
+                },
                 events: eventos,
                 dateClick: function (info) {
-                    // Redireciona para a mesma página com a data selecionada
                     window.location.href = '/?data=' + info.dateStr;
                 },
                 eventClick: function (info) {
                     // Opcional: mostrar detalhes do evento
                 },
-                // Destaca o dia de hoje
                 validRange: {
                     start: null,
                     end: null
                 }
             });
 
-            // Define o dia selecionado como hoje por padrão
             /*[# th:if="${dataSelecionada != null}" ]*/
             calendar.gotoDate(/*[[${#temporals.format(dataSelecionada, 'yyyy-MM-dd')}]]*/'2025-09-01');
             /*[/]*/
