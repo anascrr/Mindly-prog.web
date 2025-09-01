@@ -3,6 +3,7 @@ package br.edu.iff.ccc.mindly.service;
 import br.edu.iff.ccc.mindly.entities.Consulta;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +48,16 @@ public class ConsultaService {
             return consulta;
         }
         return null;
+    }
+
+    public List<Consulta> obterConsultasPorData(LocalDate data) {
+        List<Consulta> resultado = new ArrayList<>();
+        for (Consulta consulta : consultas) {
+            if (consulta.getDataConsulta() != null &&
+                    consulta.getDataConsulta().toLocalDate().equals(data)) {
+                resultado.add(consulta);
+            }
+        }
+        return resultado;
     }
 }

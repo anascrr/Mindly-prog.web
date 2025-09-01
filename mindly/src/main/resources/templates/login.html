@@ -4,22 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Mindly</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f5dc 0%, #e6f4ea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: #fffbe6;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(34, 70, 34, 0.08);
+            min-width: 340px;
+            border: 1.5px solid #cbe7c3;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2e7d32;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: #3e4d3a;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1.5px solid #b2cbb6;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f5f5dc;
+            color: #2e7d32;
+            transition: border-color 0.2s;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #81c784;
+            outline: none;
+            background: #f0f8f4;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(90deg, #81c784 0%, #388e3c 100%);
+            color: #fffbe6;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(34, 70, 34, 0.07);
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #81c784 100%);
+        }
+
+        .error-message {
+            color: #a94442;
+            background: #f9e6e6;
+            border: 1.5px solid #e6bcbc;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            margin-right: 0.7rem;
+        }
+
+        .brand-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #388e3c;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Mindly - Login</h1>
+    <div class="login-container">
+        <div class="brand">
+            <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#81c784" stroke="#388e3c" stroke-width="2" />
+                <path d="M14 28c2 4 6 8 10 8s8-4 10-8" stroke="#fffbe6" stroke-width="2" stroke-linecap="round" />
+                <circle cx="18" cy="20" r="2" fill="#fffbe6" />
+                <circle cx="30" cy="20" r="2" fill="#fffbe6" />
+            </svg>
+            <span class="brand-title">Mindly</span>
+        </div>
+        <h1>Login</h1>
 
-    <div th:if="${erro}" th:text="${erro}" style="color: red;"></div>
+        <div th:if="${erro}" th:text="${erro}" class="error-message"></div>
 
-    <form th:action="@{/home}" th:object="${loginDTO}" method="post">
-        <label for="email">Email:</label>
-        <input type="text" id="email" th:field="*{email}" placeholder="Digite seu email" required />
+        <form th:action="@{/home}" th:object="${loginDTO}" method="post" autocomplete="off">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" th:field="*{email}" placeholder="Digite seu e-mail" required />
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required />
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required />
 
-        <button type="submit">Entrar</button>
-    </form>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
 </body>
 
 </html>
