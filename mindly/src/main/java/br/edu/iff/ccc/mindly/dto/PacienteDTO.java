@@ -18,15 +18,15 @@ public class PacienteDTO {
     private String email;
 
     @NotEmpty(message = "Telefone não pode ser vazio")
-    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$")
+    @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "Telefone deve estar no formato (99) 99999-9999")
     private String telefone;
 
     @NotEmpty(message = "Endereço não pode ser vazio")
     private String endereco;
 
     @NotEmpty(message = "Data de nascimento não pode ser vazia")
-    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
-    private String dataNascimento;  
+    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$", message = "Data de nascimento deve estar no formato dd/MM/yyyy")
+    private String dataNascimento;
 
     @NotEmpty(message = "CPF não pode ser vazio")
     @Size(min = 14, max = 14, message = "CPF deve ter 11 números")
