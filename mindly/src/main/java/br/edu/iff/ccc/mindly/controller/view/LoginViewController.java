@@ -25,7 +25,8 @@ public class LoginViewController {
         Login usuario = authService.autenticar(dto);
 
         if (usuario != null) {
-            model.addAttribute("usuario", usuario);
+            model.addAttribute("username", usuario.getNome());
+            model.addAttribute("role", usuario.getPapel());
             return "index";
         } else {
             model.addAttribute("erro", "Usuário ou senha inválidos");
