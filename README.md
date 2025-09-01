@@ -106,18 +106,88 @@ Acesse em: [**http://localhost:8080**](http://localhost:8080)
 
 ## 🖼️ Wireframe
 
-```markdown
-![Wireframe do Projeto](./docs/wireframe.png)
-```
+### Login
+![Login](Docs/wireframe/wireframe_login.png)
+
+### Tela Home
+![Tela Home](Docs/wireframe/wireframe_home.png)
+
+### Lista de Pacientes
+![Lista de Pacientes](Docs/wireframe/wireframe_listaPacientes.png)
+
+### Adicionar Paciente
+![Adicionar Paciente](Docs/wireframe/wireframe_adicionarPaciente.png)
+
+### Lista de Consultas
+![Lista de Consultas](Docs/wireframe/wireframe_listaConsultas.png)
+
+### Adicionar Consulta
+![Adicionar Consulta](Docs/wireframe/wireframe_adicionarConsulta.png)
 
 ---
 
 ## 📂 Estrutura de Pastas
 
 ```
-mindly/
+├─ data/
+│ └─ mindly_db.mv.db
+├─ src/
+│ ├─ main/
+│ │ ├─ java/
+│ │ │ └─ br/edu/iff/ccc/mindly/
+│ │ │ ├─ MindlyApplication.java
+│ │ │ ├─ controller/
+│ │ │ │ ├─ restapi/
+│ │ │ │ │ ├─ AgendamentoController.java
+│ │ │ │ │ ├─ AuthController.java
+│ │ │ │ │ └─ RestApiMainController.java
+│ │ │ │ └─ view/
+│ │ │ │ ├─ ConsultaViewController.java
+│ │ │ │ ├─ HomePageViewController.java
+│ │ │ │ ├─ LoginViewController.java
+│ │ │ │ └─ PacienteViewController.java
+│ │ │ ├─ dto/
+│ │ │ │ ├─ ConsultaDTO.java
+│ │ │ │ ├─ LoginDTO.java
+│ │ │ │ ├─ PacienteDTO.java
+│ │ │ │ └─ UsuarioDTO.java
+│ │ │ ├─ entities/
+│ │ │ │ ├─ Consulta.java
+│ │ │ │ ├─ Login.java
+│ │ │ │ ├─ Paciente.java
+│ │ │ │ └─ Usuario.java
+│ │ │ └─ service/
+│ │ │ ├─ AuthService.java
+│ │ │ ├─ ConsultaService.java
+│ │ │ ├─ PacienteService.java
+│ │ │ └─ UsuarioService.java
+│ │ └─ resources/
+│ │ ├─ application.properties
+│ │ ├─ messages.properties
+│ │ ├─ static/
+│ │ │ └─ image/
+│ │ │ └─ logo_mindly.png
+│ │ └─ templates/
+│ │ ├─ index.html
+│ │ ├─ login.html
+│ │ ├─ consultas/
+│ │ │ ├─ adicionar.html
+│ │ │ ├─ editar.html
+│ │ │ └─ lista.html
+│ │ ├─ fragmentos/
+│ │ │ ├─ footer.html
+│ │ │ └─ navbar.html
+│ │ └─ pacientes/
+│ │ ├─ adicionar.html
+│ │ ├─ editar.html
+│ │ └─ lista.html
+│ └─ test/
+│ └─ java/
+│ └─ br/edu/iff/ccc/mindly/
+│ └─ MindlyApplicationTests.java
+└─ target/
+(compilados e arquivos temporários)
 ```
-
 ---
 ## 🙌 Agradecimentos
 Agradecemos por explorar o projeto **Mindly**!
