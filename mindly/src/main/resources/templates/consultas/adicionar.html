@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Consulta - Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            background: #fffcf5 !important;
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .text-principal,
+        label,
+        input,
+        span,
+        p,
+        a,
+        button,
+        select {
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .btn-adicionar {
+            background: #65a272 !important;
+            color: #fff !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+
+        .btn-adicionar:hover {
+            background: #4e7e59 !important;
+        }
+
+        .input-edit,
+        select {
+            background: #fffcf5 !important;
+            color: #545454 !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Adicionar Consulta
+                        </p>
+                    </div>
+                    <form th:action="@{/consultas}" method="post" class="flex flex-col gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <span class="text-base font-medium leading-normal pb-2">Paciente</span>
+                            <div class="flex gap-2 items-center">
+                                <select name="pacienteId" required
+                                    class="form-select flex-1 rounded-lg border border-[#cedbe8] input-edit h-14 p-[15px] text-base font-normal leading-normal">
+                                    <option value="" disabled selected>Selecione um paciente</option>
+                                    <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
+                                        th:text="${paciente.nome}"></option>
+                                </select>
+                                <a th:href="@{/pacientes/adicionar}" class="text-blue-600 underline text-sm"
+                                    title="Adicionar novo paciente">
+                                    + Adicionar paciente
+                                </a>
+                            </div>
+                        </label>
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <span class="text-base font-medium leading-normal pb-2">Médico</span>
+                            <select name="medico" required
+                                class="form-select flex-1 rounded-lg border border-[#cedbe8] input-edit h-14 p-[15px] text-base font-normal leading-normal">
+                                <option value="" disabled selected>Selecione o médico</option>
+                                <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo
+                                </option>
+                                <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos -
+                                    Psiquiatra
+                                </option>
+                            </select>
+                        </label>
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <span class="text-base font-medium leading-normal pb-2">Data e Hora da Consulta</span>
+                            <input type="datetime-local" name="dataConsulta" required
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                        </label>
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <span class="text-base font-medium leading-normal pb-2">Observação</span>
+                            <input type="text" name="observacao" placeholder="Observação (opcional)"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+                        </label>
+                        <div class="flex px-4 py-3 justify-end">
+                            <button type="submit"
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-adicionar text-sm font-bold leading-normal tracking-[0.015em]">
+                                <span class="truncate">Adicionar</span>
+                            </button>
+                        </div>
+                    </form>
+                    <a th:href="@{/consultas}" class="mt-4 text-blue-600 inline">Voltar à lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+
+
+
+</html>
+</body>
+</body>
+
+</html>

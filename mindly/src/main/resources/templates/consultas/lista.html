@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas - Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            background: #fffcf5 !important;
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .text-principal,
+        label,
+        input,
+        span,
+        p,
+        a,
+        button,
+        th,
+        td {
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+        }
+
+        .btn-consulta {
+            background: #65a272 !important;
+            color: #fff !important;
+            font-family: 'Rubik', sans-serif !important;
+            font-size: 0.92rem !important;
+            height: 2.1rem !important;
+            min-width: 70px !important;
+            padding: 0 14px !important;
+        }
+
+        .btn-consulta:hover {
+            background: #4e7e59 !important;
+        }
+
+        .input-consulta,
+        select {
+            font-family: 'Rubik', sans-serif !important;
+            color: #545454 !important;
+            background: #fffcf5 !important;
+        }
+
+        .input-busca {
+            min-width: 120px !important;
+            max-width: 160px !important;
+            height: 2.1rem !important;
+            font-size: 0.95rem !important;
+            padding: 0.3rem 0.7rem !important;
+        }
+
+        .table-header,
+        .table-cell {
+            color: #545454 !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+
+        .bg-caixa {
+            background: #fffcf5 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-caixa group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Lista de Consultas
+                        </p>
+                        <div class="flex gap-2 items-center">
+                            <input id="filtroDataConsulta" type="date"
+                                class="border border-[#cedbe8] rounded-lg px-3 py-2 text-base input-consulta input-busca"
+                                onchange="filtrarConsultas()" placeholder="Selecione uma data...">
+                            <input id="filtroPacienteConsulta" type="text" placeholder="Buscar paciente..."
+                                class="border border-[#cedbe8] rounded-lg input-consulta input-busca"
+                                onkeyup="filtrarConsultas()">
+                            <a th:href="@{/consultas/adicionar}"
+                                class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg btn-consulta font-bold leading-normal tracking-[0.015em] gap-2 ml-2">
+                                <div class="text-white" data-icon="Plus" data-size="16px" data-weight="regular">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
+                                        fill="currentColor" viewBox="0 0 256 256">
+                                        <path
+                                            d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 @container">
+                        <div class="flex overflow-hidden rounded-lg border border-[#cedbe8] bg-caixa">
+                            <table class="flex-1">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="px-4 py-3 text-left table-header w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(0)">
+                                            Data
+                                            <span id="seta-data">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left table-header w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(1)">
+                                            Hora
+                                            <span id="seta-hora">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left table-header w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(2)">
+                                            Paciente
+                                            <span id="seta-paciente">▲</span>
+                                        </th>
+                                        <th class="px-4 py-3 text-left table-header w-[200px] text-sm font-medium leading-normal cursor-pointer"
+                                            onclick="ordenarTabela(3)">
+                                            Médico
+                                            <span id="seta-medico">▲</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="consulta : ${consultas}"
+                                        class="border-t border-t-[#cedbe8] consulta-row group hover:bg-gray-100 transition-colors duration-150"
+                                        th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}
+                                        "
+                                        th:data-paciente="${consulta.paciente != null ? consulta.paciente.nome.toLowerCase() : ''}">
+                                        <td class="h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white group-hover:bg-gray-100"
+                                            th:text="${#temporals.format(consulta.dataConsulta, 'dd/MM/yyyy')}">Data
+                                        </td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white group-hover:bg-gray-100"
+                                            th:text="${#temporals.format(consulta.dataConsulta, 'HH:mm')}">Hora</td>
+                                        <td class="h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white group-hover:bg-gray-100"
+                                            th:text="${consulta.paciente != null ? consulta.paciente.nome : 'Paciente não informado'}">
+                                            Paciente
+                                        </td>
+                                        <td
+                                            class="h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white relative group-hover:bg-gray-100">
+                                            <span th:text="${consulta.medico}">Médico</span>
+                                            <span
+                                                class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                                                <a th:href="@{'/consultas/editar/' + ${consulta.id}}"
+                                                    class="text-blue-500 hover:text-blue-700" title="Editar Consulta">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M4 21h4.586a1 1 0 0 0 .707-.293l10.5-10.5a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0l-10.5 10.5A1 1 0 0 0 4 21zm14.707-13.293a1 1 0 0 1 0 1.414l-1.414 1.414-2.828-2.828 1.414-1.414a1 1 0 0 1 1.414 0l1.414 1.414z"
+                                                            fill="currentColor" />
+                                                    </svg>
+                                                </a>
+                                                <a th:href="@{'/consultas/excluir/' + ${consulta.id}}"
+                                                    class="text-red-500 hover:text-red-700" title="Excluir Consulta"
+                                                    onclick="return confirm('Tem certeza que deseja excluir esta consulta?');">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" />
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filtrarConsultas() {
+            var inputData = document.getElementById("filtroDataConsulta").value;
+            var inputPaciente = document.getElementById("filtroPacienteConsulta").value.toLowerCase();
+            var linhas = document.getElementsByClassName("consulta-row");
+            for (var i = 0; i < linhas.length; i++) {
+                var data = linhas[i].getAttribute("data-data");
+                var paciente = linhas[i].getAttribute("data-paciente");
+                var mostra = true;
+                if (inputData && data !== inputData) {
+                    mostra = false;
+                }
+                if (inputPaciente && (!paciente || paciente.indexOf(inputPaciente) === -1)) {
+                    mostra = false;
+                }
+                linhas[i].style.display = mostra ? "" : "none";
+            }
+        }
+
+        let ordem = [true, true, true, true]; // true = crescente, false = decrescente
+
+        function ordenarTabela(col) {
+            let tabela = document.querySelector("table tbody");
+            let linhas = Array.from(tabela.querySelectorAll("tr"));
+            let getValue = (td) => td.textContent.trim();
+
+            linhas.sort((a, b) => {
+                let valA = getValue(a.children[col]);
+                let valB = getValue(b.children[col]);
+                // Para data e hora, converte para formato comparável
+                if (col === 0) { // Data
+                    let [diaA, mesA, anoA] = valA.split("/");
+                    let [diaB, mesB, anoB] = valB.split("/");
+                    valA = new Date(`${anoA}-${mesA}-${diaA}`);
+                    valB = new Date(`${anoB}-${mesB}-${diaB}`);
+                }
+                if (col === 1) { // Hora
+                    valA = valA.replace(":", "");
+                    valB = valB.replace(":", "");
+                }
+                if (ordem[col]) {
+                    return valA > valB ? 1 : valA < valB ? -1 : 0;
+                } else {
+                    return valA < valB ? 1 : valA > valB ? -1 : 0;
+                }
+            });
+
+            // Atualiza a tabela
+            linhas.forEach(linha => tabela.appendChild(linha));
+
+            // Alterna a ordem para próxima vez
+            ordem[col] = !ordem[col];
+
+            // Atualiza as setas
+            document.getElementById("seta-data").textContent = col === 0 ? (ordem[0] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-hora").textContent = col === 1 ? (ordem[1] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-paciente").textContent = col === 2 ? (ordem[2] ? "▲" : "▼") : "▲";
+            document.getElementById("seta-medico").textContent = col === 3 ? (ordem[3] ? "▲" : "▼") : "▲";
+        }
+    </script>
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+</body>
+
+</html>

@@ -3,91 +3,138 @@
 <head>
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
   <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+    href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
   <title>Adicionar Paciente - Mindly</title>
   <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body {
+      background: #fffcf5 !important;
+      font-family: 'Rubik', sans-serif !important;
+      color: #545454 !important;
+    }
+
+    .text-principal,
+    label,
+    input,
+    span,
+    p,
+    a,
+    button {
+      font-family: 'Rubik', sans-serif !important;
+      color: #545454 !important;
+    }
+
+    .btn-adicionar {
+      background: #65a272 !important;
+      color: #fff !important;
+      font-family: 'Rubik', sans-serif !important;
+    }
+
+    .btn-adicionar:hover {
+      background: #4e7e59 !important;
+    }
+
+    .input-edit {
+      background: #fffcf5 !important;
+      color: #545454 !important;
+      font-family: 'Rubik', sans-serif !important;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden"
-    style="font-family: Inter, 'Noto Sans', sans-serif;">
+  <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-      <header
-        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
-        <div class="flex items-center gap-4 text-[#0d141c]">
-          <div class="size-4">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
-                fill="currentColor"></path>
-            </svg>
-          </div>
-          <h2 class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Mindly</h2>
-        </div>
-        <div class="flex flex-1 justify-end gap-8">
-          <div class="flex items-center gap-9">
-            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes}">Pacientes</a>
-            <a class="text-[#0d141c] text-sm font-medium leading-normal" th:href="@{/pacientes/novo}">Novo Paciente</a>
-          </div>
-          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbNEF7WuX_seFcF0JLROrTnF9HxGg2nWJX_BzZF0WjynHC1X_EcZ7FtmB4kV_7pIjVGiC-wruWAE7PrjTowM3WRJHIyA9Rr-2dvkLvDab58k0u42b4U43a4yJXf6RUohcXwjLmY2320XXP67mOvoUYxtFmg8NpVPi4p4ar5C-HJiAHDYOOOYWYieDFw6WpWtneA4Tj0ngz4Kjr40pC6EtJdXwFQeHihl6DmBfuyLnGQGzAJbvKXTNHAwsBDG5fSSULHVftHxzcwKbv");'>
-          </div>
-        </div>
-      </header>
+      <div th:replace="~{fragmentos/navbar :: navbar}"></div>
       <div class="px-40 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
           <div class="flex flex-wrap justify-between gap-3 p-4">
-            <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente</p>
+            <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente
+            </p>
           </div>
-          <form th:action="@{/api/pacientes}" method="post" class="flex flex-col gap-4 px-4 py-3">
+          <form th:action="@{/pacientes}" th:object="${pacienteDTO}" method="post"
+            class="flex flex-col gap-4 px-4 py-3">
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Nome</span>
-              <input type="text" name="nome" placeholder="Nome completo" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Nome</span>
+              <input type="text" th:field="*{nome}" placeholder="Nome completo" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Email</span>
-              <input type="email" name="email" placeholder="E-mail" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Email</span>
+              <input type="email" th:field="*{email}" placeholder="E-mail" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Telefone</span>
-              <input type="text" name="telefone" placeholder="Telefone" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Telefone</span>
+              <input type="text" th:field="*{telefone}" id="telefone" placeholder="Telefone" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Endereço</span>
-              <input type="text" name="endereco" placeholder="Endereço" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Endereço</span>
+              <input type="text" th:field="*{endereco}" placeholder="Endereço" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Data de Nascimento</span>
-              <input type="text" name="dataNascimento" placeholder="Data de nascimento" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Data de Nascimento</span>
+              <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="Data de nascimento"
+                required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"
+                class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">CPF</span>
-              <input type="text" name="cpf" placeholder="CPF" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">CPF</span>
+              <input type="text" th:field="*{cpf}" id="cpf" placeholder="CPF" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-red-600"></span>
             </label>
             <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-[#0d141c] text-base font-medium leading-normal pb-2">Plano de Saúde</span>
-              <input type="text" name="planoSaude" placeholder="Plano de saúde" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border border-[#cedbe8] bg-slate-50 focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span class="text-base font-medium leading-normal pb-2">Plano de Saúde</span>
+              <input type="text" th:field="*{planoSaude}" placeholder="Plano de saúde" required
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
+              <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}" class="text-red-600"></span>
             </label>
             <div class="flex px-4 py-3 justify-end">
               <button type="submit"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#3d99f5] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]">
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-adicionar text-sm font-bold leading-normal tracking-[0.015em]">
                 <span class="truncate">Adicionar</span>
               </button>
             </div>
           </form>
-          <a th:href="@{/api/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+          <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
         </div>
       </div>
     </div>
   </div>
+  <script>
+    document.getElementById('cpf').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+      value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+      e.target.value = value;
+    });
+
+    document.getElementById('telefone').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+      value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+      value = value.replace(/(\d{5})(\d)/, '$1-$2');
+      e.target.value = value;
+    });
+
+    document.getElementById('dataNascimento').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '').slice(0, 8);
+      value = value.replace(/(\d{2})(\d)/, '$1/$2');
+      value = value.replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+      e.target.value = value;
+    });
+  </script>
+  <div th:replace="~{fragmentos/footer :: footer}"></div>
 </body>
 
 </html>

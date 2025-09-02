@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Editar Paciente - Mindly</title>
+    <title>Editar Consulta - Mindly</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
@@ -22,7 +22,7 @@
         span,
         p,
         a,
-        button {
+        select {
             font-family: 'Rubik', sans-serif !important;
             color: #545454 !important;
         }
@@ -37,7 +37,8 @@
             background: #4e7e59 !important;
         }
 
-        .input-edit {
+        .input-edit,
+        select {
             background: #fffcf5 !important;
             color: #545454 !important;
             font-family: 'Rubik', sans-serif !important;
@@ -52,46 +53,39 @@
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
                     <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Editar
-                            Paciente</p>
+                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">
+                            Editar Consulta
+                        </p>
                     </div>
-                    <form th:action="@{/pacientes/editar}" th:object="${pacienteDTO}" method="post"
+                    <form th:action="@{/consultas/editar}" th:object="${consulta}" method="post"
                         class="flex flex-col gap-4 px-4 py-3">
                         <input type="hidden" th:field="*{id}" />
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Nome</span>
-                            <input type="text" th:field="*{nome}" placeholder="Nome completo" required
+                            <span class="text-base font-medium leading-normal pb-2">Paciente</span>
+                            <div class="flex gap-2 items-center">
+                                <select name="pacienteId" required
+                                    class="form-select flex-1 rounded-lg border border-[#cedbe8] input-edit h-14 p-[15px] text-base font-normal leading-normal">
+                                    <option value="" disabled>Selecione um paciente</option>
+                                    <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
+                                        th:text="${paciente.nome}"
+                                        th:selected="${consulta.paciente != null} ? ${paciente.id} == ${consulta.paciente.id} : false">
+                                    </option>
+                                </select>
+                            </div>
+                        </label>
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <span class="text-base font-medium leading-normal pb-2">Médico</span>
+                            <input type="text" th:field="*{medico}" placeholder="Nome do médico" required
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Email</span>
-                            <input type="email" th:field="*{email}" placeholder="E-mail" required
+                            <span class="text-base font-medium leading-normal pb-2">Data e Hora da Consulta</span>
+                            <input type="datetime-local" th:field="*{dataConsulta}" required
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Telefone</span>
-                            <input type="text" th:field="*{telefone}" placeholder="Telefone" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Endereço</span>
-                            <input type="text" th:field="*{endereco}" placeholder="Endereço" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Data de
-                                Nascimento</span>
-                            <input type="text" th:field="*{dataNascimento}" placeholder="Data de nascimento" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">CPF</span>
-                            <input type="text" th:field="*{cpf}" placeholder="CPF" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Plano de Saúde</span>
-                            <input type="text" th:field="*{planoSaude}" placeholder="Plano de saúde" required
+                            <span class="text-base font-medium leading-normal pb-2">Observação</span>
+                            <input type="text" th:field="*{observacao}" placeholder="Observação (opcional)"
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <div class="flex px-4 py-3 justify-end">
@@ -101,7 +95,7 @@
                             </button>
                         </div>
                     </form>
-                    <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+                    <a th:href="@{/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
                 </div>
             </div>
         </div>

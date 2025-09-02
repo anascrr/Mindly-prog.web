@@ -1,40 +1,54 @@
 package br.edu.iff.ccc.mindly.service;
 
+import br.edu.iff.ccc.mindly.dto.PacienteDTO;
+import br.edu.iff.ccc.mindly.entities.Paciente;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.iff.ccc.mindly.entities.Paciente;
-
+@Service
 public class PacienteService {
-    public static void salvarPaciente(Paciente paciente) {
+
+    private static List<Paciente> pacientes = new ArrayList<>();
+    private static Long proximoId = 1L;
+
+    public static List<Paciente> listarTodos() {
+        return pacientes;
     }
-    
-    public Paciente buscarPacientePorId(Long id) {
-        Paciente paciente = new Paciente();
-        if (id == null) {
-            throw new IllegalArgumentException("ID do paciente não pode ser nulo");
+
+    public static Paciente buscarPorId(Long id) {
+        for (Paciente paciente : pacientes) {
+            if (paciente.getId().equals(id)) {
+                return paciente;
+            }
         }
-
-        paciente.setId(id);
-        paciente.setNome("Joazinho");
-        paciente.setEmail("joazinho@gmail.com");
-        paciente.setTelefone("123456789");
-        paciente.setEndereco("Rua Exemplo, 123");
-        paciente.setDataNascimento("01/01/2000");
-        paciente.setCpf("12345678901");
-        paciente.setPlanoSaude("Plano Exemplo");
-        return paciente;
-        
-
-
+        return null;
     }
-    public static List<Paciente> pacientes = new ArrayList<>(); {
+
+    public static void adicionarPaciente(Paciente paciente) {
+        paciente.setId(proximoId++);
+        pacientes.add(paciente);
     }
+
+    public static void atualizarPaciente(PacienteDTO pacienteDTO) {
+        Paciente paciente = buscarPorId(pacienteDTO.getId());
+        if (paciente != null) {
+            paciente.setNome(pacienteDTO.getNome());
+            paciente.setEmail(pacienteDTO.getEmail());
+            paciente.setTelefone(pacienteDTO.getTelefone());
+            paciente.setEndereco(pacienteDTO.getEndereco());
+            paciente.setDataNascimento(pacienteDTO.getDataNascimento());
+            paciente.setCpf(pacienteDTO.getCpf());
+            paciente.setPlanoSaude(pacienteDTO.getPlanoSaude());
+        }
+    }
+
+    public static void excluirPaciente(Long id) {
+        pacientes.removeIf(paciente -> paciente.getId().equals(id));
+    }
+
     public static List<Paciente> listarPacientes() {
         return pacientes;
     }
-    public static void adicionarPaciente(Paciente paciente) {
-        pacientes.add(paciente);
-    }
 }
-

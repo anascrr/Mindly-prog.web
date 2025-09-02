@@ -3,13 +3,140 @@
 
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{app.title}">Mindly</title>
+    <title>Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <style>
+        body {
+            background: #fffcf5 !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+
+        .text-concreto {
+            color: #545454 !important;
+            font-family: 'Rubik', sans-serif !important;
+        }
+
+        .bg-caixa {
+            background: #f6f6f6 !important;
+        }
+
+        .fc-toolbar-title,
+        .fc-col-header-cell-cushion,
+        .fc-daygrid-day-number {
+            color: #545454 !important;
+        }
+
+        .fc-button,
+        .fc-button-primary,
+        .fc-button-primary:not(:disabled) {
+            background-color: #65a272 !important;
+            border-color: #65a272 !important;
+            color: #fff !important;
+        }
+
+        .fc-button-primary:focus,
+        .fc-button-primary:active {
+            background-color: #4e7e59 !important;
+            border-color: #4e7e59 !important;
+        }
+
+        .fc-button-primary:hover {
+            background-color: #4e7e59 !important;
+            border-color: #4e7e59 !important;
+        }
+
+        .fc-daygrid-day,
+        .fc-daygrid-day-frame {
+            background: #f6f6f6 !important;
+        }
+    </style>
 </head>
 
-<body>
-    <h1 th:text="#{app.welcome(${username})}">Bem-vindo, usuário!</h1>
-    <p th:text="#{app.logged(${username})}">Você está logado como usuário.</p>
-    <a th:href="@{/logout}" th:text="#{app.logout}">Sair</a>
+<body class="min-h-screen flex flex-col">
+    <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+    <div class="flex flex-row justify-center items-start min-h-[80vh] px-10 py-8 gap-10 flex-1">
+        <div class="bg-caixa rounded-lg shadow-md p-6 w-[380px] min-h-[600px]">
+            <h2 class="text-xl font-bold text-concreto mb-4" id="titulo-consultas">
+                Consultas do dia
+                <span th:text="${#temporals.format(dataSelecionada, 'dd/MM/yyyy')}"></span>
+            </h2>
+            <ul id="listaConsultasHoje">
+                <li th:if="${consultasData == null or consultasData.empty}" class="text-gray-500 text-concreto">
+                    Nenhuma consulta marcada para esta data.
+                </li>
+                <li th:each="consulta : ${consultasData}" class="mb-3 border-b pb-2 last:border-b-0 last:pb-0">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-concreto" th:text="${consulta.paciente.nome}">Paciente</span>
+                        <span class="text-sm text-concreto"
+                            th:text="${#temporals.format(consulta.dataConsulta, 'HH:mm')}">Hora</span>
+                        <span class="text-xs text-concreto" th:text="${consulta.medico}">Médico</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- Calendário grande -->
+        <div class="bg-caixa rounded-lg shadow-md p-6 w-[600px] min-h-[600px] flex flex-col items-center">
+            <h2 class="text-xl font-bold text-concreto mb-4">Calendário</h2>
+            <div id="calendario" style="width:100%;"></div>
+        </div>
+    </div>
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+    <script th:inline="javascript">
+        // Eventos do calendário (consultas) vindos do backend
+        const eventos = [
+            /*[# th:each="consulta : ${consultasTodas}" ]*/
+            {
+                title: /*[[${consulta.paciente.nome}]]*/'Paciente',
+                start: /*[[${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd\'T\'HH:mm')}]]*/'2025-09-01T14:00',
+                extendedProps: {
+                    medico: /*[[${consulta.medico}]]*/'Médico',
+                    hora: /*[[${#temporals.format(consulta.dataConsulta, 'HH:mm')}]]*/'14:00'
+                }
+            }
+            /*[/]*/
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendario');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'pt-br',
+                height: 500,
+                selectable: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                buttonText: {
+                    today: 'Hoje'
+                },
+                events: eventos,
+                dateClick: function (info) {
+                    window.location.href = '/?data=' + info.dateStr;
+                },
+                eventClick: function (info) {
+                    // Opcional: mostrar detalhes do evento
+                },
+                validRange: {
+                    start: null,
+                    end: null
+                }
+            });
+
+            /*[# th:if="${dataSelecionada != null}" ]*/
+            calendar.gotoDate(/*[[${#temporals.format(dataSelecionada, 'yyyy-MM-dd')}]]*/'2025-09-01');
+            /*[/]*/
+
+            calendar.render();
+        });
+    </script>
 </body>
 
 </html>

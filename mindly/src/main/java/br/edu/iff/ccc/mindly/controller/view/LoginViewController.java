@@ -1,30 +1,36 @@
 package br.edu.iff.ccc.mindly.controller.view;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import br.edu.iff.ccc.mindly.dto.LoginDTO;
 import br.edu.iff.ccc.mindly.entities.Login;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import br.edu.iff.ccc.mindly.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/api")
 public class LoginViewController {
 
+    @Autowired
+    private AuthService authService;
+
     @GetMapping("/login")
-    public String mostrarPaginaLogin() {
-        return "login"; // templates/login.html
+    public String mostrarLogin(Model model) {
+        model.addAttribute("loginDTO", new LoginDTO());
+        return "login";
     }
 
-    @GetMapping("/index")
-    public String mostrarIndex() {
-        return "index";
-    }
+    @PostMapping("/home")
+    public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto, Model model) {
+        Login usuario = authService.autenticar(dto);
 
-    @PostMapping("/login")
-    public String login(Login request) {
-        return "redirect:/api/index";
+        if (usuario != null) {
+            model.addAttribute("username", usuario.getNome());
+            model.addAttribute("role", usuario.getCargo());
+            return "index";
+        } else {
+            model.addAttribute("erro", "Usuário ou senha inválidos");
+            return "login";
+        }
     }
 }
