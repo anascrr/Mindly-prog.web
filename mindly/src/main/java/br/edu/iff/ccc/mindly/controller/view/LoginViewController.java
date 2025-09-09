@@ -14,7 +14,7 @@ public class LoginViewController {
     @Autowired
     private AuthService authService;
 
-    @GetMapping("/login")
+    @GetMapping({"/", "/login"})
     public String mostrarLogin(Model model) {
         model.addAttribute("loginDTO", new LoginDTO());
         return "login";

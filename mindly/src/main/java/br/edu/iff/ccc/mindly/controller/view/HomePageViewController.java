@@ -19,7 +19,7 @@ public class HomePageViewController {
     @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping({ "/", "/home" })
+    @GetMapping({"/home" })
     public String homePage(@RequestParam(required = false) String data, Model model) {
         LocalDate hoje = LocalDate.now();
         LocalDate dataSelecionada = (data != null) ? LocalDate.parse(data) : hoje;
