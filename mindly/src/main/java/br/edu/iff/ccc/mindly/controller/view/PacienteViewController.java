@@ -10,6 +10,7 @@ import br.edu.iff.ccc.mindly.entities.Paciente;
 import br.edu.iff.ccc.mindly.service.PacienteService;
 import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class PacienteViewController {
 
+    @Autowired
+    private PacienteService pacienteService;
+
     @GetMapping("/pacientes")
     public String listarPacientes(Model model) {
-        model.addAttribute("pacientes", PacienteService.listarTodos());
+        model.addAttribute("pacientes", pacienteService.listarTodos());
         return "pacientes/lista"; 
     }
 
@@ -31,7 +35,7 @@ public class PacienteViewController {
 
     @GetMapping("/pacientes/editar/{id}")
     public String editarPaciente(@PathVariable Long id, Model model) {
-        Paciente paciente = PacienteService.buscarPorId(id);
+        Paciente paciente = pacienteService.buscarPorId(id);
         PacienteDTO pacienteDTO = new PacienteDTO(paciente);
         model.addAttribute("pacienteDTO", pacienteDTO);
         return "pacientes/editar"; 
@@ -46,19 +50,19 @@ public class PacienteViewController {
             return "pacientes/adicionar";
         }
         Paciente paciente = pacienteDTO.toEntity();
-        PacienteService.adicionarPaciente(paciente);
+        pacienteService.adicionarPaciente(paciente);
         return "redirect:/pacientes";
     }
 
     @PostMapping("/pacientes/editar")
     public String atualizarPaciente(@ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO) {
-        PacienteService.atualizarPaciente(pacienteDTO);
+        pacienteService.atualizarPaciente(pacienteDTO);
         return "redirect:/pacientes";
     }
 
     @GetMapping("/pacientes/{id}")
     public String excluirPaciente(@PathVariable Long id) {
-        PacienteService.excluirPaciente(id);
+        pacienteService.excluirPaciente(id);
         return "redirect:/pacientes";
     }
 }
