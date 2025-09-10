@@ -1,63 +1,52 @@
 package br.edu.iff.ccc.mindly.service;
 
 import br.edu.iff.ccc.mindly.entities.Consulta;
+import br.edu.iff.ccc.mindly.repository.ConsultaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ConsultaService {
 
-    private Long proximoId = 1L;
-    private List<Consulta> consultas = new ArrayList<>();
+    private final ConsultaRepository consultaRepository;
+
+    public ConsultaService(ConsultaRepository consultaRepository) {
+        this.consultaRepository = consultaRepository;
+    }
 
     public List<Consulta> listarConsultas() {
-        return consultas;
+        return consultaRepository.findAll();
     }
 
     public Optional<Consulta> buscarPorId(Long id) {
-        return consultas.stream()
-                .filter(consulta -> consulta.getId().equals(id))
-                .findFirst();
+        return consultaRepository.findById(id);
     }
 
     public Consulta salvar(Consulta consulta) {
-        if (consulta.getId() == null) {
-            consulta.setId(proximoId++);
-        } else {
-            // Remove a consulta antiga com o mesmo ID, se existir
-            consultas.removeIf(c -> c.getId().equals(consulta.getId()));
-        }
-        consultas.add(consulta);
-        return consulta;
+        return consultaRepository.save(consulta);
     }
 
-    public boolean remover(Long id) {
-        return consultas.removeIf(consulta -> consulta.getId().equals(id));
+    public void remover(Long id) {
+        consultaRepository.deleteById(id);
     }
 
     public Consulta atualizar(Long id, Consulta novaConsulta) {
-        Optional<Consulta> existente = buscarPorId(id);
-        if (existente.isPresent()) {
-            Consulta consulta = existente.get();
+        return consultaRepository.findById(id).map(consulta -> {
             consulta.setDataConsulta(novaConsulta.getDataConsulta());
             consulta.setObservacao(novaConsulta.getObservacao());
-            return consulta;
-        }
-        return null;
+            consulta.setMedico(novaConsulta.getMedico());
+            consulta.setPaciente(novaConsulta.getPaciente());
+            return consultaRepository.save(consulta);
+        }).orElse(null);
     }
 
     public List<Consulta> obterConsultasPorData(LocalDate data) {
-        List<Consulta> resultado = new ArrayList<>();
-        for (Consulta consulta : consultas) {
-            if (consulta.getDataConsulta() != null &&
-                    consulta.getDataConsulta().toLocalDate().equals(data)) {
-                resultado.add(consulta);
-            }
-        }
-        return resultado;
+        LocalDateTime inicio = data.atStartOfDay();
+        LocalDateTime fim = data.plusDays(1).atStartOfDay();
+        return consultaRepository.findByDataConsultaBetween(inicio, fim);
     }
 }
