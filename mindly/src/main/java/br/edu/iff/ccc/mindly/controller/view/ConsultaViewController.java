@@ -26,6 +26,7 @@ public class ConsultaViewController {
     @GetMapping("/consultas")
     public String listarConsultas(Model model) {
         model.addAttribute("consultas", consultaService.listarConsultas());
+        model.addAttribute("activePage", "consultas");
         return "consultas/lista"; // templates/consultas/lista.html
     }
 

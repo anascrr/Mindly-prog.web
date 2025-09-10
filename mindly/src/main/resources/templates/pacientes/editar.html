@@ -9,40 +9,8 @@
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        body {
-            background: #fffcf5 !important;
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
-
-        .text-principal,
-        label,
-        input,
-        span,
-        p,
-        a,
-        button {
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
-
-        .btn-salvar {
-            background: #65a272 !important;
-            color: #fff !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-
-        .btn-salvar:hover {
-            background: #4e7e59 !important;
-        }
-
-        .input-edit {
-            background: #fffcf5 !important;
-            color: #545454 !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-    </style>
+    
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -52,11 +20,9 @@
             <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
                     <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Editar
-                            Paciente</p>
+                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Editar Paciente</p>
                     </div>
-                    <form th:action="@{/pacientes/editar}" th:object="${pacienteDTO}" method="post"
-                        class="flex flex-col gap-4 px-4 py-3">
+                    <form th:action="@{/pacientes/editar}" th:object="${pacienteDTO}" method="post" class="flex flex-col gap-4 px-4 py-3">
                         <input type="hidden" th:field="*{id}" />
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-base font-medium leading-normal pb-2">Nome</span>
@@ -70,7 +36,7 @@
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-base font-medium leading-normal pb-2">Telefone</span>
-                            <input type="text" th:field="*{telefone}" placeholder="Telefone" required
+                            <input type="text" th:field="*{telefone}" id="telefone" placeholder="Telefone" required
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
@@ -79,14 +45,13 @@
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Data de
-                                Nascimento</span>
-                            <input type="text" th:field="*{dataNascimento}" placeholder="Data de nascimento" required
+                            <span class="text-base font-medium leading-normal pb-2">Data de Nascimento</span>
+                            <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="Data de nascimento" required
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
                             <span class="text-base font-medium leading-normal pb-2">CPF</span>
-                            <input type="text" th:field="*{cpf}" placeholder="CPF" required
+                            <input type="text" th:field="*{cpf}" id="cpf" placeholder="CPF" required
                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
                         </label>
                         <label class="flex flex-col min-w-40 flex-1">
@@ -107,6 +72,8 @@
         </div>
     </div>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
+
+    <script th:src="@{/js/form-masks.js}"></script>
 </body>
 
 </html>

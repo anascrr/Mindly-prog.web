@@ -24,7 +24,8 @@ public class PacienteViewController {
     @GetMapping("/pacientes")
     public String listarPacientes(Model model) {
         model.addAttribute("pacientes", pacienteService.listarTodos());
-        return "pacientes/lista"; 
+        model.addAttribute("activePage", "pacientes");
+        return "pacientes/lista";
     }
 
     @GetMapping("/pacientes/adicionar")

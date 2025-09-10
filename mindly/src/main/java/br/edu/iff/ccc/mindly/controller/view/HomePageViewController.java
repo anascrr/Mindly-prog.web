@@ -38,6 +38,7 @@ public class HomePageViewController {
         model.addAttribute("consultasData", consultasData);
         model.addAttribute("dataSelecionada", dataSelecionada);
         model.addAttribute("hoje", hoje);
+        model.addAttribute("activePage", "home");
 
         return "index";
     }

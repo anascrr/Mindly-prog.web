@@ -1,0 +1,200 @@
+/*
+ * ==================================
+ * ESTILOS GLOBAIS E DE LAYOUT
+ * (Originários do index.html e páginas de formulário)
+ * ==================================
+ */
+body {
+    background: #fffcf5 !important;
+    font-family: 'Rubik', sans-serif !important;
+    color: #545454 !important;
+}
+
+.bg-caixa {
+    background: #f6f6f6 !important;
+}
+
+.text-principal,
+label,
+input,
+span,
+p,
+a,
+button,
+select,
+th,
+td {
+    font-family: 'Rubik', sans-serif !important;
+    color: #545454 !important;
+}
+
+/*
+ * ==================================
+ * ESTILOS DE FORMULÁRIO
+ * (Originários de adicionar.html, editar.html)
+ * ==================================
+ */
+.input-edit,
+select {
+    background: #fffcf5 !important;
+    color: #545454 !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.btn-adicionar,
+.btn-salvar {
+    background: #65a272 !important;
+    color: #fff !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.btn-adicionar:hover,
+.btn-salvar:hover {
+    background: #4e7e59 !important;
+}
+
+/*
+ * ==================================
+ * ESTILOS DE LISTAGEM E TABELA
+ * (Originários de lista.html)
+ * ==================================
+ */
+.btn-consulta {
+    background: #65a272 !important;
+    color: #fff !important;
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 0.92rem !important;
+    height: 2.1rem !important;
+    min-width: 70px !important;
+    padding: 0 14px !important;
+}
+
+.btn-consulta:hover {
+    background: #4e7e59 !important;
+}
+
+.input-consulta {
+    font-family: 'Rubik', sans-serif !important;
+    color: #545454 !important;
+    background: #fffcf5 !important;
+}
+
+.input-busca {
+    min-width: 120px !important;
+    max-width: 160px !important;
+    height: 2.1rem !important;
+    font-size: 0.95rem !important;
+    padding: 0.3rem 0.7rem !important;
+}
+
+.table-header,
+.table-cell {
+    color: #545454 !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+/*
+ * ==================================
+ * ESTILOS DO CALENDÁRIO (FULLCALENDAR)
+ * (Originários do index.html)
+ * ==================================
+ */
+.fc-toolbar-title,
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number {
+    color: #545454 !important;
+}
+
+.fc-button,
+.fc-button-primary,
+.fc-button-primary:not(:disabled) {
+    background-color: #65a272 !important;
+    border-color: #65a272 !important;
+    color: #fff !important;
+}
+
+.fc-button-primary:focus,
+.fc-button-primary:active,
+.fc-button-primary:hover {
+    background-color: #4e7e59 !important;
+    border-color: #4e7e59 !important;
+}
+
+.fc-daygrid-day,
+.fc-daygrid-day-frame {
+    background: #f6f6f6 !important;
+}
+
+/*
+ * ==================================
+ * ESTILOS DE FRAGMENTOS (Footer, Navbar)
+ * ==================================
+ */
+.app-footer {
+    text-align: center;
+    padding: 1em 0;
+    background: #d8d5ca;
+    font-size: 1em;
+    font-family: 'Rubik', sans-serif;
+    color: #545454;
+}
+
+/* Estilos para a Navbar */
+.navbar {
+    background: #d8d5ca;
+    font-family: 'Rubik', sans-serif;
+}
+
+.navbar__brand {
+    color: #545454;
+    align-items: center;
+}
+
+.navbar__logo {
+    width: 40px;
+    height: auto;
+}
+
+.navbar__brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar__title {
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+}
+
+.navbar__link {
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar__link:hover {
+    color: #000; /* Um pouco mais escuro ao passar o mouse */
+}
+
+/* Classe especial para o link da página ativa */
+.navbar__link--active {
+    font-weight: 700; /* Deixa o texto em negrito */
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.btn-novo {
+    background: #65a272 !important;
+    color: #fff !important;
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 0.92rem !important;
+    height: 2.1rem !important;
+    min-width: 80px !important;
+    padding: 0 14px !important;
+}
+
+.btn-novo:hover {
+    background: #4e7e59 !important;
+}

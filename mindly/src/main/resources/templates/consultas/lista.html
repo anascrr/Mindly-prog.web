@@ -9,65 +9,8 @@
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        body {
-            background: #fffcf5 !important;
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
 
-        .text-principal,
-        label,
-        input,
-        span,
-        p,
-        a,
-        button,
-        th,
-        td {
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
-
-        .btn-consulta {
-            background: #65a272 !important;
-            color: #fff !important;
-            font-family: 'Rubik', sans-serif !important;
-            font-size: 0.92rem !important;
-            height: 2.1rem !important;
-            min-width: 70px !important;
-            padding: 0 14px !important;
-        }
-
-        .btn-consulta:hover {
-            background: #4e7e59 !important;
-        }
-
-        .input-consulta,
-        select {
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-            background: #fffcf5 !important;
-        }
-
-        .input-busca {
-            min-width: 120px !important;
-            max-width: 160px !important;
-            height: 2.1rem !important;
-            font-size: 0.95rem !important;
-            padding: 0.3rem 0.7rem !important;
-        }
-
-        .table-header,
-        .table-cell {
-            color: #545454 !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-
-        .bg-caixa {
-            background: #fffcf5 !important;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -131,8 +74,7 @@
                                 <tbody>
                                     <tr th:each="consulta : ${consultas}"
                                         class="border-t border-t-[#cedbe8] consulta-row group hover:bg-gray-100 transition-colors duration-150"
-                                        th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}
-                                        "
+                                        th:data-data="${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd')}"
                                         th:data-paciente="${consulta.paciente != null ? consulta.paciente.nome.toLowerCase() : ''}">
                                         <td class="h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white group-hover:bg-gray-100"
                                             th:text="${#temporals.format(consulta.dataConsulta, 'dd/MM/yyyy')}">Data
@@ -177,67 +119,9 @@
             </div>
         </div>
     </div>
-    <script>
-        function filtrarConsultas() {
-            var inputData = document.getElementById("filtroDataConsulta").value;
-            var inputPaciente = document.getElementById("filtroPacienteConsulta").value.toLowerCase();
-            var linhas = document.getElementsByClassName("consulta-row");
-            for (var i = 0; i < linhas.length; i++) {
-                var data = linhas[i].getAttribute("data-data");
-                var paciente = linhas[i].getAttribute("data-paciente");
-                var mostra = true;
-                if (inputData && data !== inputData) {
-                    mostra = false;
-                }
-                if (inputPaciente && (!paciente || paciente.indexOf(inputPaciente) === -1)) {
-                    mostra = false;
-                }
-                linhas[i].style.display = mostra ? "" : "none";
-            }
-        }
-
-        let ordem = [true, true, true, true]; // true = crescente, false = decrescente
-
-        function ordenarTabela(col) {
-            let tabela = document.querySelector("table tbody");
-            let linhas = Array.from(tabela.querySelectorAll("tr"));
-            let getValue = (td) => td.textContent.trim();
-
-            linhas.sort((a, b) => {
-                let valA = getValue(a.children[col]);
-                let valB = getValue(b.children[col]);
-                // Para data e hora, converte para formato comparável
-                if (col === 0) { // Data
-                    let [diaA, mesA, anoA] = valA.split("/");
-                    let [diaB, mesB, anoB] = valB.split("/");
-                    valA = new Date(`${anoA}-${mesA}-${diaA}`);
-                    valB = new Date(`${anoB}-${mesB}-${diaB}`);
-                }
-                if (col === 1) { // Hora
-                    valA = valA.replace(":", "");
-                    valB = valB.replace(":", "");
-                }
-                if (ordem[col]) {
-                    return valA > valB ? 1 : valA < valB ? -1 : 0;
-                } else {
-                    return valA < valB ? 1 : valA > valB ? -1 : 0;
-                }
-            });
-
-            // Atualiza a tabela
-            linhas.forEach(linha => tabela.appendChild(linha));
-
-            // Alterna a ordem para próxima vez
-            ordem[col] = !ordem[col];
-
-            // Atualiza as setas
-            document.getElementById("seta-data").textContent = col === 0 ? (ordem[0] ? "▲" : "▼") : "▲";
-            document.getElementById("seta-hora").textContent = col === 1 ? (ordem[1] ? "▲" : "▼") : "▲";
-            document.getElementById("seta-paciente").textContent = col === 2 ? (ordem[2] ? "▲" : "▼") : "▲";
-            document.getElementById("seta-medico").textContent = col === 3 ? (ordem[3] ? "▲" : "▼") : "▲";
-        }
-    </script>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
+    
+    <script th:src="@{/js/lista.js}"></script>
 </body>
 
 </html>
