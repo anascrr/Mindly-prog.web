@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Erro no Servidor</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" />
+    <link rel="stylesheet" th:href="@{/css/error-pages.css}">
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code error-code--500">Oops!</div>
+        <h1 class="error-title">Erro Inesperado</h1>
+        <p class="error-message" th:text="${errorMessage}">
+            Nossa equipe foi notificada e já estamos trabalhando para resolver o problema.
+        </p>
+
+        <a th:href="@{/home}" class="error-back-link">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>
