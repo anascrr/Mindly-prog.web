@@ -13,9 +13,9 @@ public class UsuarioService {
     private final Map<Long, UsuarioDTO> usuarios = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong(1);
 
-    public UsuarioDTO autenticar(String username, String senha) {
+    public UsuarioDTO autenticar(String email, String senha) {
         return usuarios.values().stream()
-                .filter(u -> u.getUsername().equals(username) && u.getSenha().equals(senha))
+                .filter(u -> u.getEmail().equals(email) && u.getSenha().equals(senha))
                 .findFirst()
                 .orElse(null);
     }

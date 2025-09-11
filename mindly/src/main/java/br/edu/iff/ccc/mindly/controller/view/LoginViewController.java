@@ -1,7 +1,7 @@
 package br.edu.iff.ccc.mindly.controller.view;
 
 import br.edu.iff.ccc.mindly.dto.LoginDTO;
-import br.edu.iff.ccc.mindly.entities.Login;
+import br.edu.iff.ccc.mindly.entities.Usuario;
 import br.edu.iff.ccc.mindly.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +22,14 @@ public class LoginViewController {
 
     @PostMapping("/home")
     public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto, Model model) {
-        Login usuario = authService.autenticar(dto);
+        Usuario usuario = authService.autenticar(dto);
 
         if (usuario != null) {
-            model.addAttribute("username", usuario.getNome());
-            model.addAttribute("role", usuario.getCargo());
+            model.addAttribute("email", usuario.getEmail());
+            model.addAttribute("role", usuario.getRole());
             return "index";
         } else {
-            model.addAttribute("erro", "Usuário ou senha inválidos");
+            model.addAttribute("erro", "email ou senha inválidos");
             return "login";
         }
     }

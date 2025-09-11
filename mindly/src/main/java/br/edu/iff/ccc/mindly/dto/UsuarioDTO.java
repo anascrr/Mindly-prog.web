@@ -6,14 +6,11 @@ public class UsuarioDTO {
 
     private Long id;
 
-    @NotBlank(message = "O username é obrigatório")
-    private String username;
+    @NotBlank(message = "O email é obrigatório")
+    private String email;
 
     @NotBlank(message = "A senha é obrigatória")
     private String senha;
-
-    @NotBlank(message = "O papel é obrigatório")
-    private String role;
 
     public Long getId() {
         return id;
@@ -23,12 +20,12 @@ public class UsuarioDTO {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -37,13 +34,5 @@ public class UsuarioDTO {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

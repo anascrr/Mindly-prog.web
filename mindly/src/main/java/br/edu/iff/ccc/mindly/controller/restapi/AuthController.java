@@ -21,12 +21,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public String autenticar(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
-        UsuarioDTO autenticado = usuarioService.autenticar(usuarioDTO.getUsername(), usuarioDTO.getSenha());
+        UsuarioDTO autenticado = usuarioService.autenticar(usuarioDTO.getEmail(), usuarioDTO.getSenha());
 
         if (autenticado != null) {
             return "redirect:/home"; // redireciona para a Home se login ok
         } else {
-            model.addAttribute("erro", "Usuário ou senha inválidos");
+            model.addAttribute("erro", "Email ou senha inválidos");
             return "login"; // volta para tela de login
         }
     }
