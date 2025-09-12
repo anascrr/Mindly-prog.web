@@ -21,16 +21,12 @@ public class LoginViewController {
     }
 
     @PostMapping("/home")
-    public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto, Model model) {
-        Usuario usuario = authService.autenticar(dto);
+public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto, Model model) {
+    Usuario usuario = authService.autenticar(dto);
 
-        if (usuario != null) {
-            model.addAttribute("email", usuario.getEmail());
-            model.addAttribute("role", usuario.getRole());
-            return "index";
-        } else {
-            model.addAttribute("erro", "email ou senha inválidos");
-            return "login";
-        }
-    }
+    model.addAttribute("email", usuario.getEmail());
+    model.addAttribute("role", usuario.getRole()); // cuidado: use `getRole()`
+    return "index";
+}
+
 }
