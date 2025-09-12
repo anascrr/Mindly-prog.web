@@ -25,13 +25,9 @@ public class HomePageViewController {
         LocalDate dataSelecionada = (data != null) ? LocalDate.parse(data) : hoje;
 
         List<Consulta> consultasHoje = consultaService.obterConsultasPorData(hoje);
-        if (consultasHoje == null)
-            consultasHoje = new ArrayList<>();
         consultasHoje.sort(Comparator.comparing(Consulta::getDataConsulta));
 
         List<Consulta> consultasData = consultaService.obterConsultasPorData(dataSelecionada);
-        if (consultasData == null)
-            consultasData = new ArrayList<>();
         consultasData.sort(Comparator.comparing(Consulta::getDataConsulta));
 
         model.addAttribute("consultasHoje", consultasHoje);

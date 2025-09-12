@@ -1,7 +1,6 @@
 package br.edu.iff.ccc.mindly.controller.view;
 
 import br.edu.iff.ccc.mindly.dto.LoginDTO;
-import br.edu.iff.ccc.mindly.entities.Usuario;
 import br.edu.iff.ccc.mindly.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +19,13 @@ public class LoginViewController {
         return "login";
     }
 
-    @PostMapping("/home")
-public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto, Model model) {
-    Usuario usuario = authService.autenticar(dto);
+    @PostMapping("/login")
+    public String autenticar(@ModelAttribute("loginDTO") LoginDTO dto) {
+        // A validação acontece aqui. Se as credenciais estiverem erradas,
+        // o AuthService vai lançar a exceção e o GlobalExceptionHandler vai interceptar,
+        // redirecionando de volta para a página de login com a mensagem de erro.
+        authService.autenticar(dto);
 
-    model.addAttribute("email", usuario.getEmail());
-    model.addAttribute("role", usuario.getRole()); // cuidado: use `getRole()`
-    return "index";
-}
-
+        return "redirect:/home";
+    }
 }

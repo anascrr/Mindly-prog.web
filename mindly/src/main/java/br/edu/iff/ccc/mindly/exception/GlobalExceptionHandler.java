@@ -12,8 +12,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidCredentialsException.class)
     public String handleInvalidCredentials(InvalidCredentialsException ex, Model model) {
         model.addAttribute("erro", ex.getMessage());
-        model.addAttribute("loginDTO", new LoginDTO()); // reenvia DTO para o form
-        return "login"; // volta para a tela de login
+        model.addAttribute("loginDTO", new LoginDTO());
+        return "login";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
