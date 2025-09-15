@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
-    
+
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 
@@ -30,6 +30,9 @@
 
             <button type="submit">Entrar</button>
         </form>
+        <div th:if="${erro}" style="color:red;">
+            <p th:text="${erro}"></p>
+        </div>
     </div>
 </body>
 
