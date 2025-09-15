@@ -21,3 +21,4 @@ public class AuthService {
                 .orElseThrow(() -> new InvalidCredentialsException("Email ou senha inválidos"));
     }
 }
+ 
