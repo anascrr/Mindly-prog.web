@@ -101,12 +101,4 @@
         public void setPlanoSaude(String planoSaude) {
             this.planoSaude = planoSaude;
         }
-
-        public List<Consulta> getConsultas() {
-            return consultas;
-        }
-
-        public void setConsultas(List<Consulta> consultas) {
-            this.consultas = consultas;
-        }
     }
