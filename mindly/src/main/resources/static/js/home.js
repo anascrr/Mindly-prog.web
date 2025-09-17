@@ -18,7 +18,7 @@ function inicializarCalendario(eventos, dataInicial) {
         events: eventos, // Usa os eventos passados como parâmetro
         dateClick: function (info) {
             // Redireciona para a página principal com a data selecionada como parâmetro
-            window.location.href = '/?data=' + info.dateStr;
+            window.location.href = '/home?data=' + info.dateStr;
         },
         eventClick: function (info) {
             // Opcional: ação ao clicar em um evento
