@@ -1,14 +1,12 @@
 package br.edu.iff.ccc.mindly.service;
 
 import br.edu.iff.ccc.mindly.dto.PacienteDTO;
-// import br.edu.iff.ccc.mindly.dto.PacienteDTO;
 import br.edu.iff.ccc.mindly.entities.Paciente;
 import br.edu.iff.ccc.mindly.repository.PacienteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,8 +23,8 @@ public class PacienteService {
         return pacienteRepository.findById(id).orElse(null);
     }
 
-    public Paciente adicionarPaciente(Paciente paciente) {
-        return pacienteRepository.save(paciente);
+    public Paciente adicionarPaciente(Paciente pacientes) {
+        return pacienteRepository.save(pacientes);
     }
 
     public void atualizarPaciente(PacienteDTO pacienteDTO) {

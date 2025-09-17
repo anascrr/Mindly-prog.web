@@ -7,9 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
 @Entity
+@Table(name = "consultas")
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
