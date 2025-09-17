@@ -25,8 +25,8 @@ public class PacienteService {
         return pacienteRepository.findById(id).orElse(null);
     }
 
-    public void adicionarPaciente(Paciente paciente) {
-        pacienteRepository.save(paciente);
+    public Paciente adicionarPaciente(Paciente paciente) {
+        return pacienteRepository.save(paciente);
     }
 
     public void atualizarPaciente(PacienteDTO pacienteDTO) {

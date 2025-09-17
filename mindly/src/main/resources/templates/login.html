@@ -21,7 +21,7 @@
 
         <div th:if="${erro}" th:text="${erro}" class="error-message"></div>
 
-        <form th:action="@{/home}" th:object="${loginDTO}" method="post" autocomplete="off">
+        <form th:action="@{/login}" th:object="${loginDTO}" method="post" autocomplete="off">
             <label for="email">E-mail</label>
             <input type="text" id="email" th:field="*{email}" placeholder="Digite seu e-mail" required />
 
@@ -30,9 +30,6 @@
 
             <button type="submit">Entrar</button>
         </form>
-        <div th:if="${erro}" style="color:red;">
-            <p th:text="${erro}"></p>
-        </div>
     </div>
 </body>
 
