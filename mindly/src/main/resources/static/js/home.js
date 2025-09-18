@@ -1,4 +1,3 @@
-// Função para inicializar o calendário com os dados recebidos do HTML
 function inicializarCalendario(eventos, dataInicial) {
     const calendarEl = document.getElementById('calendario');
 
@@ -7,33 +6,48 @@ function inicializarCalendario(eventos, dataInicial) {
         locale: 'pt-br',
         height: 500,
         selectable: true,
+
+        // --- MUDANÇA PRINCIPAL AQUI ---
+        // 1. Removemos o botão padrão 'today'.
+        // 2. Adicionamos o nosso botão customizado 'hojeCustom'.
         headerToolbar: {
-            left: 'prev,next today',
+            left: 'prev,next hojeCustom', // Substituímos 'today' por 'hojeCustom'
             center: 'title',
             right: ''
         },
-        buttonText: {
-            today: 'Hoje'
+
+        // --- DEFINIÇÃO DO NOSSO BOTÃO ---
+        // Esta é a forma oficial da biblioteca para adicionar botões com ações próprias.
+        customButtons: {
+            hojeCustom: {
+                text: 'Hoje', // O texto que aparecerá no botão
+                click: function() {
+                    // A única ação deste botão: redirecionar para /home. Sem conflitos.
+                    window.location.href = '/home';
+                }
+            }
         },
-        events: eventos, // Usa os eventos passados como parâmetro
+
+        events: eventos,
+
+        // A lógica de destaque do dia selecionado continua a mesma.
+        dayCellDidMount: function(arg) {
+            const cellDateString = arg.date.toISOString().split('T')[0];
+            if (dataInicial && cellDateString === dataInicial) {
+                arg.el.classList.add('selected-day');
+            }
+        },
+
         dateClick: function (info) {
-            // Redireciona para a página principal com a data selecionada como parâmetro
             window.location.href = '/home?data=' + info.dateStr;
-        },
-        eventClick: function (info) {
-            // Opcional: ação ao clicar em um evento
-            // Ex: alert('Paciente: ' + info.event.title);
-        },
-        validRange: {
-            start: null,
-            end: null
         }
     });
 
-    // Se uma data inicial foi fornecida, navega o calendário para essa data
+    // Se uma data específica veio do backend, centraliza o calendário nela.
     if (dataInicial) {
         calendar.gotoDate(dataInicial);
     }
 
+    // Desenha o calendário na tela.
     calendar.render();
 }

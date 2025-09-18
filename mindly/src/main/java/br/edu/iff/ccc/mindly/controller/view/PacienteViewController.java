@@ -1,69 +1,89 @@
 package br.edu.iff.ccc.mindly.controller.view;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import br.edu.iff.ccc.mindly.dto.PacienteDTO;
+import br.edu.iff.ccc.mindly.dto.PacienteRequestDTO;
+import br.edu.iff.ccc.mindly.dto.PacienteUpdateDTO;
 import br.edu.iff.ccc.mindly.entities.Paciente;
+import br.edu.iff.ccc.mindly.exception.BusinessException;
 import br.edu.iff.ccc.mindly.service.PacienteService;
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/pacientes")
 public class PacienteViewController {
 
     @Autowired
     private PacienteService pacienteService;
 
-    @GetMapping("/pacientes")
+    @GetMapping
     public String listarPacientes(Model model) {
         model.addAttribute("pacientes", pacienteService.listarTodos());
         model.addAttribute("activePage", "pacientes");
         return "pacientes/lista";
     }
 
-    @GetMapping("/pacientes/adicionar")
-    public String novoPaciente(Model model) {
-        model.addAttribute("pacienteDTO", new PacienteDTO());
-        return "pacientes/adicionar"; 
+    @GetMapping("/adicionar")
+    public String mostrarFormularioAdicionar(Model model) {
+        model.addAttribute("pacienteDTO", new PacienteRequestDTO());
+        return "pacientes/adicionar";
     }
 
-    @GetMapping("/pacientes/editar/{id}")
-    public String editarPaciente(@PathVariable Long id, Model model) {
-        Paciente paciente = pacienteService.buscarPorId(id);
-        PacienteDTO pacienteDTO = new PacienteDTO(paciente);
-        model.addAttribute("pacienteDTO", pacienteDTO);
-        return "pacientes/editar"; 
-    }
-
-    @PostMapping("/pacientes")
-    public String salvarPaciente(
-            @Valid @ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO,
-            BindingResult result,
-            Model model) {
+    @PostMapping("/adicionar")
+    public String salvarPaciente(@Valid @ModelAttribute("pacienteDTO") PacienteRequestDTO dto, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "pacientes/adicionar";
         }
-        Paciente paciente = pacienteDTO.toEntity();
-        pacienteService.adicionarPaciente(paciente);
-        return "redirect:/pacientes";
+        try {
+            pacienteService.criarPaciente(dto);
+            redirectAttributes.addFlashAttribute("successMessage", "Paciente cadastrado com sucesso!");
+            return "redirect:/pacientes";
+        } catch (BusinessException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "pacientes/adicionar";
+        }
     }
 
-    @PostMapping("/pacientes/editar")
-    public String atualizarPaciente(@ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO) {
-        pacienteService.atualizarPaciente(pacienteDTO);
-        return "redirect:/pacientes";
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Paciente paciente = pacienteService.buscarPacientePorId(id);
+        model.addAttribute("paciente", paciente);
+        return "pacientes/editar";
     }
 
-    @GetMapping("/pacientes/{id}")
-    public String excluirPaciente(@PathVariable Long id) {
+    @PostMapping("/editar/{id}")
+    public String atualizarPaciente(@PathVariable Long id, @Valid @ModelAttribute("paciente") Paciente paciente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "pacientes/editar";
+        }
+        try {
+            PacienteUpdateDTO dto = new PacienteUpdateDTO();
+            dto.setId(id);
+            dto.setNome(paciente.getNome());
+            dto.setEmail(paciente.getEmail());
+            dto.setTelefone(paciente.getTelefone());
+            dto.setEndereco(paciente.getEndereco());
+            dto.setDataNascimento(paciente.getDataNascimento());
+            dto.setCpf(paciente.getCpf());
+            dto.setPlanoSaude(paciente.getPlanoSaude());
+            
+            pacienteService.atualizarPaciente(id, dto);
+            redirectAttributes.addFlashAttribute("successMessage", "Paciente atualizado com sucesso!");
+            return "redirect:/pacientes";
+        } catch (BusinessException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "pacientes/editar";
+        }
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirPaciente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         pacienteService.excluirPaciente(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Paciente excluído com sucesso!");
         return "redirect:/pacientes";
     }
 }

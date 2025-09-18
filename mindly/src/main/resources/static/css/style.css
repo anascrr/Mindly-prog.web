@@ -120,9 +120,17 @@ select {
     border-color: #4e7e59 !important;
 }
 
-.fc-daygrid-day,
-.fc-daygrid-day-frame {
+.fc-daygrid-day {
     background: #f6f6f6 !important;
+}
+
+.selected-day {
+    background-color: #3b82f6 !important; /* Um tom de azul para o destaque */
+}
+
+/* Garante que o número do dia selecionado fique branco */
+.selected-day .fc-daygrid-day-number {
+    color: #ffffff !important;
 }
 
 /*
