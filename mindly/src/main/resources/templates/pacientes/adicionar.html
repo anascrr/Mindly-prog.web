@@ -1,85 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Paciente - Mindly</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
 </head>
-
 <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
-        <div class="layout-container flex h-full grow flex-col">
-            <div th:replace="~{fragmentos/navbar :: navbar}"></div>
-            <div class="px-40 flex flex-1 justify-center py-5">
-                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-                    <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente</p>
-                    </div>
-                    <form th:action="@{/pacientes}" th:object="${pacienteDTO}" method="post" class="flex flex-col gap-4 px-4 py-3">
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Nome</span>
-                            <input type="text" th:field="*{nome}" placeholder="Nome completo" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Email</span>
-                            <input type="email" th:field="*{email}" placeholder="E-mail" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Telefone</span>
-                            <input type="text" th:field="*{telefone}" id="telefone" placeholder="Telefone" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Endereço</span>
-                            <input type="text" th:field="*{endereco}" placeholder="Endereço" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Data de Nascimento</span>
-                            <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="Data de nascimento" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">CPF</span>
-                            <input type="text" th:field="*{cpf}" id="cpf" placeholder="CPF" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-red-600"></span>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Plano de Saúde</span>
-                            <input type="text" th:field="*{planoSaude}" placeholder="Plano de saúde" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                            <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}" class="text-red-600"></span>
-                        </label>
-                        <div class="flex px-4 py-3 justify-end">
-                            <button type="submit"
-                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-adicionar text-sm font-bold leading-normal tracking-[0.015em]">
-                                <span class="truncate">Adicionar</span>
-                            </button>
-                        </div>
-                    </form>
-                    <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+    <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+    <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col w-[512px]">
+            <p class="text-principal text-[32px] font-bold">Adicionar Paciente</p>
+            
+            <form th:action="@{/pacientes/adicionar}" th:object="${pacienteDTO}" method="post" class="flex flex-col gap-4 px-4 py-3">
+
+                <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    <span class="font-medium">Erro!</span> <span th:text="${errorMessage}"></span>
                 </div>
-            </div>
+                <div th:if="${#fields.hasErrors('*')}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                    <span class="font-medium">Por favor, corrija os erros abaixo.</span>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="nome">Nome</label>
+                    <input type="text" th:field="*{nome}" required />
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                </div>
+                
+                <div class="flex flex-col">
+                    <label for="email">Email</label>
+                    <input type="email" th:field="*{email}" required />
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" class="flex ... btn-adicionar ...">
+                        <span class="truncate">Adicionar</span>
+                    </button>
+                </div>
+            </form>
+            <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
         </div>
     </div>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
-
     <script th:src="@{/js/form-masks.js}"></script>
 </body>
-
 </html>

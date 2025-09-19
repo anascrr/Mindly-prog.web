@@ -9,7 +9,7 @@
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
@@ -24,6 +24,10 @@
                             <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72 m-0">
                                 Lista de Pacientes
                             </p>
+                        </div>
+                        <div th:if="${successMessage}" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+                            role="alert">
+                            <span class="font-medium">Sucesso!</span> <span th:text="${successMessage}"></span>
                         </div>
                         <div class="flex gap-2 items-center">
                             <input id="filtroPaciente" type="text" placeholder="Buscar paciente..."
@@ -47,8 +51,12 @@
                             <table class="flex-1">
                                 <thead>
                                     <tr class="bg-gray-100">
-                                        <th class="px-4 py-3 text-left table-header w-[400px] text-sm font-medium leading-normal">Nome</th>
-                                        <th class="px-4 py-3 text-left table-header w-[400px] text-sm font-medium leading-normal">Email</th>
+                                        <th
+                                            class="px-4 py-3 text-left table-header w-[400px] text-sm font-medium leading-normal">
+                                            Nome</th>
+                                        <th
+                                            class="px-4 py-3 text-left table-header w-[400px] text-sm font-medium leading-normal">
+                                            Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,15 +67,25 @@
                                         <td
                                             class="h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal bg-white relative group-hover:bg-gray-100">
                                             <span th:text="${paciente.email}">Email</span>
-                                            <span class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                                            <span
+                                                class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                                                 <a th:href="@{'/pacientes/editar/' + ${paciente.id}}"
                                                     class="text-blue-500 hover:text-blue-700" title="Editar">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M4 21h4.586a1 1 0 0 0 .707-.293l10.5-10.5a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0l-10.5 10.5A1 1 0 0 0 4 21zm14.707-13.293a1 1 0 0 1 0 1.414l-1.414 1.414-2.828-2.828 1.414-1.414a1 1 0 0 1 1.414 0l1.414 1.414z" fill="currentColor" /></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M4 21h4.586a1 1 0 0 0 .707-.293l10.5-10.5a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0l-10.5 10.5A1 1 0 0 0 4 21zm14.707-13.293a1 1 0 0 1 0 1.414l-1.414 1.414-2.828-2.828 1.414-1.414a1 1 0 0 1 1.414 0l1.414 1.414z"
+                                                            fill="currentColor" />
+                                                    </svg>
                                                 </a>
                                                 <a th:href="@{'/pacientes/' + ${paciente.id}}"
                                                     class="text-red-500 hover:text-red-700" title="Excluir"
                                                     onclick="return confirm('Tem certeza que deseja excluir este paciente?');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" />
+                                                    </svg>
                                                 </a>
                                             </span>
                                         </td>

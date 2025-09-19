@@ -1,12 +1,16 @@
+/* Estilos globais para a página de login */
 body {
-    font-family: 'Rubik', sans-serif !important;
+    font-family: 'Rubik', sans-serif;
     background: linear-gradient(180deg, #fffcf5 0%, #d8d5ca 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
+/* --- Bloco Principal: .login-container --- */
+/* ESTA É A PARTE QUE ESTAVA FALTANDO VISUALMENTE */
 .login-container {
     background: #fffcf5;
     padding: 2.5rem 2.5rem 2rem 2.5rem;
@@ -14,31 +18,47 @@ body {
     box-shadow: 0 4px 24px rgba(101, 162, 114, 0.08);
     min-width: 340px;
     border: 1.5px solid #65a272;
-    font-family: 'Rubik', sans-serif !important;
+    font-family: 'Rubik', sans-serif;
+    color: #545454;
 }
 
-h1 {
+/* --- Elementos dentro de .login-container --- */
+.login-container__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container__brand-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.login-container__logo {
+    width: 250px;
+    height: auto;
+    display: block;
+}
+
+.login-container__heading {
     text-align: center;
     margin-bottom: 2rem;
-    color: #545454;
     font-weight: 900;
     letter-spacing: 1px;
     font-size: 1.5rem;
-    font-family: 'Rubik', sans-serif !important;
 }
 
-label {
+.login-container__label {
     display: block;
     margin-top: 1.2rem;
     margin-bottom: 0.3rem;
-    color: #545454;
     font-weight: 600;
     letter-spacing: 0.5px;
-    font-family: 'Rubik', sans-serif !important;
 }
 
-input[type="text"],
-input[type="password"] {
+.login-container__input {
     width: 100%;
     padding: 0.8rem;
     border: 1.5px solid #65a272;
@@ -46,19 +66,19 @@ input[type="password"] {
     font-size: 1rem;
     background: #fffcf5;
     color: #545454;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background-color 0.2s;
     margin-bottom: 0.5rem;
-    font-family: 'Rubik', sans-serif !important;
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
+.login-container__input:focus {
     border-color: #65a272;
     outline: none;
     background: #fff;
 }
 
-button {
+.login-container__button {
     width: 100%;
     padding: 0.85rem;
     background: #65a272;
@@ -72,10 +92,10 @@ button {
     letter-spacing: 1px;
     box-shadow: 0 2px 8px rgba(101, 162, 114, 0.07);
     transition: background 0.2s;
-    font-family: 'Rubik', sans-serif !important;
+    font-family: 'Rubik', sans-serif;
 }
 
-button:hover {
+.login-container__button:hover {
     background: #4e7e59;
 }
 
@@ -88,26 +108,4 @@ button:hover {
     margin-bottom: 1.2rem;
     text-align: center;
     font-weight: 500;
-    font-family: 'Rubik', sans-serif !important;
-}
-
-.brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.brand-img {
-    width: 250px;
-    height: auto;
-    display: block;
-}
-
-.brand-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #545454;
-    letter-spacing: 1px;
-    font-family: 'Rubik', sans-serif !important;
 }

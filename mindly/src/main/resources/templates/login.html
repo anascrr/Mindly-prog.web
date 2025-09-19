@@ -6,31 +6,29 @@
     <title>Login - Mindly</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
-
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 
 <body>
     <div class="login-container">
-        <div class="brand">
-            <span class="brand-title">Mindly</span>
-            <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo" class="brand-img" />
+        <div class="login-container__brand">
+            <h1 class="login-container__brand-title">Mindly</h1>
+            <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo" class="login-container__logo" />
         </div>
-        <h1>Login</h1>
+        <h1 class="login-container__heading">Login</h1>
 
         <div th:if="${erro}" th:text="${erro}" class="error-message"></div>
 
         <form th:action="@{/login}" th:object="${loginDTO}" method="post" autocomplete="off">
-            <label for="email">E-mail</label>
-            <input type="text" id="email" th:field="*{email}" placeholder="Digite seu e-mail" required />
+            <label for="email" class="login-container__label">E-mail</label>
+            <input type="text" id="email" th:field="*{email}" placeholder="Digite seu e-mail" required class="login-container__input" />
 
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required />
+            <label for="senha" class="login-container__label">Senha</label>
+            <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required class="login-container__input" />
 
-            <button type="submit">Entrar</button>
+            <button type="submit" class="login-container__button">Entrar</button>
         </form>
     </div>
 </body>
-
 </html>
