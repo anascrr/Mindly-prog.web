@@ -29,13 +29,14 @@ public class PacienteViewController {
 
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionar(Model model) {
-        model.addAttribute("pacienteDTO", new PacienteRequestDTO());
+        model.addAttribute("pacienteRequestDTO", new PacienteRequestDTO());
         return "pacientes/adicionar";
     }
 
     @PostMapping("/adicionar")
-    public String salvarPaciente(@Valid @ModelAttribute("pacienteDTO") PacienteRequestDTO dto, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String salvarPaciente(@Valid @ModelAttribute("pacienteRequestDTO") PacienteRequestDTO dto, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
+            model.addAttribute("pacienteRequestDTO", dto);
             return "pacientes/adicionar";
         }
         try {
@@ -44,6 +45,7 @@ public class PacienteViewController {
             return "redirect:/pacientes";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("pacienteRequestDTO", dto);
             return "pacientes/adicionar";
         }
     }
@@ -58,6 +60,7 @@ public class PacienteViewController {
     @PostMapping("/editar/{id}")
     public String atualizarPaciente(@PathVariable Long id, @Valid @ModelAttribute("paciente") Paciente paciente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
+            model.addAttribute("paciente", paciente);
             return "pacientes/editar";
         }
         try {
@@ -76,9 +79,11 @@ public class PacienteViewController {
             return "redirect:/pacientes";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("paciente", paciente);
             return "pacientes/editar";
         }
     }
+
 
     @GetMapping("/excluir/{id}")
     public String excluirPaciente(@PathVariable Long id, RedirectAttributes redirectAttributes) {

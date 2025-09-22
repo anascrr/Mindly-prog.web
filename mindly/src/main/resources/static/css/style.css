@@ -1,134 +1,356 @@
 /*
  * ==================================
  * ESTILOS GLOBAIS E DE LAYOUT
- * (Originários do index.html e páginas de formulário)
  * ==================================
  */
 body {
-    background: #fffcf5 !important;
-    font-family: 'Rubik', sans-serif !important;
-    color: #545454 !important;
+    background: #fffcf5;
+    font-family: 'Rubik', sans-serif;
+    color: #545454;
+    min-height: 100vh; /* Garante que o body ocupe a altura mínima da viewport */
+    display: flex;
+    flex-direction: column; /* Organiza os filhos (navbar, main, footer) em coluna */
+    margin: 0; /* Garante que não há margem padrão no body */
+    padding: 0; /* Garante que não há padding padrão no body */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.bg-caixa {
-    background: #f6f6f6 !important;
+/* O main-content deve crescer para empurrar o footer */
+.main-content {
+    flex: 1; /* Permite que o conteúdo principal ocupe o espaço restante, empurrando o footer */
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 0; /* py-5 do Tailwind: 1.25rem em cima e embaixo */
+    padding-left: 10rem; /* px-40 do Tailwind: 10rem nas laterais (40 * 0.25rem = 10rem) */
+    padding-right: 10rem;
+    box-sizing: border-box; /* Garante que padding não adicione mais altura/largura */
 }
 
-.text-principal,
-label,
-input,
-span,
-p,
-a,
-button,
-select,
-th,
-td {
-    font-family: 'Rubik', sans-serif !important;
-    color: #545454 !important;
+/* Nova classe para o wrapper de conteúdo, substituindo as classes inline do div `layout-content-container` */
+/* Esta classe encapsula o conteúdo principal (título, filtros, tabela) dentro do main-content */
+.content-wrapper { /* Corresponde a `layout-content-container flex flex-col max-w-[960px] flex-1` */
+    display: flex;
+    flex-direction: column;
+    max-width: 960px; /* max-w-[960px] */
+    flex: 1; /* flex-1 */
 }
+
+/* Classes utilitárias gerais (apenas as que realmente não se encaixam em blocos) */
+/* .bg-caixa é substituído por cores nos blocos específicos */
+/* .text-concreto é substituído por #545454 nos blocos específicos */
 
 /*
  * ==================================
- * ESTILOS DE FORMULÁRIO
- * (Originários de adicionar.html, editar.html)
+ * ESTILOS DE FORMULÁRIO (Componentes de Reuso)
  * ==================================
  */
-.input-edit,
-select {
-    background: #fffcf5 !important;
-    color: #545454 !important;
-    font-family: 'Rubik', sans-serif !important;
+.form-input {
+    background: #fffcf5;
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    width: 100%;
+    padding: 0.8rem;
+    border: 1.5px solid #65a272;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
-.btn-adicionar,
-.btn-salvar {
-    background: #65a272 !important;
-    color: #fff !important;
-    font-family: 'Rubik', sans-serif !important;
+.form-input:focus {
+    border-color: #4e7e59;
+    outline: none;
+    background: #fff;
 }
 
-.btn-adicionar:hover,
-.btn-salvar:hover {
-    background: #4e7e59 !important;
+.button {
+    background: #65a272;
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none; /* Garante que links como botões não tenham sublinhado */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background: #4e7e59;
+}
+
+/* Modificadores para botões */
+.button--primary {
+    font-size: 1.1rem;
+    padding: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(101, 162, 114, 0.07);
+}
+
+.button--small {
+    font-size: 0.92rem;
+    height: 2.1rem;
+    min-width: 70px;
+    padding: 0 14px;
+    letter-spacing: 0.5px;
+}
+
+.button--action {
+    min-width: 80px;
 }
 
 /*
  * ==================================
  * ESTILOS DE LISTAGEM E TABELA
- * (Originários de lista.html)
  * ==================================
  */
-.btn-consulta {
-    background: #65a272 !important;
-    color: #fff !important;
-    font-family: 'Rubik', sans-serif !important;
-    font-size: 0.92rem !important;
-    height: 2.1rem !important;
-    min-width: 70px !important;
-    padding: 0 14px !important;
+
+.list-header { /* flex flex-wrap justify-between gap-3 p-4 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem; /* gap-3 */
+    padding: 1rem; /* p-4 */
+    align-items: center;
 }
 
-.btn-consulta:hover {
-    background: #4e7e59 !important;
+.list-header__title { /* text-principal tracking-light text-[32px] font-bold leading-tight min-w-72 */
+    color: #545454; /* Supondo que text-principal seja #545454 */
+    letter-spacing: -0.015em; /* tracking-light */
+    font-size: 2rem; /* text-[32px] */
+    font-weight: 700; /* font-bold */
+    line-height: 1.25; /* leading-tight */
+    min-width: 18rem; /* min-w-72 (72 * 0.25rem = 18rem) */
+    margin: 0;
 }
 
-.input-consulta {
-    font-family: 'Rubik', sans-serif !important;
-    color: #545454 !important;
-    background: #fffcf5 !important;
+.list-header__actions { /* flex gap-2 items-center */
+    display: flex;
+    gap: 0.5rem; /* gap-2 */
+    align-items: center;
+    flex-wrap: wrap; /* Para quebrar linha em telas menores */
 }
 
-.input-busca {
-    min-width: 120px !important;
-    max-width: 160px !important;
-    height: 2.1rem !important;
-    font-size: 0.95rem !important;
-    padding: 0.3rem 0.7rem !important;
+/* Alerta de mensagem de sucesso */
+.list-alert { /* p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; /* text-sm */
+    border-radius: 0.5rem; /* rounded-lg */
 }
 
-.table-header,
-.table-cell {
-    color: #545454 !important;
-    font-family: 'Rubik', sans-serif !important;
+.list-alert--success {
+    background-color: #dcfce7; /* bg-green-50 */
+    color: #166534; /* text-green-800 */
 }
+
+.list-alert__message { /* font-medium */
+    font-weight: 500;
+}
+
+.list-search__input { /* border border-[#cedbe8] rounded-lg px-3 py-2 text-base input-consulta input-busca */
+    border: 1px solid #cedbe8;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem; /* px-3 py-2 */
+    font-size: 1rem; /* text-base */
+    background: #fffcf5; /* bg-caixa */
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+    height: 42px; /* Altura padrão para alinhar com o botão */
+}
+
+.button--icon-add { /* flex cursor-pointer items-center justify-center overflow-hidden rounded-lg btn-consulta font-bold leading-normal tracking-[0.015em] gap-2 ml-2 */
+    display: inline-flex; /* Alterado de flex para inline-flex para não ocupar toda largura */
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.5rem; /* rounded-lg */
+    background: #65a272; /* Cor de adicionar */
+    color: #fff; /* text-white */
+    font-weight: 700; /* font-bold */
+    line-height: 1.5; /* leading-normal */
+    letter-spacing: 0.015em; /* tracking-[0.015em] */
+    gap: 0.5rem; /* gap-2 */
+    margin-left: 0.5rem; /* ml-2 */
+    padding: 0.5rem 1rem; /* Ajuste para ter um bom padding */
+    height: 42px; /* Para alinhar com os inputs */
+    transition: background 0.2s ease-in-out;
+    text-decoration: none; /* remove underline padrão de <a> */
+    white-space: nowrap; /* Impede que o texto quebre */
+}
+
+.button--icon-add:hover {
+    background: #4e7e59;
+}
+
+.button--icon-add svg { /* text-white, data-icon, data-size */
+    width: 1rem; /* 16px */
+    height: 1rem; /* 16px */
+    fill: currentColor; /* Para que o SVG herde a cor do texto */
+}
+
+.table-wrapper { /* px-4 py-3 @container */
+    padding: 0.75rem 1rem; /* px-4 py-3 */
+}
+
+.table-container { /* flex overflow-hidden rounded-lg border border-[#cedbe8] bg-caixa */
+    display: flex;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    border: 1px solid #cedbe8;
+    background: #fffcf5; /* bg-caixa */
+}
+
+.table-layout { /* flex-1 */
+    width: 100%; /* Garante que a tag <table> preencha o container flex */
+    border-collapse: collapse; /* Para remover espaçamento extra entre células */
+}
+
+.table-layout__header-cell { /* px-4 py-3 text-left table-header w-[200px] text-sm font-medium leading-normal cursor-pointer */
+    text-align: left;
+    padding: 0.75rem 1rem; /* px-4 py-3 */
+    background: #e7edf4; /* bg-gray-100 no original HTML */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    line-height: 1.5; /* leading-normal */
+    cursor: pointer;
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    position: relative; /* CRÍTICO: Para posicionar a seta absoluta */
+    white-space: nowrap; /* Impede que o texto do cabeçalho quebre */
+    /* A largura (`w-[200px]`) é aplicada diretamente no HTML com `style="width: 200px;"` */
+}
+
+.table-layout__header-cell span { /* Posição da seta */
+    position: absolute; /* absolute */
+    right: 1rem; /* right-4 */
+    top: 50%; /* top-1/2 */
+    transform: translateY(-50%); /* -translate-y-1/2 */
+    color: #a0aec0; /* Cor da seta padrão */
+    line-height: 1; /* Garante que a seta não adicione altura extra ao span */
+}
+
+.table-layout__row { /* border-t border-t-[#cedbe8] consulta-row group hover:bg-gray-100 transition-colors duration-150 */
+    border-top: 1px solid #cedbe8;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.table-layout__row:hover {
+    background: #f1f5f9; /* hover:bg-gray-100 (ajustado para uma cor da sua paleta) */
+}
+
+.table-layout__cell { /* h-[72px] px-4 py-2 w-[200px] table-cell text-sm font-normal leading-normal bg-white group-hover:bg-gray-100 */
+    height: 4.5rem; /* 72px */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 400; /* font-normal */
+    line-height: 1.5; /* leading-normal */
+    background: #ffffff; /* bg-white */
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    white-space: nowrap; /* Evita que o texto quebre */
+    /* A largura (`w-[200px]`) é aplicada diretamente no HTML com `style="width: 200px;"` */
+}
+
+/* Ações (Editar/Excluir) que aparecem no hover - span dentro do td */
+.table-cell-actions { /* absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 */
+    position: absolute;
+    right: 1rem; /* right-4 */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 0.5rem; /* gap-2 */
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+/* Aplica a opacidade 100% quando a linha da tabela está em hover */
+.table-layout__row:hover .table-cell-actions { /* group-hover:opacity-100 */
+    opacity: 1;
+}
+
+.action-button { /* text-blue-500 hover:text-blue-700 */
+    color: #3b82f6; /* text-blue-500 */
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+.action-button:hover {
+    color: #2563eb; /* hover:text-blue-700 */
+}
+
+.action-button--delete { /* text-red-500 hover:text-red-700 */
+    color: #ef4444; /* text-red-500 */
+}
+
+.action-button--delete:hover {
+    color: #dc2626; /* hover:text-red-700 */
+}
+
+.action-button svg { /* width="18" height="18" */
+    width: 1.125rem; /* 18px */
+    height: 1.125rem; /* 18px */
+    fill: currentColor;
+    stroke: currentColor; /* Para o ícone de excluir que usa stroke */
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.table-layout__empty-message { /* Para a mensagem "Nenhuma consulta encontrada." */
+    padding: 1rem;
+    text-align: center;
+    color: #6b7280;
+    background: #fffcf5;
+}
+
 
 /*
  * ==================================
  * ESTILOS DO CALENDÁRIO (FULLCALENDAR)
- * (Originários do index.html)
  * ==================================
  */
-.fc-toolbar-title,
-.fc-col-header-cell-cushion,
-.fc-daygrid-day-number {
-    color: #545454 !important;
+.fc .fc-toolbar-title,
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
 }
 
-.fc-button,
-.fc-button-primary,
-.fc-button-primary:not(:disabled) {
-    background-color: #65a272 !important;
-    border-color: #65a272 !important;
-    color: #fff !important;
+.fc .fc-button,
+.fc .fc-button-primary {
+    background-color: #65a272;
+    border-color: #65a272;
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    text-transform: none;
 }
 
-.fc-button-primary:focus,
-.fc-button-primary:active,
-.fc-button-primary:hover {
-    background-color: #4e7e59 !important;
-    border-color: #4e7e59 !important;
+.fc .fc-button-primary:not(:disabled):hover {
+    background-color: #4e7e59;
+    border-color: #4e7e59;
 }
 
-.fc-daygrid-day {
-    background: #f6f6f6 !important;
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:active {
+    background-color: #4e7e59;
+    border-color: #4e7e59;
+    box-shadow: none;
+}
+
+.fc .fc-daygrid-day {
+    background: #f6f6f6; /* bg-caixa */
 }
 
 .selected-day {
-    background-color: #3b82f6 !important; /* Um tom de azul para o destaque */
+    background-color: #3b82f6 !important;
 }
 
-/* Garante que o número do dia selecionado fique branco */
 .selected-day .fc-daygrid-day-number {
     color: #ffffff !important;
 }
@@ -138,24 +360,41 @@ select {
  * ESTILOS DE FRAGMENTOS (Footer, Navbar)
  * ==================================
  */
-.app-footer {
+.page-footer {
     text-align: center;
     padding: 1em 0;
     background: #d8d5ca;
     font-size: 1em;
     font-family: 'Rubik', sans-serif;
     color: #545454;
+    width: 100%;
+    margin-top: auto; /* CRÍTICO: Empurra o footer para o final do container flex (body) */
+    box-sizing: border-box; /* Garante que padding não afete a largura total */
 }
 
-/* Estilos para a Navbar */
+.page-footer__credits {
+    font-size: 0.9em;
+    margin-top: 0.25rem;
+}
+
 .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #e7edf4;
+    padding: 0.75rem 2.5rem;
     background: #d8d5ca;
     font-family: 'Rubik', sans-serif;
+    color: #545454;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.navbar__brand {
-    color: #545454;
+.navbar__brand-wrapper {
+    display: flex;
     align-items: center;
+    gap: 0.75rem;
 }
 
 .navbar__logo {
@@ -165,44 +404,291 @@ select {
 
 .navbar__brand-link {
     text-decoration: none;
-    display: flex;
-    align-items: center;
+    color: inherit;
 }
 
 .navbar__title {
-    color: #545454;
-    font-family: 'Rubik', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
     margin: 0;
 }
 
+.navbar__nav {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    gap: 2rem;
+    align-items: center;
+}
+
 .navbar__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
     color: #545454;
-    font-family: 'Rubik', sans-serif;
     transition: color 0.2s ease-in-out;
+    white-space: nowrap;
 }
 
 .navbar__link:hover {
-    color: #000; /* Um pouco mais escuro ao passar o mouse */
+    color: #000;
 }
 
-/* Classe especial para o link da página ativa */
 .navbar__link--active {
-    font-weight: 700; /* Deixa o texto em negrito */
+    font-weight: 700;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
 }
 
-.btn-novo {
-    background: #65a272 !important;
-    color: #fff !important;
-    font-family: 'Rubik', sans-serif !important;
-    font-size: 0.92rem !important;
-    height: 2.1rem !important;
-    min-width: 80px !important;
-    padding: 0 14px !important;
+.button--new {
+    font-size: 0.92rem;
+    height: 2.1rem;
+    min-width: 80px;
+    padding: 0 14px;
+    background: #65a272;
+    color: #fff;
 }
 
-.btn-novo:hover {
-    background: #4e7e59 !important;
+.button--new:hover {
+    background: #4e7e59;
+}
+
+
+/*
+ * ==================================
+ * ESTILOS ESPECÍFICOS DA HOME
+ * ==================================
+ */
+.main-dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; /* items-start */
+    min-height: 80vh; /* min-h-[80vh] */
+    padding: 2rem 2.5rem; /* py-8 px-10 */
+    gap: 2.5rem; /* gap-10 */
+    flex: 1; /* flex-1 */
+    box-sizing: border-box; /* Garante que padding não adicione à largura/altura */
+}
+
+.card { /* Bloco base para cards - para reutilizar estilos comuns */
+    background: #f6f6f6; /* bg-caixa */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-md */
+    padding: 1.5rem; /* p-6 */
+    min-height: 600px;
+    box-sizing: border-box;
+}
+
+.card-consultas-hoje { /* Modificador ou card específico */
+    width: 380px; /* w-[380px] */
+}
+
+.card-consultas-hoje__title {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 700; /* font-bold */
+    color: #545454; /* text-concreto */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.card-consultas-hoje__list {
+    list-style: none; /* Remove marcadores padrão */
+    padding: 0;
+    margin: 0;
+}
+
+.card-consultas-hoje__item--empty {
+    color: #6b7280; /* text-gray-500 */
+    /* Talvez adicionar um padding se o original tinha */
+    padding-bottom: 0.5rem; /* Ajuste para espaçamento */
+}
+
+.card-consultas-hoje__item {
+    margin-bottom: 0.75rem; /* mb-3 */
+    padding-bottom: 0.5rem; /* pb-2 */
+    border-bottom: 1px solid #e5e7eb; /* border-b */
+}
+
+.card-consultas-hoje__item:last-child {
+    border-bottom: none; /* last:border-b-0 */
+    padding-bottom: 0; /* last:pb-0 */
+    margin-bottom: 0;
+}
+
+.card-consultas-hoje__item-details {
+    display: flex;
+    flex-direction: column; /* flex flex-col */
+}
+
+.card-consultas-hoje__item-name {
+    font-weight: 600; /* font-semibold */
+    color: #545454; /* text-concreto */
+}
+
+.card-consultas-hoje__item-time {
+    font-size: 0.875rem; /* text-sm */
+    color: #545454; /* text-concreto */
+}
+
+.card-consultas-hoje__item-doctor {
+    font-size: 0.75rem; /* text-xs */
+    color: #545454; /* text-concreto */
+}
+
+.card-calendario { /* Modificador ou card específico */
+    width: 600px; /* w-[600px] */
+    display: flex;
+    flex-direction: column; /* flex flex-col */
+    align-items: center; /* items-center */
+}
+
+.card-calendario__title {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 700; /* font-bold */
+    color: #545454; /* text-concreto */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.card-calendario__calendar {
+    width: 100%; /* style="width:100%;" */
+    /* Adicionar aqui estilos adicionais para o container do calendário, se necessário */
+}
+
+/*
+ * ==================================
+ * ESTILOS GERAIS DE PÁGINAS DE FORMULÁRIO (adicionar.html, editar.html)
+ * ==================================
+ */
+
+/* Container do formulário em si */
+.form-container { /* w-[512px] max-w-[960px] flex-1 py-5 */
+    display: flex;
+    flex-direction: column;
+    width: 512px;
+    max-width: 960px; /* Mantido o max-w, embora o w:512px já restrinja */
+    flex: 1;
+    padding: 1.25rem 0; /* py-5 */
+}
+
+/* Cabeçalho do formulário (título da página) */
+.form-header { /* flex flex-wrap justify-between gap-3 p-4 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem; /* gap-3 */
+    padding: 1rem; /* p-4 */
+    align-items: center;
+}
+
+.form-header__title { /* text-principal tracking-light text-[32px] font-bold leading-tight min-w-72 */
+    color: #545454; /* text-principal */
+    letter-spacing: -0.015em;
+    font-size: 2rem; /* text-[32px] */
+    font-weight: 700;
+    line-height: 1.25;
+    min-width: 18rem;
+    margin: 0;
+}
+
+/* O form em si */
+.form-main { /* flex flex-col gap-4 px-4 py-3 */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* gap-4 */
+    padding: 0.75rem 1rem; /* px-4 py-3 */
+}
+
+/* Alerta de mensagem (erro/sucesso) */
+.form-alert { /* p-4 mb-4 text-sm rounded-lg */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+}
+
+.form-alert--error { /* text-red-800 bg-red-50 */
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.form-alert__message { /* font-medium */
+    font-weight: 500;
+}
+
+/* Grupos de campo (label + input/select) */
+.form-group { /* flex flex-col min-w-40 flex-1 */
+    display: flex;
+    flex-direction: column;
+    min-width: 10rem; /* min-w-40 */
+    flex: 1;
+    /* margin-bottom: 1rem; Removido, pois o gap do .form-main já cuida disso */
+}
+
+.form-group__label { /* text-base font-medium leading-normal pb-2 */
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding-bottom: 0.5rem; /* pb-2 */
+    color: #545454;
+}
+
+/* O input principal, reutilizando a classe form-input (já definido anteriormente) */
+/* .form-input já está bem definido. */
+
+.form-group__error-message { /* text-red-600 text-sm mt-1 */
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem; /* mt-1 */
+}
+
+.form-group__input-wrapper { /* flex gap-2 items-center */
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* O select principal, reutilizando e estendendo a classe form-input */
+.form-group__select { /* flex-1 border border-[#cedbe8] rounded-lg h-14 p-[15px] text-base font-normal leading-normal input-edit */
+    flex: 1;
+    border: 1px solid #cedbe8;
+    border-radius: 0.5rem;
+    height: 3.5rem; /* h-14 */
+    padding: 0.9375rem; /* p-[15px] */
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background: #fffcf5; /* input-edit (que já era bg-wfcf5) */
+    color: #545454;
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+}
+
+.form-group__link-add { /* text-blue-600 underline text-sm whitespace-nowrap */
+    color: #2563eb;
+    text-decoration: underline;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+/* Container de botões de ação */
+.form-actions { /* px-4 py-3 flex justify-end */
+    display: flex;
+    padding: 0.75rem 1rem;
+    justify-content: flex-end;
+}
+
+/* Link para voltar à lista */
+.form-link-back { /* mt-4 text-blue-600 */
+    margin-top: 1rem; /* mt-4 */
+    color: #2563eb; /* text-blue-600 */
+    text-decoration: none; /* remove underline padrão de <a> */
+    padding: 0 1rem; /* Adiciona padding para alinhar com o formulário */
+}
+
+.form-link-back:hover {
+    text-decoration: underline;
 }

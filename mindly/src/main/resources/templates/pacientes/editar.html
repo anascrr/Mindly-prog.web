@@ -4,50 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Paciente - Mindly</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
     <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
     <div th:replace="~{fragmentos/navbar :: navbar}"></div>
-    <div class="px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col w-[512px]">
-            <p class="text-principal text-[32px] font-bold">Editar Paciente</p>
+
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 class="form-header__title">Editar Paciente</h2>
+            </div>
 
             <form th:action="@{/pacientes/editar/{id}(id=${paciente.id})}" th:object="${paciente}" method="post"
-                class="flex flex-col gap-4 px-4 py-3">
+                class="form-main">
 
-                <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                    <span class="font-medium">Erro!</span> <span th:text="${errorMessage}"></span>
+                <div th:if="${errorMessage}" class="form-alert form-alert--error" role="alert">
+                    <span class="form-alert__message">Erro!</span> <span th:text="${errorMessage}"></span>
                 </div>
 
                 <input type="hidden" th:field="*{id}" />
 
-                <div class="flex flex-col">
-                    <label for="nome">Nome</label>
-                    <input type="text" th:field="*{nome}" required />
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                <div class="form-group">
+                    <label for="nome" class="form-group__label">Nome</label>
+                    <input type="text" th:field="*{nome}" id="nome" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="form-group__error-message"></span>
                 </div>
 
-                <div class="flex flex-col">
-                    <label for="email">Email</label>
-                    <input type="email" th:field="*{email}" required />
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('email')}"
-                        th:errors="*{email}"></span>
+                <div class="form-group">
+                    <label for="email" class="form-group__label">Email</label>
+                    <input type="email" th:field="*{email}" id="email" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-group__error-message"></span>
                 </div>
 
-                <div class="flex justify-end">
-                    <button type="submit" class="flex ... btn-adicionar ...">
+                <div class="form-group">
+                    <label for="telefone" class="form-group__label">Telefone</label>
+                    <input type="text" th:field="*{telefone}" id="telefone" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="form-group__error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco" class="form-group__label">Endereço</label>
+                    <input type="text" th:field="*{endereco}" id="endereco" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="form-group__error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="dataNascimento" class="form-group__label">Data de Nascimento</label>
+                    <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="DD/MM/AAAA" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}" class="form-group__error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf" class="form-group__label">CPF</label>
+                    <input type="text" th:field="*{cpf}" id="cpf" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="form-group__error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="planoSaude" class="form-group__label">Plano de Saúde</label>
+                    <input type="text" th:field="*{planoSaude}" id="planoSaude" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}" class="form-group__error-message"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button button--primary">
                         <span class="truncate">Salvar Alterações</span>
                     </button>
                 </div>
             </form>
-            <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+            <a th:href="@{/pacientes}" class="form-link-back">Voltar à lista</a>
         </div>
-    </div>
+    </main>
+
     <div th:replace="~{fragmentos/footer :: footer}"></div>
     <script th:src="@{/js/form-masks.js}"></script>
 </body>
