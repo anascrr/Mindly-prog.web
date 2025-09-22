@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
 </head>
 
 <body>
@@ -24,12 +26,14 @@
                         </p>
                     </div>
 
-                    <form th:action="@{/consultas/adicionar}" th:object="${consultaRequestDTO}" method="post" class="flex flex-col gap-4 px-4 py-3">
+                    <form th:action="@{/consultas/adicionar}" th:object="${consultaRequestDTO}" method="post"
+                        class="flex flex-col gap-4 px-4 py-3">
 
-                        <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                        <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
+                            role="alert">
                             <span class="font-medium">Erro!</span> <span th:text="${errorMessage}"></span>
                         </div>
-                        
+
                         <div class="flex flex-col min-w-40 flex-1">
                             <label for="pacienteId" class="text-base font-medium leading-normal pb-2">Paciente</label>
                             <div class="flex gap-2 items-center">
@@ -39,11 +43,13 @@
                                     <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
                                         th:text="${paciente.nome}"></option>
                                 </select>
-                                <a th:href="@{/pacientes/adicionar}" class="text-blue-600 underline text-sm" title="Adicionar novo paciente">
+                                <a th:href="@{/pacientes/adicionar}" class="text-blue-600 underline text-sm"
+                                    title="Adicionar novo paciente">
                                     + Adicionar paciente
                                 </a>
                             </div>
-                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('pacienteId')}" th:errors="*{pacienteId}"></span>
+                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('pacienteId')}"
+                                th:errors="*{pacienteId}"></span>
                         </div>
 
                         <div class="flex flex-col min-w-40 flex-1">
@@ -52,23 +58,28 @@
                                 class="form-select flex-1 rounded-lg border border-[#cedbe8] input-edit h-14 p-[15px] text-base font-normal leading-normal">
                                 <option value="" disabled>Selecione o médico</option>
                                 <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo</option>
-                                <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra</option>
+                                <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos -
+                                    Psiquiatra</option>
                             </select>
-                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('medico')}" th:errors="*{medico}"></span>
+                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('medico')}"
+                                th:errors="*{medico}"></span>
                         </div>
-                        
+
                         <div class="flex flex-col min-w-40 flex-1">
-                            <label for="dataConsultaInput" class="text-base font-medium leading-normal pb-2">Data e Hora da Consulta</label>
+                            <label for="dataConsultaInput" class="text-base font-medium leading-normal pb-2">Data e Hora
+                                da Consulta</label>
                             <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required
-                                class="form-input ..."/>
-                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('dataConsulta')}" th:errors="*{dataConsulta}"></span>
+                                class="form-input ..." />
+                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('dataConsulta')}"
+                                th:errors="*{dataConsulta}"></span>
                         </div>
-                        
+
                         <div class="flex flex-col min-w-40 flex-1">
                             <label for="observacao" class="text-base font-medium leading-normal pb-2">Observação</label>
-                            <input type="text" id="observacao" th:field="*{observacao}" placeholder="Observação (opcional)"
-                                class="form-input ..."/>
-                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}"></span>
+                            <input type="text" id="observacao" th:field="*{observacao}"
+                                placeholder="Observação (opcional)" class="form-input ..." />
+                            <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('observacao')}"
+                                th:errors="*{observacao}"></span>
                         </div>
 
                         <div class="flex px-4 py-3 justify-end">
@@ -83,7 +94,7 @@
         </div>
     </div>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
-    
+
     <script>
         function getFormattedCurrentDateTime() {
             const now = new Date();
@@ -96,4 +107,5 @@
         }
     </script>
 </body>
+
 </html>

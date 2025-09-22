@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Consulta - Mindly</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
 </head>
+
 <body>
     <div th:replace="~{fragmentos/navbar :: navbar}"></div>
     <div class="px-40 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col w-[512px]">
             <p class="text-principal text-[32px] font-bold">Editar Consulta</p>
 
-            <form th:action="@{/consultas/editar/{id}(id=${consulta.id})}" th:object="${consulta}" method="post" class="flex flex-col gap-4 px-4 py-3">
+            <form th:action="@{/consultas/editar/{id}(id=${consulta.id})}" th:object="${consulta}" method="post"
+                class="flex flex-col gap-4 px-4 py-3">
 
                 <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
                     <span class="font-medium">Erro!</span> <span th:text="${errorMessage}"></span>
@@ -24,27 +29,32 @@
                     <select id="pacienteId" th:field="*{paciente.id}" required class="form-select ...">
                         <option th:each="p : ${pacientes}" th:value="${p.id}" th:text="${p.nome}"></option>
                     </select>
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('paciente')}" th:errors="*{paciente}"></span>
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('paciente')}"
+                        th:errors="*{paciente}"></span>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="medico" class="text-base font-medium pb-2">Médico</label>
                     <select id="medico" th:field="*{medico}" required class="form-select ...">
                         <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo</option>
-                        <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra</option>
+                        <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra
+                        </option>
                     </select>
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('medico')}" th:errors="*{medico}"></span>
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('medico')}"
+                        th:errors="*{medico}"></span>
                 </div>
-                
+
                 <div class="flex flex-col">
                     <label for="dataConsultaInput" class="text-base font-medium pb-2">Data e Hora</label>
-                    <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required class="form-input ..."/>
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('dataConsulta')}" th:errors="*{dataConsulta}"></span>
+                    <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required
+                        class="form-input ..." />
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('dataConsulta')}"
+                        th:errors="*{dataConsulta}"></span>
                 </div>
-                
+
                 <div class="flex flex-col">
                     <label for="observacao" class="text-base font-medium pb-2">Observação</label>
-                    <input type="text" id="observacao" th:field="*{observacao}" class="form-input ..."/>
+                    <input type="text" id="observacao" th:field="*{observacao}" class="form-input ..." />
                 </div>
 
                 <div class="flex justify-end">
@@ -57,7 +67,7 @@
         </div>
     </div>
     <div th:replace="~{fragmentos/footer :: footer}"></div>
-    
+
     <script>
         // (Script para bloquear datas passadas)
         function getFormattedCurrentDateTime() {
@@ -71,4 +81,5 @@
         }
     </script>
 </body>
+
 </html>

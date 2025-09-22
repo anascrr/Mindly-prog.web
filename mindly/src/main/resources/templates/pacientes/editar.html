@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Paciente - Mindly</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
 </head>
+
 <body>
     <div th:replace="~{fragmentos/navbar :: navbar}"></div>
     <div class="px-40 flex flex-1 justify-center py-5">
         <div class="layout-content-container flex flex-col w-[512px]">
             <p class="text-principal text-[32px] font-bold">Editar Paciente</p>
-            
-            <form th:action="@{/pacientes/editar/{id}(id=${paciente.id})}" th:object="${paciente}" method="post" class="flex flex-col gap-4 px-4 py-3">
+
+            <form th:action="@{/pacientes/editar/{id}(id=${paciente.id})}" th:object="${paciente}" method="post"
+                class="flex flex-col gap-4 px-4 py-3">
 
                 <div th:if="${errorMessage}" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
                     <span class="font-medium">Erro!</span> <span th:text="${errorMessage}"></span>
                 </div>
-                
+
                 <input type="hidden" th:field="*{id}" />
-                
+
                 <div class="flex flex-col">
                     <label for="nome">Nome</label>
                     <input type="text" th:field="*{nome}" required />
                     <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
                 </div>
-                
+
                 <div class="flex flex-col">
                     <label for="email">Email</label>
                     <input type="email" th:field="*{email}" required />
-                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    <span class="text-red-600 text-sm" th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}"></span>
                 </div>
 
                 <div class="flex justify-end">
@@ -45,4 +51,5 @@
     <div th:replace="~{fragmentos/footer :: footer}"></div>
     <script th:src="@{/js/form-masks.js}"></script>
 </body>
+
 </html>
