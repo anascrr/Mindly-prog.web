@@ -10,10 +10,9 @@ public record ConsultaResponseDTO(
         Long id,
         String pacienteNome,
         String medico,
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-        LocalDateTime dataConsulta,
-        String observacao
-) {
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm") LocalDateTime dataConsulta,
+        String observacao) {
+
     public static ConsultaResponseDTO fromEntity(Consulta consulta) {
         String nome = (consulta.getPaciente() != null) ? consulta.getPaciente().getNome() : "Paciente não associado";
         return new ConsultaResponseDTO(
@@ -21,7 +20,6 @@ public record ConsultaResponseDTO(
                 nome,
                 consulta.getMedico(),
                 consulta.getDataConsulta(),
-                consulta.getObservacao()
-        );
+                consulta.getObservacao());
     }
 }
