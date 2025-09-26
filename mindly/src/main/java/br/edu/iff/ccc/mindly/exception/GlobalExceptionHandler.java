@@ -1,6 +1,7 @@
+// src/main/java/br/edu/iff/ccc/mindly/exception/GlobalExceptionHandler.java
 package br.edu.iff.ccc.mindly.exception;
 
-import br.edu.iff.ccc.mindly.dto.LoginDTO;
+import br.edu.iff.ccc.mindly.dto.UsuarioLoginDTO; // CORRIGIDO: Usa UsuarioLoginDTO
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,16 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Logger para registrar os erros no console
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     // Captura exceções de credenciais inválidas.
     // Retorna o usuário para a tela de login com uma mensagem de erro.
-    @ExceptionHandler(InvalidCredentialsException.class)
+    @ExceptionHandler(InvalidCredentialsException.class) // Mantém InvalidCredentialsException
     public String handleInvalidCredentials(InvalidCredentialsException ex, Model model) {
         logger.warn("Tentativa de login falhou: {}", ex.getMessage());
-        model.addAttribute("erro", ex.getMessage());
-        model.addAttribute("loginDTO", new LoginDTO());
+        model.addAttribute("errorMessage", ex.getMessage()); // Muda para errorMessage para consistência com LoginViewController
+        model.addAttribute("usuarioLoginDTO", new UsuarioLoginDTO()); // CORRIGIDO: Usa UsuarioLoginDTO
         return "login";
     }
 
@@ -36,28 +36,23 @@ public class GlobalExceptionHandler {
     public String handleBusinessException(BusinessException ex, HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
         logger.warn("Violação de regra de negócio: {}", ex.getMessage());
-        // Adiciona a mensagem de erro como um "flash attribute", que sobrevive ao
-        // redirecionamento.
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
-        // Pega a URL da página anterior e redireciona de volta para ela.
         String referer = request.getHeader("Referer");
         return "redirect:" + (referer != null ? referer : "/");
     }
 
     // MELHORADO: Captura exceções de recurso não encontrado (404).
-    // Retorna a página 404 personalizada com mais detalhes.
     @ExceptionHandler(ResourceNotFoundException.class)
     public ModelAndView handleResourceNotFound(ResourceNotFoundException ex, HttpServletRequest request) {
         logger.error("Recurso não encontrado: {}", ex.getMessage());
-        ModelAndView mav = new ModelAndView("error/404"); // Aponta para o arquivo templates/error/404.html
+        ModelAndView mav = new ModelAndView("error/404");
         mav.addObject("errorMessage", ex.getMessage());
-        mav.addObject("requestUri", request.getRequestURI()); // Adiciona a URI que causou o erro
+        mav.addObject("requestUri", request.getRequestURI());
         return mav;
     }
 
     // Captura todas as outras exceções não tratadas (erros genéricos 500).
-    // Funciona como uma rede de segurança para qualquer erro inesperado.
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ProblemDetail handleGenericException(Exception ex, HttpServletRequest request) {
