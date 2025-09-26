@@ -1,29 +1,29 @@
 ## ✅ Checklist – Entrega Final do Projeto (API REST) P2  29/09/2025
 
 ### Parte I – Design e Implementação da API REST
-- [ ] Usar **verbos HTTP corretos** (GET, POST, PUT, PATCH, DELETE).  
-- [ ] Estruturar URLs baseadas em **recursos (substantivos no plural)** e com versionamento (ex: `/api/v1/produtos`).  
+- [x] Usar **verbos HTTP corretos** (GET, POST, PUT, PATCH, DELETE).  
+- [x] Estruturar URLs baseadas em **recursos (substantivos no plural)** e com versionamento (ex: `/api/v1/produtos`).  
 - [ ] Criar endpoints CRUD (**Criar, Ler, Atualizar, Deletar**) para **todas as entidades principais**.  
-- [ ] Encapsular a lógica de negócio na camada de **@Service**.  
-- [ ] Retornar **status HTTP corretos** com `ResponseEntity`:  
-  - [ ] `201 Created` (com Location no cabeçalho) para criação.  
-  - [ ] `204 No Content` para exclusão.  
-  - [ ] `200 OK` para sucesso nas demais operações.  
+- [x] Encapsular a lógica de negócio na camada de **@Service**.  
+- [x] Retornar **status HTTP corretos** com `ResponseEntity`:  
+  - [x] `201 Created` (com Location no cabeçalho) para criação.  
+  - [x] `204 No Content` para exclusão.  
+  - [x] `200 OK` para sucesso nas demais operações.  
 
 ---
 
 ### Parte II – Persistência e Lógica de Negócio
-- [ ] Usar **Spring Data JPA** para a camada de persistência.  
-- [ ] Implementar **consultas customizadas** nos Repositories (`Query Methods` ou `@Query`) para buscas específicas.  
+- [x] Usar **Spring Data JPA** para a camada de persistência.  
+- [x] Implementar **consultas customizadas** nos Repositories (`Query Methods` ou `@Query`) para buscas específicas.  
 
 ---
 
 ### Parte III – Documentação e Tratamento de Exceções
-- [ ] Implementar **tratamento de exceções global** com `@ControllerAdvice`.  
-- [ ] Retornar erros no formato **ProblemDetail (RFC 7807)**.  
-- [ ] Criar **exceções customizadas** e lançá-las na camada de Serviço:  
-  - [ ] `RecursoNaoEncontradoException`.  
-  - [ ] `RegraDeNegocioException`.  
+- [x] Implementar **tratamento de exceções global** com `@ControllerAdvice`.  
+- [x] Retornar erros no formato **ProblemDetail (RFC 7807)**.  
+- [x] Criar **exceções customizadas** e lançá-las na camada de Serviço:  
+  - [x] `RecursoNaoEncontradoException`.  
+  - [x] `RegraDeNegocioException`.  
 - [ ] Configurar **Swagger (springdoc-openapi)**:  
   - [ ] Documentar endpoints com `@Tag`, `@Operation`, `@ApiResponse`.  
   - [ ] Documentar DTOs e parâmetros.  
