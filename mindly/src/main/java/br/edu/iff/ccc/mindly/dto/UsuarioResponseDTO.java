@@ -3,12 +3,17 @@ package br.edu.iff.ccc.mindly.dto;
 
 import br.edu.iff.ccc.mindly.entities.Role; // Importa o Enum Role
 import br.edu.iff.ccc.mindly.entities.Usuario;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class UsuarioResponseDTO {
+    @Schema(description = "ID único do usuário", example = "1111111")
     private Long id;
+    @Schema(description = "Nome do usuário", example = "Rafael Monteiro")
     private String nome;
+    @Schema(description = "Endereço de email do usuário", example = "psicologo@mindly.com")
     private String email;
-    private Role role; // Usa o Enum Role
+    @Schema(description = "Papel (role) do usuário no sistema", example = "PSICOLOGO")
+    private Role role;
 
     public UsuarioResponseDTO() {
     }

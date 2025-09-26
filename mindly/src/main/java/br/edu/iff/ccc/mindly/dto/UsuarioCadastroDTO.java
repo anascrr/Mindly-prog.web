@@ -3,6 +3,7 @@ package br.edu.iff.ccc.mindly.dto;
 
 import br.edu.iff.ccc.mindly.entities.Role; // Importa o Enum Role
 import br.edu.iff.ccc.mindly.entities.Usuario;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull; // Para o Enum Role
@@ -12,21 +13,25 @@ public class UsuarioCadastroDTO {
 
     private Long id; // Pode ser nulo para criação, preenchido para atualização
 
+    @Schema(description = "Nome do usuário", example = "Rafael Monteiro")
     @NotBlank(message = "O nome é obrigatório")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
+    @Schema(description = "Endereço de email do usuário", example = "psicologo@mindly.com")
     @NotBlank(message = "O email é obrigatório")
     @Email(message = "Formato de email inválido")
     @Size(max = 100, message = "O email deve ter no máximo 100 caracteres")
     private String email;
 
+    @Schema(description = "Senha do usuário", example = "123", accessMode = Schema.AccessMode.WRITE_ONLY)
     @NotBlank(message = "A senha é obrigatória")
     @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
     private String senha;
 
-    @NotNull(message = "A role é obrigatória") // Usa @NotNull para Enums
-    private Role role; // Usa o Enum Role
+    @Schema(description = "Papel (role) do usuário no sistema", example = "PSICOLOGO")
+    @NotNull(message = "A role é obrigatória")
+    private Role role;
 
     // --- Getters e Setters ---
     public Long getId() { return id; }
@@ -43,7 +48,7 @@ public class UsuarioCadastroDTO {
     // Método para converter para entidade
     public Usuario toEntity() {
         Usuario usuario = new Usuario();
-        usuario.setId(this.id); // ID pode ser preenchido para atualização
+        usuario.setId(this.id);
         usuario.setNome(this.nome);
         usuario.setEmail(this.email);
         usuario.setSenha(this.senha);

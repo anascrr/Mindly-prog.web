@@ -10,6 +10,9 @@ import br.edu.iff.ccc.mindly.exception.ResourceNotFoundException;
 import br.edu.iff.ccc.mindly.service.AuthService;
 import br.edu.iff.ccc.mindly.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -78,7 +81,9 @@ public class UsuarioRestController {
     @GetMapping("/{id}")
     @Operation(summary = "Buscar usuário por ID",
                description = "Retorna os detalhes de um usuário específico pelo seu ID.")
-    @ApiResponse(responseCode = "200", description = "Usuário encontrado")
+    @Parameter(name = "id", description = "ID único do usuário a ser buscado", example = "1111111") // Documenta o PathVariable
+    @ApiResponse(responseCode = "200", description = "Usuário encontrado",
+                 content = @Content(schema = @Schema(implementation = UsuarioResponseDTO.class)))
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     public ResponseEntity<UsuarioResponseDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioResponseDTO usuario = usuarioService.buscarUsuarioPorId(id);
@@ -88,12 +93,13 @@ public class UsuarioRestController {
     @PostMapping
     @Operation(summary = "Criar um novo usuário",
                description = "Cria um novo usuário no sistema (apenas Admin).")
+    @Parameter(name = "Logged-User-Email", description = "Email do usuário logado realizando a operação (para verificação de ADMIN)", required = false, example = "admin@mindly.com")
     @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso")
     @ApiResponse(responseCode = "400", description = "Requisição inválida (e.g., email já existe)")
     @ApiResponse(responseCode = "403", description = "Acesso proibido (não é Admin)")
     public ResponseEntity<UsuarioResponseDTO> criarUsuario(
             @Valid @RequestBody UsuarioCadastroDTO dto,
-            @RequestHeader(name = "X-Logged-User-Email", required = false) String emailDoUsuarioLogado) {
+            @RequestHeader(name = "Logged-User-Email", required = false) String emailDoUsuarioLogado) {
         UsuarioResponseDTO novoUsuario = usuarioService.criarUsuario(dto, emailDoUsuarioLogado);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -127,7 +133,7 @@ public class UsuarioRestController {
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     public ResponseEntity<Void> excluirUsuario(
             @PathVariable Long id,
-            @RequestHeader(name = "X-Logged-User-Email", required = false) String emailDoUsuarioLogado) {
+            @RequestHeader(name = "Logged-User-Email", required = false) String emailDoUsuarioLogado) {
         usuarioService.excluirUsuario(id, emailDoUsuarioLogado);
         return ResponseEntity.noContent().build(); // 204 No Content
     }
