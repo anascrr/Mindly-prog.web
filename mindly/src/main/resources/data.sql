@@ -1,5 +1,5 @@
 INSERT INTO usuarios (id, nome, email, senha, role)
-VALUES (1111111, 'Administrador', 'admin@mindly.com', '123', 'ADMIN');
+VALUES (1111111, 'Billy Loomis', 'admin@mindly.com', '123', 'ADMIN');
 
 INSERT INTO usuarios (id, nome, email, senha, role)
 VALUES (2222222, 'Carlos Augusto', 'recepcao@mindly.com', '123', 'RECEPCIONISTA');

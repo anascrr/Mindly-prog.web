@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Size;
 
 public class UsuarioCadastroDTO {
 
-    private Long id; // Pode ser nulo para criação, preenchido para atualização
 
     @Schema(description = "Nome do usuário", example = "Rafael Monteiro")
     @NotBlank(message = "O nome é obrigatório")
@@ -24,7 +23,7 @@ public class UsuarioCadastroDTO {
     @Size(max = 100, message = "O email deve ter no máximo 100 caracteres")
     private String email;
 
-    @Schema(description = "Senha do usuário", example = "123", accessMode = Schema.AccessMode.WRITE_ONLY)
+    @Schema(description = "Senha do usuário", example = "123456", accessMode = Schema.AccessMode.WRITE_ONLY)
     @NotBlank(message = "A senha é obrigatória")
     @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
     private String senha;
@@ -34,8 +33,6 @@ public class UsuarioCadastroDTO {
     private Role role;
 
     // --- Getters e Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
     public String getEmail() { return email; }
@@ -48,7 +45,6 @@ public class UsuarioCadastroDTO {
     // Método para converter para entidade
     public Usuario toEntity() {
         Usuario usuario = new Usuario();
-        usuario.setId(this.id);
         usuario.setNome(this.nome);
         usuario.setEmail(this.email);
         usuario.setSenha(this.senha);
