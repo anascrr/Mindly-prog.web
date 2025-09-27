@@ -56,7 +56,7 @@ public class ConsultaViewController {
 
         try {
             consultaService.criarConsulta(dto);
-            redirectAttributes.addFlashAttribute("successMessage", "Consulta agendada com sucesso!");
+            redirectAttributes.addFlashAttribute("successMessage", "Consulta agendada!");
             return "redirect:/consultas";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -91,7 +91,7 @@ public class ConsultaViewController {
                     consulta.getObservacao()
             );
             consultaService.atualizarConsulta(id, dto);
-            redirectAttributes.addFlashAttribute("successMessage", "Consulta atualizada com sucesso!");
+            redirectAttributes.addFlashAttribute("successMessage", "Consulta atualizada!");
             return "redirect:/consultas";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -103,7 +103,7 @@ public class ConsultaViewController {
     @GetMapping("/excluir/{id}")
     public String excluirConsulta(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         consultaService.remover(id);
-        redirectAttributes.addFlashAttribute("successMessage", "Consulta excluída com sucesso!");
+        redirectAttributes.addFlashAttribute("successMessage", "Consulta excluída!");
         return "redirect:/consultas";
     }
 }

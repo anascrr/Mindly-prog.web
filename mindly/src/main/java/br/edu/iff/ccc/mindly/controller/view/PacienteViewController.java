@@ -41,7 +41,7 @@ public class PacienteViewController {
         }
         try {
             pacienteService.criarPaciente(dto);
-            redirectAttributes.addFlashAttribute("successMessage", "Paciente cadastrado com sucesso!");
+            redirectAttributes.addFlashAttribute("successMessage", "Paciente cadastrado!");
             return "redirect:/pacientes";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -75,7 +75,7 @@ public class PacienteViewController {
             dto.setPlanoSaude(paciente.getPlanoSaude());
             
             pacienteService.atualizarPaciente(id, dto);
-            redirectAttributes.addFlashAttribute("successMessage", "Paciente atualizado com sucesso!");
+            redirectAttributes.addFlashAttribute("successMessage", "Paciente atualizado!");
             return "redirect:/pacientes";
         } catch (BusinessException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -88,7 +88,7 @@ public class PacienteViewController {
     @GetMapping("/excluir/{id}")
     public String excluirPaciente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         pacienteService.excluirPaciente(id);
-        redirectAttributes.addFlashAttribute("successMessage", "Paciente excluído com sucesso!");
+        redirectAttributes.addFlashAttribute("successMessage", "Paciente excluído!");
         return "redirect:/pacientes";
     }
 }
