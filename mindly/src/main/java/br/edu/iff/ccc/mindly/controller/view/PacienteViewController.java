@@ -65,7 +65,6 @@ public class PacienteViewController {
         }
         try {
             PacienteUpdateDTO dto = new PacienteUpdateDTO();
-            dto.setId(id);
             dto.setNome(paciente.getNome());
             dto.setEmail(paciente.getEmail());
             dto.setTelefone(paciente.getTelefone());

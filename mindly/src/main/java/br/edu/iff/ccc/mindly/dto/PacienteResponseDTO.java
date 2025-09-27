@@ -1,25 +1,33 @@
 package br.edu.iff.ccc.mindly.dto;
 
 import br.edu.iff.ccc.mindly.entities.Paciente;
+import io.swagger.v3.oas.annotations.media.Schema; // Importar Schema
 
 
-// DTO para ENVIAR os dados de um Paciente como resposta da API.
-// Expõe apenas os campos necessários, protegendo dados como CPF e Endereço.
-
+@Schema(description = "DTO para enviar dados de um paciente como resposta da API")
 public class PacienteResponseDTO {
-    
+
+    @Schema(description = "ID único do paciente", example = "1111111")
     private Long id;
+
+    @Schema(description = "Nome completo do paciente", example = "Maria da Silva")
     private String nome;
+
+    @Schema(description = "Endereço de e-mail do paciente", example = "maria@mindly.com")
     private String email;
+
+    @Schema(description = "Número de telefone do paciente", example = "(22) 99876-5432")
     private String telefone;
+
+    @Schema(description = "Data de nascimento do paciente (DD/MM/AAAA)", example = "15/05/1990")
     private String dataNascimento;
+
+    @Schema(description = "Nome do plano de saúde do paciente", example = "Unimed")
     private String planoSaude;
 
     public PacienteResponseDTO() {
     }
 
-    // Este construtor é a forma principal de criar este DTO.
-    // Ele extrai os dados da entidade Paciente.
     public PacienteResponseDTO(Paciente paciente) {
         this.id = paciente.getId();
         this.nome = paciente.getNome();
