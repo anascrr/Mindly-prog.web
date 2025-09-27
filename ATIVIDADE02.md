@@ -3,7 +3,7 @@
 ### Parte I – Design e Implementação da API REST
 - [x] Usar **verbos HTTP corretos** (GET, POST, PUT, PATCH, DELETE).  
 - [x] Estruturar URLs baseadas em **recursos (substantivos no plural)** e com versionamento (ex: `/api/v1/produtos`).  
-- [ ] Criar endpoints CRUD (**Criar, Ler, Atualizar, Deletar**) para **todas as entidades principais**.  
+- [x] Criar endpoints CRUD (**Criar, Ler, Atualizar, Deletar**) para **todas as entidades principais**.  
 - [x] Encapsular a lógica de negócio na camada de **@Service**.  
 - [x] Retornar **status HTTP corretos** com `ResponseEntity`:  
   - [x] `201 Created` (com Location no cabeçalho) para criação.  
@@ -24,10 +24,10 @@
 - [x] Criar **exceções customizadas** e lançá-las na camada de Serviço:  
   - [x] `RecursoNaoEncontradoException`.  
   - [x] `RegraDeNegocioException`.  
-- [ ] Configurar **Swagger (springdoc-openapi)**:  
-  - [ ] Documentar endpoints com `@Tag`, `@Operation`, `@ApiResponse`.  
-  - [ ] Documentar DTOs e parâmetros.  
-  - [ ] Garantir que a **UI do Swagger** esteja acessível e funcional.  
+- [x] Configurar **Swagger (springdoc-openapi)**:  
+  - [x] Documentar endpoints com `@Tag`, `@Operation`, `@ApiResponse`.  
+  - [x] Documentar DTOs e parâmetros.  
+  - [x] Garantir que a **UI do Swagger** esteja acessível e funcional.  
 
 ---
 
