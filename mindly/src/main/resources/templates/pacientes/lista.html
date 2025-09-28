@@ -23,8 +23,8 @@
                     <div th:if="${successMessage}" class="list-alert list-alert--success" role="alert">
                         <span class="list-alert__message">Sucesso!</span> <span th:text="${successMessage}"></span>
                     </div>
-                    <input id="filtroPaciente" type="text" placeholder="Buscar paciente..."
-                        class="list-search__input" onkeyup="filtrarPacientes()">
+                    <input id="filtroPaciente" type="text" placeholder="Buscar paciente..." class="list-search__input"
+                        onkeyup="filtrarPacientes()">
                     <a th:href="@{/pacientes/adicionar}" class="button--icon-add">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor"
                             viewBox="0 0 256 256">
@@ -44,23 +44,23 @@
                                 <th class="table-layout__header-cell" style="width: 400px;">Nome</th>
                                 <th class="table-layout__header-cell" style="width: 400px; position: relative;">
                                     Email
-                                    </th>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:if="${pacientes.empty}">
                                 <td colspan="2" class="table-layout__empty-message">Nenhum paciente encontrado.</td>
                             </tr>
-                            <tr th:each="paciente : ${pacientes}"
-                                class="table-layout__row" th:data-paciente="${paciente.nome.toLowerCase()}">
+                            <tr th:each="paciente : ${pacientes}" class="paciente-row table-layout__row"
+                                th:data-paciente="${paciente.nome.toLowerCase()}">
                                 <td class="table-layout__cell" style="width: 400px;" th:text="${paciente.nome}"></td>
                                 <td class="table-layout__cell" style="width: 400px; position: relative;">
                                     <span th:text="${paciente.email}"></span>
                                     <span class="table-cell-actions">
-                                        <a th:href="@{'/pacientes/editar/' + ${paciente.id}}"
-                                            class="action-button" title="Editar">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                fill="none" viewBox="0 0 24 24">
+                                        <a th:href="@{'/pacientes/editar/' + ${paciente.id}}" class="action-button"
+                                            title="Editar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
+                                                viewBox="0 0 24 24">
                                                 <path
                                                     d="M4 21h4.586a1 1 0 0 0 .707-.293l10.5-10.5a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0l-10.5 10.5A1 1 0 0 0 4 21zm14.707-13.293a1 1 0 0 1 0 1.414l-1.414 1.414-2.828-2.828 1.414-1.414a1 1 0 0 1 1.414 0l1.414 1.414z"
                                                     fill="currentColor" />
@@ -69,10 +69,10 @@
                                         <a th:href="@{'/pacientes/excluir/' + ${paciente.id}}"
                                             class="action-button action-button--delete" title="Excluir"
                                             onclick="return confirm('Tem certeza que deseja excluir este paciente?');">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                fill="none" viewBox="0 0 24 24">
-                                                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
+                                                viewBox="0 0 24 24">
+                                                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" />
                                             </svg>
                                         </a>
                                     </span>
