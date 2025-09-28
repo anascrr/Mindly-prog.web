@@ -35,4 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Definir data mínima para o campo de data/hora da consulta
+    const dataInput = document.getElementById('dataConsultaInput');
+    if (dataInput) {
+        function getFormattedCurrentDateTime() {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            return now.toISOString().slice(0, 16);
+        }
+        dataInput.min = getFormattedCurrentDateTime();
+    }
 });

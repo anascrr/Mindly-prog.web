@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Consulta - Mindly</title>
-    
+
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" sizes="32x32" th="href=@{/image/favicon-32x32.png}">
     <link rel="icon" type="image/png" sizes="18x18" th="href=@{/image/favicon-180x180.png}">
-    
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
@@ -39,28 +39,35 @@
                                 <option th:each="p : ${pacientes}" th:value="${p.id}" th:text="${p.nome}"></option>
                             </select>
                         </div>
-                        <span class="form-group__error-message" th:if="${#fields.hasErrors('paciente')}" th:errors="*{paciente}"></span>
+                        <span class="form-group__error-message" th:if="${#fields.hasErrors('paciente')}"
+                            th:errors="*{paciente}"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="medico" class="form-group__label">Médico</label>
                         <select id="medico" th:field="*{medico}" required class="form-group__select">
                             <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo</option>
-                            <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra</option>
+                            <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra
+                            </option>
                         </select>
-                        <span class="form-group__error-message" th:if="${#fields.hasErrors('medico')}" th:errors="*{medico}"></span>
+                        <span class="form-group__error-message" th:if="${#fields.hasErrors('medico')}"
+                            th:errors="*{medico}"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="dataConsultaInput" class="form-group__label">Data e Hora da Consulta</label>
-                        <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required class="form-input" />
-                        <span class="form-group__error-message" th:if="${#fields.hasErrors('dataConsulta')}" th:errors="*{dataConsulta}"></span>
+                        <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required
+                            class="form-input" />
+                        <span class="form-group__error-message" th:if="${#fields.hasErrors('dataConsulta')}"
+                            th:errors="*{dataConsulta}"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="observacao" class="form-group__label">Observação</label>
-                        <input type="text" id="observacao" th:field="*{observacao}" placeholder="Observação (opcional)" class="form-input" />
-                        <span class="form-group__error-message" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}"></span>
+                        <input type="text" id="observacao" th:field="*{observacao}" placeholder="Observação (opcional)"
+                            class="form-input" />
+                        <span class="form-group__error-message" th:if="${#fields.hasErrors('observacao')}"
+                            th:errors="*{observacao}"></span>
                     </div>
 
                     <div class="form-actions">
@@ -69,7 +76,7 @@
                         </button>
                     </div>
                 </form>
-                
+
                 <a th:href="@{/consultas}" class="form-container__back-link">Voltar à lista</a>
             </div>
         </main>
@@ -77,17 +84,7 @@
         <div th:replace="~{fragmentos/footer :: footer}"></div>
     </div>
 
-    <script>
-        function getFormattedCurrentDateTime() {
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            return now.toISOString().slice(0, 16);
-        }
-        const dataInput = document.getElementById('dataConsultaInput');
-        if (dataInput) {
-            dataInput.min = getFormattedCurrentDateTime();
-        }
-    </script>
+    <script th:src="@{/js/form-masks.js}"></script>
 </body>
 
 </html>
