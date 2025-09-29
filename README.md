@@ -241,5 +241,27 @@ MINDLY-PROG.WEB/
 └── DDD
 ```
 ---
+
+## 🌐 Documentação da API (Swagger)
+
+A documentação interativa da API está disponível via **Swagger UI**. Siga os passos abaixo para acessá-la:
+
+### 1) Certifique-se de que a API está rodando
+Siga os passos da seção **🚀 Como Executar** para iniciar a aplicação.  
+Por padrão, a API estará disponível em:  
+```http://localhost:8080```
+
+### 2) Acessar o Swagger
+Abra seu navegador e acesse:  
+📖 [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+Aqui você poderá:
+* Visualizar todos os endpoints da API.
+* Testar requisições GET, POST, PUT e DELETE.
+* Conferir os parâmetros, respostas e exemplos de uso.
+
+> 💡 Dica: o Swagger atualiza automaticamente quando novos endpoints são adicionados ao projeto.
+
+---
 ## 🙌 Agradecimentos
 Agradecemos por explorar o projeto **Mindly**!
