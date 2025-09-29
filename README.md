@@ -128,64 +128,117 @@ Acesse em: [**http://localhost:8080**](http://localhost:8080)
 ## 📂 Estrutura de Pastas
 
 ```
-├─ data/
-│ └─ mindly_db.mv.db
-├─ src/
-│ ├─ main/
-│ │ ├─ java/
-│ │ │ └─ br/edu/iff/ccc/mindly/
-│ │ │ ├─ MindlyApplication.java
-│ │ │ ├─ controller/
-│ │ │ │ ├─ restapi/
-│ │ │ │ │ ├─ AgendamentoController.java
-│ │ │ │ │ ├─ AuthController.java
-│ │ │ │ │ └─ RestApiMainController.java
-│ │ │ │ └─ view/
-│ │ │ │ ├─ ConsultaViewController.java
-│ │ │ │ ├─ HomePageViewController.java
-│ │ │ │ ├─ LoginViewController.java
-│ │ │ │ └─ PacienteViewController.java
-│ │ │ ├─ dto/
-│ │ │ │ ├─ ConsultaDTO.java
-│ │ │ │ ├─ LoginDTO.java
-│ │ │ │ ├─ PacienteDTO.java
-│ │ │ │ └─ UsuarioDTO.java
-│ │ │ ├─ entities/
-│ │ │ │ ├─ Consulta.java
-│ │ │ │ ├─ Login.java
-│ │ │ │ ├─ Paciente.java
-│ │ │ │ └─ Usuario.java
-│ │ │ └─ service/
-│ │ │ ├─ AuthService.java
-│ │ │ ├─ ConsultaService.java
-│ │ │ ├─ PacienteService.java
-│ │ │ └─ UsuarioService.java
-│ │ └─ resources/
-│ │ ├─ application.properties
-│ │ ├─ messages.properties
-│ │ ├─ static/
-│ │ │ └─ image/
-│ │ │ └─ logo_mindly.png
-│ │ └─ templates/
-│ │ ├─ index.html
-│ │ ├─ login.html
-│ │ ├─ consultas/
-│ │ │ ├─ adicionar.html
-│ │ │ ├─ editar.html
-│ │ │ └─ lista.html
-│ │ ├─ fragmentos/
-│ │ │ ├─ footer.html
-│ │ │ └─ navbar.html
-│ │ └─ pacientes/
-│ │ ├─ adicionar.html
-│ │ ├─ editar.html
-│ │ └─ lista.html
-│ └─ test/
-│ └─ java/
-│ └─ br/edu/iff/ccc/mindly/
-│ └─ MindlyApplicationTests.java
-└─ target/
-(compilados e arquivos temporários)
+MINDLY-PROG.WEB/
+├── src/
+│   ├── main/
+│   │   ├── java/br/edu/iff/ccc/mindly/
+│   │   │   ├── controller/
+│   │   │   │   ├── restapi/
+│   │   │   │   │   ├── ConsultaRestController.java
+│   │   │   │   │   ├── PacienteRestController.java
+│   │   │   │   │   └── UsuarioRestController.java
+│   │   │   │   └── view/
+│   │   │   │       ├── ConsultaViewController.java
+│   │   │   │       ├── HomePageViewController.java
+│   │   │   │       ├── LoginViewController.java
+│   │   │   │       └── PacienteViewController.java
+│   │   │   ├── dto/
+│   │   │   │   ├── ConsultaRequestDTO.java
+│   │   │   │   ├── ConsultaResponseDTO.java
+│   │   │   │   ├── PacienteRequestDTO.java
+│   │   │   │   ├── PacienteResponseDTO.java
+│   │   │   │   ├── PacienteUpdateDTO.java
+│   │   │   │   ├── UsuarioCadastroDTO.java
+│   │   │   │   ├── UsuarioLoginDTO.java
+│   │   │   │   └── UsuarioResponseDTO.java
+│   │   │   ├── entities/
+│   │   │   │   ├── Consulta.java
+│   │   │   │   ├── Paciente.java
+│   │   │   │   ├── Role.java
+│   │   │   │   └── Usuario.java
+│   │   │   ├── exception/
+│   │   │   │   ├── BusinessException.java
+│   │   │   │   ├── ForbiddenException.java
+│   │   │   │   ├── InvalidCredentialsException.java
+│   │   │   │   ├── ResourceNotFoundException.java
+│   │   │   │   ├── RestExceptionHandler.java
+│   │   │   │   └── WebExceptionHandler.java
+│   │   │   ├── repository/
+│   │   │   │   ├── ConsultaRepository.java
+│   │   │   │   ├── PacienteRepository.java
+│   │   │   │   └── UsuarioRepository.java
+│   │   │   ├── service/
+│   │   │   │   ├── AuthService.java
+│   │   │   │   ├── ConsultaService.java
+│   │   │   │   ├── PacienteService.java
+│   │   │   │   └── UsuarioService.java
+│   │   │   └── MindlyApplication.java
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── css/
+│   │       │   │   ├── error-pages.css
+│   │       │   │   ├── login.css
+│   │       │   │   └── style.css
+│   │       │   ├── image/
+│   │       │   │   ├── favicon-32x32-sem-fundo.png
+│   │       │   │   ├── Favicon-32x32.png
+│   │       │   │   ├── favicon-180x180-sem-fundo.png
+│   │       │   │   ├── Favicon-180x180.png
+│   │       │   │   ├── favicon.ico
+│   │       │   │   └── logo_mindly.png
+│   │       │   └── js/
+│   │       │       ├── form-masks.js
+│   │       │       ├── home.js
+│   │       │       └── lista.js
+│   │       ├── templates/
+│   │       │   ├── consultas/
+│   │       │   │   ├── adicionar.html
+│   │       │   │   ├── editar.html
+│   │       │   │   └── lista.html
+│   │       │   ├── error/
+│   │       │   │   ├── 404.html
+│   │       │   │   └── error.html
+│   │       │   ├── fragmentos/
+│   │       │   │   ├── footer.html
+│   │       │   │   └── navbar.html
+│   │       │   ├── pacientes/
+│   │       │   │   ├── adicionar.html
+│   │       │   │   ├── editar.html
+│   │       │   │   └── lista.html
+│   │       │   ├── index.html
+│   │       │   └── login.html
+│   │       ├── application.properties
+│   │       ├── data.sql
+│   │       └── messages.properties
+│   └── test/java/br/edu/iff/ccc/mindly/
+│       └── MindlyApplicationTests.java
+├── .mvn/wrapper/
+│   ├── maven-wrapper.properties
+│   └── mvnw
+├── config/
+│   └── OpenApiConfig.java
+├── data/
+│   ├── mindly_db.mv.db
+│   └── mindly_db.trace.db
+├── Docs/
+├── wireframe/
+│   ├── wireframe_adicionarConsulta.png
+│   ├── wireframe_adicionarPaciente.png
+│   ├── wireframe_home.png
+│   ├── wireframe_listaConsultas.png
+│   ├── wireframe_listaPacientes.png
+│   ├── wireframe_login.png
+│   └── Diagrama de Classes.png
+├── target/
+├── .gitattributes
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── ATIVIDADEO2.md
+├── LICENSE
+├── README.md
+└── DDD
 ```
 ---
 ## 🙌 Agradecimentos
