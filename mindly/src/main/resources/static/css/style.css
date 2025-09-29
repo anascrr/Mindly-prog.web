@@ -332,9 +332,8 @@ body {
     /* bg-white */
     color: #545454;
     font-family: 'Rubik', sans-serif;
-    white-space: nowrap;
-    /* Evita que o texto quebre */
-    /* A largura (`w-[200px]`) é aplicada diretamente no HTML com `style="width: 200px;"` */
+    white-space: normal;
+    word-break: break-word;
 }
 
 /* Ações (Editar/Excluir) que aparecem no hover - span dentro do td */
