@@ -96,7 +96,7 @@ Acesse em: [**http://localhost:8080**](http://localhost:8080)
 
 ### 4) Problemas comuns e soluções
 
-* \*\*Erro: \*\*\`\` → verifique as credenciais do banco e se o servidor está ativo.
+* **Erro:** → verifique as credenciais do banco e se o servidor está ativo.
 * **Erro de versão do Java** → garanta que o VS Code está usando o **JDK 17** (Settings → `java.configuration.runtimes`).
 * **Porta 8080 em uso** → mude `server.port` para outra (ex.: `server.port=8081`).
 * **Classe principal não aparece para rodar** → aguarde a conclusão do “Java Projects Import” ou reabra o VS Code.
