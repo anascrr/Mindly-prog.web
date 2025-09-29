@@ -32,8 +32,8 @@
 ---
 
 ### Parte IV – Entrega no GitHub
-- [ ] Criar **Pull Request**: da branch `desenvolvimento` para `main`, com título **Entrega Final P2**.  
-- [ ] Marcar o commit final com a Tag **v2.0-FINAL**.  
-- [ ] Atualizar o **README.md** com:  
-  - [ ] Instruções para configurar e executar a API.  
-  - [ ] Link para a documentação do Swagger.  
+- [x] Criar **Pull Request**: da branch `desenvolvimento` para `main`, com título **Entrega Final P2**.  
+- [x] Marcar o commit final com a Tag **v2.0-FINAL**.  
+- [x] Atualizar o **README.md** com:  
+  - [x] Instruções para configurar e executar a API.  
+  - [x] Link para a documentação do Swagger.  
