@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
 <body>
 
     <header th:fragment="navbar" class="navbar">
-    
+
         <a th:href="@{/home}" class="navbar__brand-link">
-            <div class="navbar__brand-wrapper"> <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo" class="navbar__logo" />
+            <div class="navbar__brand-wrapper"> <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo"
+                    class="navbar__logo" />
                 <h2 class="navbar__title">Mindly</h2>
             </div>
         </a>
-    
+
         <nav class="navbar__nav">
             <a class="navbar__link" th:href="@{/home}"
-               th:classappend="${activePage == 'home' ? 'navbar__link--active' : ''}">Home</a>
-    
+                th:classappend="${activePage == 'home' ? 'navbar__link--active' : ''}">Home</a>
+
             <a class="navbar__link" th:href="@{/pacientes}"
-               th:classappend="${activePage == 'pacientes' ? 'navbar__link--active' : ''}">Pacientes</a>
-    
+                th:classappend="${activePage == 'pacientes' ? 'navbar__link--active' : ''}">Pacientes</a>
+
             <a class="navbar__link" th:href="@{/consultas}"
-               th:classappend="${activePage == 'consultas' ? 'navbar__link--active' : ''}">Consultas</a>
+                th:classappend="${activePage == 'consultas' ? 'navbar__link--active' : ''}">Consultas</a>
         </nav>
-    
+
     </header>
 
 </body>
+
 </html>

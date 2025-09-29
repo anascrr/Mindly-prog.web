@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
 <body>
 
     <footer th:fragment="footer" class="page-footer">
-    
+
         <div class="page-footer__copyright">
-            Mindly &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> — Cuidando da sua saúde mental com tecnologia.
+            Mindly &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> — Cuidando da sua
+            saúde mental com tecnologia.
         </div>
-    
+
         <div class="page-footer__credits">
             Programação Web
         </div>
-        
+
     </footer>
 
 </body>
+
 </html>
