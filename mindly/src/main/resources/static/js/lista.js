@@ -79,3 +79,25 @@ function filtrarPacientes() {
         }
     }
 }
+
+let ordemNomePaciente = true; // true = crescente, false = decrescente
+
+function ordenarPacientes() {
+    let tabela = document.querySelector(".table-layout tbody");
+    let linhas = Array.from(tabela.querySelectorAll("tr.paciente-row"));
+    let getValue = (td) => td.textContent.trim().toLowerCase();
+
+    linhas.sort((a, b) => {
+        let valA = getValue(a.children[0]);
+        let valB = getValue(b.children[0]);
+        if (ordemNomePaciente) {
+            return valA.localeCompare(valB);
+        } else {
+            return valB.localeCompare(valA);
+        }
+    });
+
+    linhas.forEach(linha => tabela.appendChild(linha));
+    ordemNomePaciente = !ordemNomePaciente;
+    document.getElementById("seta-nome").textContent = ordemNomePaciente ? "▲" : "▼";
+}

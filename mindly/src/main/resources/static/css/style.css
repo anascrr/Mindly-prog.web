@@ -224,8 +224,10 @@ body {
     /* gap-2 */
     margin-left: 0.5rem;
     /* ml-2 */
-    padding: 0.35rem 0.7rem; /* Menor padding para botão menor */
-    height: 32px; /* Altura reduzida */
+    padding: 0.35rem 0.7rem;
+    /* Menor padding para botão menor */
+    height: 32px;
+    /* Altura reduzida */
     transition: background 0.2s ease-in-out;
     text-decoration: none;
     /* remove underline padrão de <a> */
@@ -295,19 +297,12 @@ body {
 }
 
 .table-layout__header-cell span {
-    /* Posição da seta */
-    position: absolute;
-    /* absolute */
-    right: 1rem;
-    /* right-4 */
-    top: 50%;
-    /* top-1/2 */
-    transform: translateY(-50%);
-    /* -translate-y-1/2 */
+    position: static;
+    margin-left: 0;
+    margin-right: 0.2em;
+    /* Espaço entre seta e texto */
     color: #a0aec0;
-    /* Cor da seta padrão */
     line-height: 1;
-    /* Garante que a seta não adicione altura extra ao span */
 }
 
 .table-layout__row {
