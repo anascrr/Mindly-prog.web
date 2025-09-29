@@ -19,7 +19,8 @@
             <div class="form-header">
                 <h2 class="form-header__title">Adicionar Consulta</h2>
             </div>
-            <form th:action="@{/consultas/adicionar}" th:object="${consultaRequestDTO}" method="post" class="form-main">
+            <form th:action="@{/consultas/adicionar}" th:object="${consultaRequestDTO}" method="post" class="form-main"
+                autocomplete="off">
                 <div th:if="${errorMessage}" class="form-alert form-alert--error" role="alert">
                     <span class="form-alert__message">Erro!</span> <span th:text="${errorMessage}"></span>
                 </div>
@@ -27,7 +28,7 @@
                     <label for="pacienteId" class="form-group__label">Paciente</label>
                     <div class="form-group__input-wrapper">
                         <select id="pacienteId" th:field="*{pacienteId}" required class="form-group__select">
-                            <option value="" disabled selected>Selecione um paciente</option>
+                            <option value="" th:selected="*{pacienteId} == null">Selecione um paciente</option>
                             <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
                                 th:text="${paciente.nome}"></option>
                         </select>
@@ -42,7 +43,7 @@
                 <div class="form-group">
                     <label for="medico" class="form-group__label">Médico</label>
                     <select id="medico" th:field="*{medico}" required class="form-group__select">
-                        <option value="" disabled selected>Selecione o médico</option>
+                        <option value="" th:selected="*{medico} == null">Selecione o médico</option>
                         <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo</option>
                         <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra
                         </option>

@@ -33,7 +33,6 @@ public class ConsultaViewController {
 
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionar(Model model) {
-        // PADRONIZADO: Garante que o objeto no model tenha o nome correto.
         if (!model.containsAttribute("consultaRequestDTO")) {
             model.addAttribute("consultaRequestDTO", new ConsultaRequestDTO(null, null, null, null));
         }
@@ -43,12 +42,13 @@ public class ConsultaViewController {
 
     @PostMapping("/adicionar")
     public String salvarConsulta(
-            // PADRONIZADO: O nome do objeto no @ModelAttribute agora é "consultaRequestDTO".
+            // PADRONIZADO: O nome do objeto no @ModelAttribute agora é
+            // "consultaRequestDTO".
             @Valid @ModelAttribute("consultaRequestDTO") ConsultaRequestDTO dto,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {
-        
+
         if (result.hasErrors()) {
             model.addAttribute("pacientes", pacienteService.listarTodos());
             return "consultas/adicionar";
@@ -66,7 +66,7 @@ public class ConsultaViewController {
             return "consultas/adicionar";
         }
     }
-    
+
     // ... (os outros métodos como editar e excluir continuam os mesmos) ...
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
@@ -77,19 +77,20 @@ public class ConsultaViewController {
     }
 
     @PostMapping("/editar/{id}")
-    public String atualizarConsulta(@PathVariable Long id, @Valid @ModelAttribute("consulta") Consulta consulta, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+    public String atualizarConsulta(@PathVariable Long id, @Valid @ModelAttribute("consulta") Consulta consulta,
+            BindingResult result, RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("pacientes", pacienteService.listarTodos());
             return "consultas/editar";
         }
         try {
-            // No caso de edição, estamos trabalhando com a entidade, então o DTO é criado aqui dentro
+            // No caso de edição, estamos trabalhando com a entidade, então o DTO é criado
+            // aqui dentro
             ConsultaRequestDTO dto = new ConsultaRequestDTO(
                     consulta.getPaciente().getId(),
                     consulta.getMedico(),
                     consulta.getDataConsulta(),
-                    consulta.getObservacao()
-            );
+                    consulta.getObservacao());
             consultaService.atualizarConsulta(id, dto);
             redirectAttributes.addFlashAttribute("successMessage", "Consulta atualizada!");
             return "redirect:/consultas";

@@ -20,6 +20,10 @@
             <div class="form-header">
                 <h2 class="form-header__title">Adicionar Paciente</h2>
             </div>
+            <div th:if="${errorMessage}" class="form-alert">
+                <span th:text="${errorMessage}" style="color:red; font-weight:bold;"></span>
+            </div>
+
             <form th:action="@{/pacientes/adicionar}" th:object="${pacienteRequestDTO}" method="post" class="form-main">
                 <div class="form-group">
                     <label for="nome" class="form-group__label">Nome</label>
