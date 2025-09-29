@@ -35,7 +35,7 @@
 
 ---
 
-## 🚀 Como Executar (detalhado, sem Maven)
+## 🚀 Como Executar
 
 ### 0) Pré-requisitos
 
