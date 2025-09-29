@@ -17,7 +17,7 @@
 * 📅 **Agendamento de Consultas** – criar, editar e cancelar com base na agenda dos profissionais.
 * 👤 **Cadastro de Pacientes** – dados como nome, CPF, telefone, data de nascimento e e-mail.
 * 🗓️ **Agenda Dinâmica** – visualização diária dinâmica.
-* 🔐 **Login com Controle de Acesso** – permissões específicas por perfil.
+* 🔐 **Login com Controle de Acesso** – apenas perfis de membros da clínica podem ter acesso.
 
 ---
 
