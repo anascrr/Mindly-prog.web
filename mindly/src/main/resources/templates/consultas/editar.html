@@ -5,102 +5,71 @@
     <meta charset="UTF-8">
     <title>Editar Consulta - Mindly</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        body {
-            background: #fffcf5 !important;
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
-
-        .text-principal,
-        label,
-        input,
-        span,
-        p,
-        a,
-        select {
-            font-family: 'Rubik', sans-serif !important;
-            color: #545454 !important;
-        }
-
-        .btn-salvar {
-            background: #65a272 !important;
-            color: #fff !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-
-        .btn-salvar:hover {
-            background: #4e7e59 !important;
-        }
-
-        .input-edit,
-        select {
-            background: #fffcf5 !important;
-            color: #545454 !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
-        <div class="layout-container flex h-full grow flex-col">
-            <div th:replace="~{fragmentos/navbar :: navbar}"></div>
-            <div class="px-40 flex flex-1 justify-center py-5">
-                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-                    <div class="flex flex-wrap justify-between gap-3 p-4">
-                        <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">
-                            Editar Consulta
-                        </p>
-                    </div>
-                    <form th:action="@{/consultas/editar}" th:object="${consulta}" method="post"
-                        class="flex flex-col gap-4 px-4 py-3">
-                        <input type="hidden" th:field="*{id}" />
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Paciente</span>
-                            <div class="flex gap-2 items-center">
-                                <select name="pacienteId" required
-                                    class="form-select flex-1 rounded-lg border border-[#cedbe8] input-edit h-14 p-[15px] text-base font-normal leading-normal">
-                                    <option value="" disabled>Selecione um paciente</option>
-                                    <option th:each="paciente : ${pacientes}" th:value="${paciente.id}"
-                                        th:text="${paciente.nome}"
-                                        th:selected="${consulta.paciente != null} ? ${paciente.id} == ${consulta.paciente.id} : false">
-                                    </option>
-                                </select>
-                            </div>
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Médico</span>
-                            <input type="text" th:field="*{medico}" placeholder="Nome do médico" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Data e Hora da Consulta</span>
-                            <input type="datetime-local" th:field="*{dataConsulta}" required
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <span class="text-base font-medium leading-normal pb-2">Observação</span>
-                            <input type="text" th:field="*{observacao}" placeholder="Observação (opcional)"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-                        </label>
-                        <div class="flex px-4 py-3 justify-end">
-                            <button type="submit"
-                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-salvar text-sm font-bold leading-normal tracking-[0.015em]">
-                                <span class="truncate">Salvar</span>
-                            </button>
-                        </div>
-                    </form>
-                    <a th:href="@{/consultas}" class="mt-4 text-blue-600">Voltar à lista</a>
-                </div>
+    <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 class="form-header__title">Editar Consulta</h2>
             </div>
+            <form th:action="@{/consultas/editar/{id}(id=${consulta.id})}" th:object="${consulta}" method="post"
+                class="form-main">
+                <div th:if="${errorMessage}" class="form-alert form-alert--error" role="alert">
+                    <span class="form-alert__message">Erro!</span> <span th:text="${errorMessage}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="pacienteId" class="form-group__label">Paciente</label>
+                    <div class="form-group__input-wrapper">
+                        <select id="pacienteId" th:field="*{paciente.id}" required class="form-group__select">
+                            <option th:each="p : ${pacientes}" th:value="${p.id}" th:text="${p.nome}"></option>
+                        </select>
+                    </div>
+                    <span class="form-group__error-message" th:if="${#fields.hasErrors('paciente')}"
+                        th:errors="*{paciente}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="medico" class="form-group__label">Médico</label>
+                    <select id="medico" th:field="*{medico}" required class="form-group__select">
+                        <option value="Dr. Rafael Monteiro - Psicólogo">Dr. Rafael Monteiro - Psicólogo</option>
+                        <option value="Dra. Helena Vasconcelos - Psiquiatra">Dra. Helena Vasconcelos - Psiquiatra
+                        </option>
+                    </select>
+                    <span class="form-group__error-message" th:if="${#fields.hasErrors('medico')}"
+                        th:errors="*{medico}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="dataConsultaInput" class="form-group__label">Data e Hora da Consulta</label>
+                    <input type="datetime-local" id="dataConsultaInput" th:field="*{dataConsulta}" required
+                        class="form-input" />
+                    <span class="form-group__error-message" th:if="${#fields.hasErrors('dataConsulta')}"
+                        th:errors="*{dataConsulta}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="observacao" class="form-group__label">Observação</label>
+                    <input type="text" id="observacao" th:field="*{observacao}" placeholder="Observação (opcional)"
+                        class="form-input" />
+                    <span class="form-group__error-message" th:if="${#fields.hasErrors('observacao')}"
+                        th:errors="*{observacao}"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button button--primary button--action">
+                        <span class="truncate">Salvar Alterações</span>
+                    </button>
+                </div>
+            </form>
+            <a th:href="@{/consultas}" class="form-link-back">Voltar à lista</a>
         </div>
-    </div>
+    </main>
+
     <div th:replace="~{fragmentos/footer :: footer}"></div>
+    <script th:src="@{/js/form-masks.js}"></script>
 </body>
 
 </html>

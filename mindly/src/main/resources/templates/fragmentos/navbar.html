@@ -1,24 +1,34 @@
-<header th:fragment="navbar"
-    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3"
-    style="background: #d8d5ca; font-family: 'Rubik', sans-serif;">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <div class="flex items-center gap-3" style="color: #545454; align-items: center;">
-        <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo" style="width: 40px; height: auto;" />
+<head>
+    <meta charset="UTF-8">
+</head>
 
-        <a th:href="@{/home}" style="text-decoration: none; display: flex; align-items: center;">
-            <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]"
-                style="color: #545454; font-family: 'Rubik', sans-serif; margin: 0;">
-                Mindly
-            </h2>
+<body>
+
+    <header th:fragment="navbar" class="navbar">
+
+        <a th:href="@{/home}" class="navbar__brand-link">
+            <div class="navbar__brand-wrapper"> <img th:src="@{/image/logo_mindly.png}" alt="Mindly Logo"
+                    class="navbar__logo" />
+                <h2 class="navbar__title">Mindly</h2>
+            </div>
         </a>
-    </div>
 
-    <div class="flex flex-1 justify-end gap-8">
-        <a class="text-sm font-medium leading-normal" th:href="@{/home}"
-            style="color: #545454; font-family: 'Rubik', sans-serif;">Home</a>
-        <a class="text-sm font-medium leading-normal" th:href="@{/pacientes}"
-            style="color: #545454; font-family: 'Rubik', sans-serif;">Pacientes</a>
-        <a class="text-sm font-medium leading-normal" th:href="@{/consultas}"
-            style="color: #545454; font-family: 'Rubik', sans-serif;">Consultas</a>
-    </div>
-</header>
+        <nav class="navbar__nav">
+            <a class="navbar__link" th:href="@{/home}"
+                th:classappend="${activePage == 'home' ? 'navbar__link--active' : ''}">Home</a>
+
+            <a class="navbar__link" th:href="@{/pacientes}"
+                th:classappend="${activePage == 'pacientes' ? 'navbar__link--active' : ''}">Pacientes</a>
+
+            <a class="navbar__link" th:href="@{/consultas}"
+                th:classappend="${activePage == 'consultas' ? 'navbar__link--active' : ''}">Consultas</a>
+        </nav>
+
+    </header>
+
+</body>
+
+</html>

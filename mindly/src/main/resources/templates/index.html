@@ -8,58 +8,20 @@
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
         href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-    <style>
-        body {
-            background: #fffcf5 !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
 
-        .text-concreto {
-            color: #545454 !important;
-            font-family: 'Rubik', sans-serif !important;
-        }
-
-        .bg-caixa {
-            background: #f6f6f6 !important;
-        }
-
-        .fc-toolbar-title,
-        .fc-col-header-cell-cushion,
-        .fc-daygrid-day-number {
-            color: #545454 !important;
-        }
-
-        .fc-button,
-        .fc-button-primary,
-        .fc-button-primary:not(:disabled) {
-            background-color: #65a272 !important;
-            border-color: #65a272 !important;
-            color: #fff !important;
-        }
-
-        .fc-button-primary:focus,
-        .fc-button-primary:active {
-            background-color: #4e7e59 !important;
-            border-color: #4e7e59 !important;
-        }
-
-        .fc-button-primary:hover {
-            background-color: #4e7e59 !important;
-            border-color: #4e7e59 !important;
-        }
-
-        .fc-daygrid-day,
-        .fc-daygrid-day-frame {
-            background: #f6f6f6 !important;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body class="min-h-screen flex flex-col">
+
     <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+
     <div class="flex flex-row justify-center items-start min-h-[80vh] px-10 py-8 gap-10 flex-1">
         <div class="bg-caixa rounded-lg shadow-md p-6 w-[380px] min-h-[600px]">
             <h2 class="text-xl font-bold text-concreto mb-4" id="titulo-consultas">
@@ -80,61 +42,34 @@
                 </li>
             </ul>
         </div>
-        <!-- Calendário grande -->
         <div class="bg-caixa rounded-lg shadow-md p-6 w-[600px] min-h-[600px] flex flex-col items-center">
             <h2 class="text-xl font-bold text-concreto mb-4">Calendário</h2>
             <div id="calendario" style="width:100%;"></div>
         </div>
     </div>
+
     <div th:replace="~{fragmentos/footer :: footer}"></div>
+
+    <script th:src="@{/js/home.js}"></script>
+
     <script th:inline="javascript">
-        // Eventos do calendário (consultas) vindos do backend
+        // Prepara a lista de eventos no formato que o FullCalendar espera
         const eventos = [
             /*[# th:each="consulta : ${consultasTodas}" ]*/
             {
-                title: /*[[${consulta.paciente.nome}]]*/'Paciente',
-                start: /*[[${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd\'T\'HH:mm')}]]*/'2025-09-01T14:00',
-                extendedProps: {
-                    medico: /*[[${consulta.medico}]]*/'Médico',
-                    hora: /*[[${#temporals.format(consulta.dataConsulta, 'HH:mm')}]]*/'14:00'
-                }
+                title: /*[[${consulta.paciente.nome}]]*/ 'Paciente',
+                start: /*[[${#temporals.format(consulta.dataConsulta, 'yyyy-MM-dd\'T\'HH:mm')}]]*/ '2025-09-01T14:00'
             }
             /*[/]*/
         ];
 
+        // Obtém a data selecionada (pode ser nula)
+        const dataInicial = /*[[${dataSelecionada != null ? #temporals.format(dataSelecionada, 'yyyy-MM-dd') : null}]]*/ null;
+
+        // Executa o script quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function () {
-            const calendarEl = document.getElementById('calendario');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'pt-br',
-                height: 500,
-                selectable: true,
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: ''
-                },
-                buttonText: {
-                    today: 'Hoje'
-                },
-                events: eventos,
-                dateClick: function (info) {
-                    window.location.href = '/?data=' + info.dateStr;
-                },
-                eventClick: function (info) {
-                    // Opcional: mostrar detalhes do evento
-                },
-                validRange: {
-                    start: null,
-                    end: null
-                }
-            });
-
-            /*[# th:if="${dataSelecionada != null}" ]*/
-            calendar.gotoDate(/*[[${#temporals.format(dataSelecionada, 'yyyy-MM-dd')}]]*/'2025-09-01');
-            /*[/]*/
-
-            calendar.render();
+            // Chama a função do arquivo home.js, passando os dados do Thymeleaf
+            inicializarCalendario(eventos, dataInicial);
         });
     </script>
 </body>

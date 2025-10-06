@@ -1,140 +1,91 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-    href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" />
-  <title>Adicionar Paciente - Mindly</title>
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <style>
-    body {
-      background: #fffcf5 !important;
-      font-family: 'Rubik', sans-serif !important;
-      color: #545454 !important;
-    }
+    <meta charset="UTF-8">
+    <title>Adicionar Paciente - Mindly</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="18x18" th:href="@{/image/favicon-180x180.png}">
 
-    .text-principal,
-    label,
-    input,
-    span,
-    p,
-    a,
-    button {
-      font-family: 'Rubik', sans-serif !important;
-      color: #545454 !important;
-    }
-
-    .btn-adicionar {
-      background: #65a272 !important;
-      color: #fff !important;
-      font-family: 'Rubik', sans-serif !important;
-    }
-
-    .btn-adicionar:hover {
-      background: #4e7e59 !important;
-    }
-
-    .input-edit {
-      background: #fffcf5 !important;
-      color: #545454 !important;
-      font-family: 'Rubik', sans-serif !important;
-    }
-  </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
-  <div class="relative flex size-full min-h-screen flex-col bg-[#fffcf5] group/design-root overflow-x-hidden">
-    <div class="layout-container flex h-full grow flex-col">
-      <div th:replace="~{fragmentos/navbar :: navbar}"></div>
-      <div class="px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-          <div class="flex flex-wrap justify-between gap-3 p-4">
-            <p class="text-principal tracking-light text-[32px] font-bold leading-tight min-w-72">Adicionar Paciente
-            </p>
-          </div>
-          <form th:action="@{/pacientes}" th:object="${pacienteDTO}" method="post"
-            class="flex flex-col gap-4 px-4 py-3">
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Nome</span>
-              <input type="text" th:field="*{nome}" placeholder="Nome completo" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Email</span>
-              <input type="email" th:field="*{email}" placeholder="E-mail" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Telefone</span>
-              <input type="text" th:field="*{telefone}" id="telefone" placeholder="Telefone" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Endereço</span>
-              <input type="text" th:field="*{endereco}" placeholder="Endereço" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Data de Nascimento</span>
-              <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="Data de nascimento"
-                required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"
-                class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">CPF</span>
-              <input type="text" th:field="*{cpf}" id="cpf" placeholder="CPF" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-red-600"></span>
-            </label>
-            <label class="flex flex-col min-w-40 flex-1">
-              <span class="text-base font-medium leading-normal pb-2">Plano de Saúde</span>
-              <input type="text" th:field="*{planoSaude}" placeholder="Plano de saúde" required
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg input-edit focus:outline-0 focus:ring-0 border border-[#cedbe8] focus:border-[#cedbe8] h-14 placeholder:text-[#49739c] p-[15px] text-base font-normal leading-normal" />
-              <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}" class="text-red-600"></span>
-            </label>
-            <div class="flex px-4 py-3 justify-end">
-              <button type="submit"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 btn-adicionar text-sm font-bold leading-normal tracking-[0.015em]">
-                <span class="truncate">Adicionar</span>
-              </button>
+    <div th:replace="~{fragmentos/navbar :: navbar}"></div>
+
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 class="form-header__title">Adicionar Paciente</h2>
             </div>
-          </form>
-          <a th:href="@{/pacientes}" class="mt-4 text-blue-600">Voltar à lista</a>
+            <div th:if="${errorMessage}" class="form-alert">
+                <span th:text="${errorMessage}" style="color:red; font-weight:bold;"></span>
+            </div>
+
+            <form th:action="@{/pacientes/adicionar}" th:object="${pacienteRequestDTO}" method="post" class="form-main">
+                <div class="form-group">
+                    <label for="nome" class="form-group__label">Nome</label>
+                    <input type="text" th:field="*{nome}" id="nome" placeholder="Nome completo" required
+                        class="form-input" />
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-group__label">Email</label>
+                    <input type="email" th:field="*{email}" id="email" placeholder="E-mail" required
+                        class="form-input" />
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="telefone" class="form-group__label">Telefone</label>
+                    <input type="text" th:field="*{telefone}" id="telefone" placeholder="Telefone" required
+                        class="form-input" />
+                    <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="endereco" class="form-group__label">Endereço</label>
+                    <input type="text" th:field="*{endereco}" id="endereco" placeholder="Endereço" required
+                        class="form-input" />
+                    <span th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="dataNascimento" class="form-group__label">Data de Nascimento</label>
+                    <input type="text" th:field="*{dataNascimento}" id="dataNascimento" placeholder="DD/MM/AAAA"
+                        required class="form-input" />
+                    <span th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="cpf" class="form-group__label">CPF</label>
+                    <input type="text" th:field="*{cpf}" id="cpf" placeholder="CPF" required class="form-input" />
+                    <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="planoSaude" class="form-group__label">Plano de Saúde</label>
+                    <input type="text" th:field="*{planoSaude}" id="planoSaude" placeholder="Plano de saúde" required
+                        class="form-input" />
+                    <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}"
+                        class="form-group__error-message"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button button--primary">
+                        <span class="truncate">Adicionar</span>
+                    </button>
+                </div>
+            </form>
+            <a th:href="@{/pacientes}" class="form-link-back">Voltar à lista</a>
         </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    document.getElementById('cpf').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '').slice(0, 11);
-      value = value.replace(/(\d{3})(\d)/, '$1.$2');
-      value = value.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-      value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-      e.target.value = value;
-    });
+    </main>
 
-    document.getElementById('telefone').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '').slice(0, 11);
-      value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-      value = value.replace(/(\d{5})(\d)/, '$1-$2');
-      e.target.value = value;
-    });
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
 
-    document.getElementById('dataNascimento').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '').slice(0, 8);
-      value = value.replace(/(\d{2})(\d)/, '$1/$2');
-      value = value.replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
-      e.target.value = value;
-    });
-  </script>
-  <div th:replace="~{fragmentos/footer :: footer}"></div>
+    <script th:src="@{/js/form-masks.js}"></script>
 </body>
 
 </html>

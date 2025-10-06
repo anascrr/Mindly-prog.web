@@ -1,0 +1,111 @@
+/* Estilos globais para a página de login */
+body {
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(180deg, #fffcf5 0%, #d8d5ca 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+/* --- Bloco Principal: .login-container --- */
+/* ESTA É A PARTE QUE ESTAVA FALTANDO VISUALMENTE */
+.login-container {
+    background: #fffcf5;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(101, 162, 114, 0.08);
+    min-width: 340px;
+    border: 1.5px solid #65a272;
+    font-family: 'Rubik', sans-serif;
+    color: #545454;
+}
+
+/* --- Elementos dentro de .login-container --- */
+.login-container__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container__brand-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.login-container__logo {
+    width: 250px;
+    height: auto;
+    display: block;
+}
+
+.login-container__heading {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+}
+
+.login-container__label {
+    display: block;
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-container__input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1.5px solid #65a272;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fffcf5;
+    color: #545454;
+    transition: border-color 0.2s, background-color 0.2s;
+    margin-bottom: 0.5rem;
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+}
+
+.login-container__input:focus {
+    border-color: #65a272;
+    outline: none;
+    background: #fff;
+}
+
+.login-container__button {
+    width: 100%;
+    padding: 0.85rem;
+    background: #65a272;
+    color: #fffcf5;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(101, 162, 114, 0.07);
+    transition: background 0.2s;
+    font-family: 'Rubik', sans-serif;
+}
+
+.login-container__button:hover {
+    background: #4e7e59;
+}
+
+.error-message {
+    color: #a94442;
+    background: #f9e6e6;
+    border: 1.5px solid #e6bcbc;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    font-weight: 500;
+}

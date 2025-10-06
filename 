@@ -1,0 +1,29 @@
+[1mdiff --git a/data/mindly_db.mv.db b/data/mindly_db.mv.db[m
+[1mindex 7da59b3..e7fc9ff 100644[m
+Binary files a/data/mindly_db.mv.db and b/data/mindly_db.mv.db differ
+[1mdiff --git a/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/HomePageViewController.java b/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/HomePageViewController.java[m
+[1mindex e89135d..b431546 100644[m
+[1m--- a/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/HomePageViewController.java[m
+[1m+++ b/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/HomePageViewController.java[m
+[36m@@ -19,7 +19,7 @@[m [mpublic class HomePageViewController {[m
+     @Autowired[m
+     private ConsultaService consultaService;[m
+ [m
+[31m-    @GetMapping({ "/", "/home" })[m
+[32m+[m[32m    @GetMapping({"/home" })[m
+     public String homePage(@RequestParam(required = false) String data, Model model) {[m
+         LocalDate hoje = LocalDate.now();[m
+         LocalDate dataSelecionada = (data != null) ? LocalDate.parse(data) : hoje;[m
+[1mdiff --git a/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/LoginViewController.java b/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/LoginViewController.java[m
+[1mindex 4ba765d..53ce95d 100644[m
+[1m--- a/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/LoginViewController.java[m
+[1m+++ b/mindly/src/main/java/br/edu/iff/ccc/mindly/controller/view/LoginViewController.java[m
+[36m@@ -14,7 +14,7 @@[m [mpublic class LoginViewController {[m
+     @Autowired[m
+     private AuthService authService;[m
+ [m
+[31m-    @GetMapping("/login")[m
+[32m+[m[32m    @GetMapping({"/", "/login"})[m
+     public String mostrarLogin(Model model) {[m
+         model.addAttribute("loginDTO", new LoginDTO());[m
+         return "login";[m
